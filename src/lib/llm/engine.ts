@@ -37,14 +37,17 @@ export async function loadEngine(model: GemmaModel, onProgress: ProgressCallback
 		})
 	);
 
-	// Buffer into a Blob first: lets the download progress reach 100% before
-	// the (opaque, unprogressable) GPU init phase starts.
+	// Buffer into a Blob first. Feeding the ReadableStream straight to
+	// Engine.create looks nicer on paper but hangs init for 10+ minutes —
+	// LiteRT wants random access to the model bytes.
 	const blob = await new Response(counted).blob();
 	onProgress({ fraction: -1, receivedBytes, totalBytes, stage: 'initializing' });
 
 	const engine = await Engine.create({
 		model: blob,
-		mainExecutorSettings: { maxNumTokens: 4096 }
+		// Gemma 4 E2B/E4B are trained for a 32k context — use all of it so long
+		// excerpt sets and long answers never hit the window.
+		mainExecutorSettings: { maxNumTokens: 32768 }
 	});
 	onProgress({ fraction: 1, receivedBytes, totalBytes, stage: 'ready' });
 	return engine;

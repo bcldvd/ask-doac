@@ -14,6 +14,12 @@ describe('renderAnswer', () => {
 		);
 	});
 
+	test('styles grouped citations like [6, 7] too', () => {
+		expect(renderAnswer('Lift heavy [6, 7].')).toBe(
+			'<p>Lift heavy <sup class="cite">6, 7</sup>.</p>'
+		);
+	});
+
 	test('splits double newlines into paragraphs', () => {
 		expect(renderAnswer('First idea.\n\nSecond idea.')).toBe(
 			'<p>First idea.</p><p>Second idea.</p>'

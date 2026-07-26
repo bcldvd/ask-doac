@@ -63,6 +63,23 @@ class App {
 			// Ask for durable storage so the 2 GB model cache isn't evicted.
 			navigator.storage?.persist?.().catch(() => {});
 			if ('serviceWorker' in navigator) {
+				// If a NEW worker replaces the one controlling us, the page is
+				// running stale cached code — reload to pick up the deploy. Two
+				// guards make a reload loop impossible: only reload when a previous
+				// controller existed, and at most once per tab until we reach ready
+				// (a killed browser can leave a waiting worker that re-activates on
+				// the next launch, which would otherwise chain reloads mid-download).
+				const RELOADED_FLAG = 'ask-doac:sw-reloaded';
+				if (navigator.serviceWorker.controller && !sessionStorage.getItem(RELOADED_FLAG)) {
+					navigator.serviceWorker.addEventListener(
+						'controllerchange',
+						() => {
+							sessionStorage.setItem(RELOADED_FLAG, '1');
+							location.reload();
+						},
+						{ once: true }
+					);
+				}
 				navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
 				navigator.serviceWorker.addEventListener('message', (e) => {
 					if (e.data?.type === 'model-cache-status') this.cachedModels = e.data.cached;
@@ -97,6 +114,8 @@ class App {
 			this.engine = engine;
 			this.index = await indexPromise;
 			this.stage = 'ready';
+			// Booted fine — future deploys may auto-reload this tab again.
+			sessionStorage.removeItem('ask-doac:sw-reloaded');
 		} catch (e) {
 			this.stage = 'error';
 			this.error = e instanceof Error ? e.message : String(e);
@@ -132,7 +151,10 @@ class App {
 					await new Promise((r) => setTimeout(r, 24));
 				}
 			} else {
-				const sources = await retrieve(this.index!, await embedQuery(q), 5);
+				// Up to 8 excerpts; nearby hits in one episode merge into longer,
+				// deeper excerpts (see clusterHits). Worst case ~14k prompt tokens —
+				// inside the 32k window without diluting a 2B model's attention.
+				const sources = await retrieve(this.index!, await embedQuery(q), 8);
 				reply.sources = sources;
 				const turn = buildGroundedPrompt(q, sources);
 				// Fresh conversation per question: every turn carries ~2k tokens of

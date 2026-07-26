@@ -31,6 +31,15 @@ describe('buildGroundedPrompt', () => {
 		expect(SYSTEM_PROMPT).toMatch(/excerpt/i);
 	});
 
+	test('system prompt asks for partial answers instead of a binary refusal', () => {
+		// The model must synthesize what the excerpts DO say and only decline
+		// when nothing relates — a small model over-triggers on "if the
+		// excerpts don't cover the question, say so".
+		expect(SYSTEM_PROMPT).toMatch(/partial/i);
+		expect(SYSTEM_PROMPT).toMatch(/only .*(decline|say you can)/i);
+		expect(SYSTEM_PROMPT).not.toMatch(/don't cover the question, say so/i);
+	});
+
 	test('states when there are no relevant excerpts', () => {
 		const prompt = buildGroundedPrompt('Anything?', []);
 		expect(prompt).toMatch(/no relevant excerpts/i);
