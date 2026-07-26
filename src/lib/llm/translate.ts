@@ -3,6 +3,7 @@
 // multilingual and already loaded, so it does the translating.
 import type { Engine } from '@litert-lm/core';
 import { streamAnswer } from './engine';
+import { stripThinking } from './thinking';
 
 export const TRANSLATE_SYSTEM = `You translate questions into English for a search engine. Reply with only the English translation of the message, nothing else — no explanations, no quotes. If the message is already in English, reply with the message unchanged.`;
 
@@ -32,13 +33,21 @@ export function isEnglish(question: string, englishTranslation: string): boolean
 }
 
 /** Translate a question to English for embedding; on any failure, return it as-is. */
-export async function toEnglishQuery(engine: Engine, question: string): Promise<string> {
+export async function toEnglishQuery(
+	engine: Engine,
+	question: string,
+	promptSuffix = ''
+): Promise<string> {
 	try {
 		const conversation = await engine.createConversation({
 			preface: { messages: [{ role: 'system', content: TRANSLATE_SYSTEM }] }
 		});
 		let out = '';
-		for await (const piece of streamAnswer(conversation, question)) out += piece;
+		// stripThinking: a thinking model's `<think>` block would otherwise
+		// become the "translation" (cleanTranslation keeps the first line).
+		for await (const piece of stripThinking(streamAnswer(conversation, question + promptSuffix))) {
+			out += piece;
+		}
 		return cleanTranslation(out, question);
 	} catch {
 		return question;

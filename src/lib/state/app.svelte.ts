@@ -2,6 +2,7 @@
 // grounded question/answer turns. `?mock=1` swaps in a canned engine so the
 // UI can be developed and screenshotted without a 2 GB download.
 import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/engine';
+import { stripThinking } from '$lib/llm/thinking';
 import { isEnglish, toEnglishQuery } from '$lib/llm/translate';
 import { buildGroundedPrompt } from '$lib/llm/prompt';
 import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
@@ -187,21 +188,23 @@ class App {
 				reply.status = searchingStatus(this.index!.episodes.length);
 				// The embedder is English-only, so non-English questions retrieve
 				// noise unless translated first (Gemma passes English through).
-				const searchQuery = await toEnglishQuery(this.engine!, q);
-				// Up to 8 excerpts; nearby hits in one episode merge into longer,
-				// deeper excerpts (see clusterHits). Worst case ~14k prompt tokens —
-				// inside the 32k window without diluting a 2B model's attention.
-				const sources = await retrieve(this.index!, await embedQuery(searchQuery), 8);
+				const searchQuery = await toEnglishQuery(this.engine!, q, this.model.promptSuffix);
+				// Excerpt count is budgeted per model (see models.ts): nearby hits in
+				// one episode merge into longer excerpts (see clusterHits), and the
+				// whole set must fit the model's context window with room to answer.
+				const sources = await retrieve(this.index!, await embedQuery(searchQuery), this.model.excerpts);
 				reply.sources = sources;
 				reply.status = readingStatus(sources);
 				// If the question survived translation (near-)unchanged it was
 				// English, and the prompt pins the answer language explicitly —
 				// letting the model infer it occasionally lands on the wrong one.
-				const turn = buildGroundedPrompt(q, sources, isEnglish(q, searchQuery));
+				const turn =
+					buildGroundedPrompt(q, sources, isEnglish(q, searchQuery)) +
+					(this.model.promptSuffix ?? '');
 				// Fresh conversation per question: every turn carries ~2k tokens of
 				// excerpts, so a shared history would blow the context window fast.
 				const conversation = await createGroundedConversation(this.engine!);
-				for await (const piece of streamAnswer(conversation, turn)) {
+				for await (const piece of stripThinking(streamAnswer(conversation, turn))) {
 					reply.text += piece;
 				}
 			}

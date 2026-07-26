@@ -18,6 +18,14 @@ const browser = await chromium.launchPersistentContext(profile, {
 	args: ['--enable-unsafe-webgpu', '--enable-features=Vulkan,SkiaGraphite']
 });
 const page = await browser.newPage();
+// ASK_DOAC_MODEL=gemma-3-1B (etc) pins the model under test; init scripts run
+// before page code on every navigation, so the choice survives reloads.
+if (process.env.ASK_DOAC_MODEL) {
+	await page.addInitScript(
+		(id) => localStorage.setItem('ask-doac:model', id),
+		process.env.ASK_DOAC_MODEL
+	);
+}
 page.on('console', (m) => {
 	if (m.type() === 'error') console.log('PAGE_ERROR:', m.text().slice(0, 300));
 });

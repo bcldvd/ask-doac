@@ -1,4 +1,4 @@
-import { Engine, type Conversation } from '@litert-lm/core';
+import { Backend, Engine, type Conversation } from '@litert-lm/core';
 import type { GemmaModel } from './models';
 import { getModelFile } from './modelStore';
 import { SYSTEM_PROMPT } from './prompt';
@@ -28,9 +28,8 @@ export async function loadEngine(model: GemmaModel, onProgress: ProgressCallback
 	// card shows this message.
 	const engine = await Engine.create({
 		model: file,
-		// Gemma 4 E2B/E4B are trained for a 32k context — use all of it so long
-		// excerpt sets and long answers never hit the window.
-		mainExecutorSettings: { maxNumTokens: 32768 }
+		backend: model.backend === 'GPU' ? Backend.GPU : Backend.GPU_ARTISAN,
+		mainExecutorSettings: { maxNumTokens: model.maxNumTokens }
 	}).catch((e) => {
 		throw new Error(`engine startup failed: ${e instanceof Error ? e.message : String(e)}`);
 	});

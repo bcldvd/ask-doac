@@ -1,5 +1,22 @@
-import { describe, expect, test } from 'vitest';
-import { cleanTranslation, isEnglish, TRANSLATE_SYSTEM } from './translate';
+import { describe, expect, test, vi } from 'vitest';
+import { cleanTranslation, isEnglish, toEnglishQuery, TRANSLATE_SYSTEM } from './translate';
+import type { Engine } from '@litert-lm/core';
+
+vi.mock('./engine', () => ({
+	streamAnswer: async function* () {
+		// how a thinking model (Qwen 3) answers the translate prompt
+		yield '<think>';
+		yield '</think>';
+		yield '\nHow do I fix my sleep?';
+	}
+}));
+
+describe('toEnglishQuery', () => {
+	test('the think block never becomes the search query', async () => {
+		const engine = { createConversation: async () => ({}) } as unknown as Engine;
+		expect(await toEnglishQuery(engine, 'Comment mieux dormir ?')).toBe('How do I fix my sleep?');
+	});
+});
 
 describe('TRANSLATE_SYSTEM', () => {
 	test('instructs the model to reply with only the English translation', () => {
