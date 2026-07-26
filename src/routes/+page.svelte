@@ -3,7 +3,7 @@
 	import { replaceState } from '$app/navigation';
 	import { app } from '$lib/state/app.svelte';
 	import { renderAnswer } from '$lib/llm/render';
-	import { questionFromSearch, searchWithQuestion } from '$lib/share';
+	import { questionFromSearch, searchWithQuestion, sharePayload } from '$lib/share';
 	import SourceItem from '$lib/components/SourceItem.svelte';
 
 	// A shared link (?q=…) queues its question: it prefills the composer so
@@ -31,6 +31,29 @@
 		if (app.messages.length === 0) replaceState(searchWithQuestion(location.search, q), {});
 		draft = '';
 		await app.ask(q);
+	}
+
+	// Share an answer via the native share sheet (iOS/Android show their
+	// panel); where the Share API is missing (desktop Chrome/Firefox on some
+	// platforms), copy the same text + link to the clipboard instead.
+	let copiedIndex = $state(-1);
+
+	async function share(i: number) {
+		const question = app.messages[i - 1]?.text ?? '';
+		const payload = sharePayload(question, app.messages[i].text, location.origin);
+		if (typeof navigator.share === 'function') {
+			try {
+				await navigator.share(payload);
+			} catch {
+				// user dismissed the share sheet
+			}
+		} else {
+			await navigator.clipboard.writeText(`${payload.text}\n${payload.url}`);
+			copiedIndex = i;
+			setTimeout(() => {
+				if (copiedIndex === i) copiedIndex = -1;
+			}, 2000);
+		}
 	}
 
 	// Auto-ask the shared question once the model is ready — unless the
@@ -109,6 +132,25 @@
 									</div>
 								{/each}
 							</footer>
+						{/if}
+						{#if !msg.pending && msg.text}
+							<button class="share" onclick={() => share(i)} aria-label="Share this answer">
+								<svg
+									width="13"
+									height="13"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M12 15V3m0 0L8 7m4-4 4 4" />
+									<path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8" />
+								</svg>
+								{copiedIndex === i ? 'Link copied' : 'Share'}
+							</button>
 						{/if}
 					</article>
 				{/if}
@@ -370,6 +412,30 @@
 		.source-reveal {
 			animation: none;
 		}
+	}
+
+	.share {
+		margin-top: 1.2rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-family: var(--font-mono);
+		font-size: 0.66rem;
+		letter-spacing: var(--track-caps);
+		text-transform: uppercase;
+		color: var(--muted);
+		background: none;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		padding: 0.5rem 0.95rem;
+		transition:
+			color 160ms ease,
+			border-color 160ms ease;
+	}
+
+	.share:hover {
+		color: var(--volt);
+		border-color: var(--volt);
 	}
 
 	/* ---- composer ---- */

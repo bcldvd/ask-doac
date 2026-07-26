@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { questionFromSearch, searchWithQuestion } from './share';
+import { questionFromSearch, searchWithQuestion, plainAnswer, sharePayload } from './share';
 
 describe('questionFromSearch', () => {
 	it('decodes the q param', () => {
@@ -40,5 +40,71 @@ describe('searchWithQuestion', () => {
 	it('round-trips through questionFromSearch', () => {
 		const q = 'what did the sleep expert say about caffeine? & more';
 		expect(questionFromSearch(searchWithQuestion('?mock=1', q))).toBe(q);
+	});
+});
+
+describe('plainAnswer', () => {
+	it('strips [n] citation marks', () => {
+		expect(plainAnswer('Volume matters most [1]. Identity too [2, 3].')).toBe(
+			'Volume matters most. Identity too.'
+		);
+	});
+
+	it('strips ** bold markers but keeps the words', () => {
+		expect(plainAnswer('Sleep is **the** foundation.')).toBe('Sleep is the foundation.');
+	});
+
+	it('keeps paragraph breaks but trims stray whitespace', () => {
+		expect(plainAnswer('  First point [1].\n\n\nSecond point.  ')).toBe(
+			'First point.\n\nSecond point.'
+		);
+	});
+});
+
+describe('sharePayload', () => {
+	const origin = 'https://ask-doac.example';
+
+	it('links back to the site with the question preloaded', () => {
+		const p = sharePayload('how do I fix my sleep?', 'Go to bed earlier [1].', origin);
+		expect(p.url).toBe('https://ask-doac.example/?q=how+do+I+fix+my+sleep%3F');
+	});
+
+	it('never carries the current page params (like mock) into the link', () => {
+		const p = sharePayload('hello', 'Answer.', origin);
+		expect(p.url).not.toContain('mock');
+	});
+
+	it('leads with the question and a citation-free answer', () => {
+		const p = sharePayload('how do I fix my sleep?', 'Go to bed **earlier** [1].', origin);
+		expect(p.text).toContain('Q: how do I fix my sleep?');
+		expect(p.text).toContain('Go to bed earlier.');
+		expect(p.text).not.toContain('[1]');
+		expect(p.text).not.toContain('**');
+	});
+
+	it('promotes the site in the closing line', () => {
+		const p = sharePayload('hello', 'Answer.', origin);
+		expect(p.text).toMatch(/Diary of a CEO/);
+		expect(p.text.trimEnd()).toMatch(/Ask your own:$/);
+	});
+
+	it('has a title for share targets that use one', () => {
+		const p = sharePayload('how do I fix my sleep?', 'Answer.', origin);
+		expect(p.title).toBe('Ask the Diary — how do I fix my sleep?');
+	});
+
+	it('truncates long answers at a word boundary with an ellipsis', () => {
+		const long = 'word '.repeat(200).trim();
+		const p = sharePayload('q', long, origin);
+		const excerpt = p.text.split('\n\n')[1];
+		expect(excerpt.length).toBeLessThanOrEqual(401);
+		expect(excerpt.endsWith('…')).toBe(true);
+		expect(excerpt).not.toMatch(/\s…$/);
+	});
+
+	it('leaves short answers untouched', () => {
+		const p = sharePayload('q', 'Short answer.', origin);
+		expect(p.text).toContain('Short answer.');
+		expect(p.text).not.toContain('…');
 	});
 });
