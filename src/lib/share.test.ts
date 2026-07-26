@@ -93,18 +93,11 @@ describe('sharePayload', () => {
 		expect(p.title).toBe('Ask the Diary — how do I fix my sleep?');
 	});
 
-	it('truncates long answers at a word boundary with an ellipsis', () => {
-		const long = 'word '.repeat(200).trim();
+	it('carries long answers in full — each generation is unique', () => {
+		const long = `First paragraph. ${'word '.repeat(200).trim()}\n\nSecond paragraph, still included.`;
 		const p = sharePayload('q', long, origin);
-		const excerpt = p.text.split('\n\n')[1];
-		expect(excerpt.length).toBeLessThanOrEqual(401);
-		expect(excerpt.endsWith('…')).toBe(true);
-		expect(excerpt).not.toMatch(/\s…$/);
-	});
-
-	it('leaves short answers untouched', () => {
-		const p = sharePayload('q', 'Short answer.', origin);
-		expect(p.text).toContain('Short answer.');
+		expect(p.text).toContain('word word word');
+		expect(p.text).toContain('Second paragraph, still included.');
 		expect(p.text).not.toContain('…');
 	});
 });

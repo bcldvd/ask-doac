@@ -27,27 +27,21 @@ export function plainAnswer(text: string): string {
 		.join('\n\n');
 }
 
-const EXCERPT_MAX = 400;
-
 /**
- * Web Share API payload for an answered question. The url reloads the same
- * question on our site (dev params like ?mock never leak into it), and the
- * text closes on an invitation so every share promotes the app.
+ * Web Share API payload for an answered question. The answer travels in
+ * full — every generation is unique, so the shared text is the only copy
+ * the recipient will ever see. The url reloads the same question on our
+ * site (dev params like ?mock never leak into it), and the text closes on
+ * an invitation so every share promotes the app.
  */
 export function sharePayload(
 	question: string,
 	answer: string,
 	origin: string
 ): { title: string; text: string; url: string } {
-	let excerpt = plainAnswer(answer);
-	if (excerpt.length > EXCERPT_MAX) {
-		excerpt = excerpt.slice(0, EXCERPT_MAX);
-		const cut = excerpt.lastIndexOf(' ');
-		excerpt = `${(cut > 0 ? excerpt.slice(0, cut) : excerpt).trimEnd()}…`;
-	}
 	return {
 		title: `Ask the Diary — ${question}`,
-		text: `Q: ${question}\n\n${excerpt}\n\nAnswered from real Diary of a CEO episodes, entirely in the browser. Ask your own:`,
+		text: `Q: ${question}\n\n${plainAnswer(answer)}\n\nAnswered from real Diary of a CEO episodes, entirely in the browser. Ask your own:`,
 		url: `${origin}/${searchWithQuestion('', question)}`
 	};
 }
