@@ -233,21 +233,29 @@ class App {
 				}
 			} else {
 				reply.status = searchingStatus(this.index!.episodes.length);
+				// Crumbs per step: a phone can run out of memory here too (the
+				// embedder loads on the first question), and the next launch
+				// should be able to say exactly which step died.
+				crumb('ask-translate');
 				// The embedder is English-only, so non-English questions retrieve
-				// noise unless translated first (Gemma passes English through).
+				// noise unless translated first (the model passes English through).
 				const searchQuery = await toEnglishQuery(this.engine!, q, this.model.promptSuffix);
+				crumb('ask-embed');
+				const queryVector = await embedQuery(searchQuery);
+				crumb('ask-retrieve');
 				// Excerpt count is budgeted per model (see models.ts): nearby hits in
 				// one episode merge into longer excerpts (see clusterHits), and the
 				// whole set must fit the model's context window with room to answer.
 				const sources = await retrieve(
 					this.index!,
-					await embedQuery(searchQuery),
+					queryVector,
 					this.model.excerpts,
 					fetch,
 					this.model.retrieval
 				);
 				reply.sources = sources;
 				reply.status = readingStatus(sources);
+				crumb('ask-generate');
 				// If the question survived translation (near-)unchanged it was
 				// English, and the prompt pins the answer language explicitly —
 				// letting the model infer it occasionally lands on the wrong one.
@@ -263,6 +271,8 @@ class App {
 		} catch (e) {
 			reply.text ||= `Something went wrong while answering: ${e instanceof Error ? e.message : e}`;
 		} finally {
+			// clean trail ending — the page survived this question
+			if (!this.mock) crumb('done');
 			reply.pending = false;
 			reply.status = undefined;
 			this.generating = false;

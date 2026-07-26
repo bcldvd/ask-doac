@@ -53,6 +53,7 @@ export function startBootLog(): CrashReport | null {
 		if (
 			!last ||
 			last.stage === 'ready' ||
+			last.stage === 'done' ||
 			last.stage === 'reload' ||
 			last.stage.startsWith('error')
 		) {
@@ -71,7 +72,11 @@ const STAGE_LABELS: Record<string, string> = {
 	'wasm-runtime': 'fetching the AI runtime',
 	'webgpu-device': 'starting WebGPU',
 	'engine-weights': 'loading the model onto the GPU',
-	'webllm-engine': 'loading the model (download + GPU)'
+	'webllm-engine': 'loading the model (download + GPU)',
+	'ask-translate': 'reading the question (first model run)',
+	'ask-embed': 'loading the search embedder',
+	'ask-retrieve': 'searching the transcripts',
+	'ask-generate': 'writing the answer'
 };
 
 export function stageLabel(stage: string): string {
