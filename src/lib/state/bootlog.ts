@@ -73,8 +73,9 @@ const STAGE_LABELS: Record<string, string> = {
 	'webgpu-device': 'starting WebGPU',
 	'engine-weights': 'loading the model onto the GPU',
 	'webllm-engine': 'loading the model (download + GPU)',
+	embedder: 'loading the search embedder',
 	'ask-translate': 'reading the question (first model run)',
-	'ask-embed': 'loading the search embedder',
+	'ask-embed': 'embedding the question',
 	'ask-retrieve': 'searching the transcripts',
 	'ask-generate': 'writing the answer'
 };

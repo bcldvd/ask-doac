@@ -35,8 +35,14 @@ sw.addEventListener('activate', (event) => {
 	event.waitUntil(
 		caches.keys().then(async (keys) => {
 			for (const key of keys) {
-				// webllm/* caches hold the mobile model's shards — never touch them
-				if (key !== APP_CACHE && key !== LEGACY_MODEL_CACHE && !key.startsWith('webllm/')) {
+				// webllm/* holds the mobile model's shards, transformers-cache the
+				// MiniLM embedder — other libraries' caches are never ours to wipe
+				if (
+					key !== APP_CACHE &&
+					key !== LEGACY_MODEL_CACHE &&
+					key !== 'transformers-cache' &&
+					!key.startsWith('webllm/')
+				) {
 					await caches.delete(key);
 				}
 			}

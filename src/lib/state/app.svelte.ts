@@ -13,7 +13,7 @@ import {
 } from '$lib/llm/models';
 import { cachedModelUrls } from '$lib/llm/modelStore';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
-import { embedQuery } from '$lib/rag/embed';
+import { embedQuery, getEmbedder } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
 import { startBootLog, crumb, type CrashReport } from './bootlog';
 import { DownloadEta, type EtaEstimate } from './eta';
@@ -146,6 +146,16 @@ class App {
 			// flashes "first visit: downloading…".
 			await this.refreshCachedModels();
 			const indexPromise = loadIndex();
+			// Load the ~25 MB search embedder BEFORE the LLM: its WASM arena
+			// must be allocated while the page is still light — on phones,
+			// initializing it next to a resident ~1 GB model throws
+			// "RangeError: Out of memory" inside ONNX.
+			crumb('embedder');
+			await getEmbedder().catch((e) => {
+				throw new Error(
+					`search embedder failed to load: ${e instanceof Error ? e.message : String(e)}`
+				);
+			});
 			this.stage = 'downloading';
 			const etaTracker = new DownloadEta();
 			let etaSampledAt = 0;

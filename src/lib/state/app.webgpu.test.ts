@@ -11,7 +11,7 @@ const engineMocks = vi.hoisted(() => ({
 
 vi.mock('$lib/llm/engine', () => engineMocks);
 vi.mock('$lib/rag/retrieve', () => ({ loadIndex: vi.fn(), retrieve: vi.fn() }));
-vi.mock('$lib/rag/embed', () => ({ embedQuery: vi.fn(), getEmbedder: vi.fn() }));
+vi.mock('$lib/rag/embed', () => ({ embedQuery: vi.fn(), getEmbedder: vi.fn(async () => ({})) }));
 
 import { app } from './app.svelte';
 
