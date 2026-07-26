@@ -17,7 +17,7 @@
 			case 'initializing':
 				return 'Setting the stage…';
 			case 'ready':
-				return `ON AIR · ${app.model.label}`;
+				return 'ON AIR';
 			case 'error':
 				return 'The studio went dark';
 		}
@@ -209,6 +209,14 @@
 	@media (max-width: 640px) {
 		.status {
 			font-size: 0.62rem;
+		}
+
+		.wordmark-sub {
+			display: none;
+		}
+
+		.logobox {
+			white-space: nowrap;
 		}
 	}
 </style>

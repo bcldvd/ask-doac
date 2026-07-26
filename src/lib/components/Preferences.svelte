@@ -67,7 +67,7 @@
 		position: fixed;
 		inset: 0;
 		z-index: 20;
-		background: rgba(8, 6, 5, 0.65);
+		background: rgba(0, 0, 0, 0.6);
 		backdrop-filter: blur(4px);
 		display: grid;
 		place-items: center;
@@ -78,7 +78,7 @@
 		width: min(26rem, 100%);
 		background: var(--panel);
 		border: 1px solid var(--line);
-		border-radius: 16px;
+		border-radius: 20px;
 		padding: 1.4rem;
 		box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
 	}
@@ -92,24 +92,26 @@
 
 	h2 {
 		font-family: var(--font-display);
-		font-weight: 500;
-		font-size: 1.25rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		font-size: 1.35rem;
+		letter-spacing: 0.01em;
 	}
 
 	.close {
 		color: var(--muted);
 		padding: 0.3rem 0.5rem;
-		border-radius: 8px;
+		border-radius: 999px;
 	}
 
 	.close:hover {
-		color: var(--paper);
+		color: var(--volt);
 	}
 
 	.section-label {
 		font-family: var(--font-mono);
 		font-size: 0.66rem;
-		letter-spacing: 0.14em;
+		letter-spacing: var(--track-caps);
 		text-transform: uppercase;
 		color: var(--faint);
 		margin-bottom: 0.6rem;
@@ -134,15 +136,15 @@
 	}
 
 	.model:hover {
-		border-color: color-mix(in srgb, var(--ember) 35%, var(--line));
+		border-color: color-mix(in srgb, var(--volt) 45%, var(--line));
 	}
 
 	.model.active {
-		border-color: var(--ember);
+		border-color: var(--volt);
 	}
 
 	.model input {
-		accent-color: var(--ember);
+		accent-color: var(--volt);
 		margin-top: 0.25rem;
 	}
 
@@ -164,8 +166,8 @@
 		font-size: 0.6rem;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--ember);
-		background: var(--ember-soft);
+		color: var(--volt);
+		background: var(--volt-soft);
 		padding: 0.1rem 0.4rem;
 		border-radius: 99px;
 	}

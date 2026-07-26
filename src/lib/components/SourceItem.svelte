@@ -69,13 +69,13 @@
 
 	.toggle:hover {
 		background: var(--panel);
-		color: var(--paper);
+		color: var(--white);
 	}
 
 	.source-n {
 		font-family: var(--font-mono);
 		font-size: 0.72rem;
-		color: var(--ember);
+		color: var(--volt);
 		flex-shrink: 0;
 	}
 
@@ -110,8 +110,8 @@
 	}
 
 	.jump:hover {
-		background: var(--panel);
-		color: var(--ember);
+		background: var(--volt);
+		color: var(--black);
 	}
 
 	.quote {

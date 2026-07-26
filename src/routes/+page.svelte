@@ -65,10 +65,10 @@
 	{#if app.messages.length === 0}
 		<section class="hero">
 			<p class="eyebrow">228 episodes · every word indexed · runs entirely in your browser</p>
-			<h1>The diary <mark class="hl">answers back</mark></h1>
+			<h1>The diary<br /><mark class="hl">answers back</mark></h1>
 			<p class="sub">
-				Ask a question and Gemma 4 replies with only what Steven Bartlett and his guests actually
-				said — cited to the minute. Nothing you type leaves this page.
+				Ask a question and get an answer built only from what Steven Bartlett and his guests
+				actually said — cited to the minute. Nothing you type leaves this page.
 			</p>
 
 			<div class="cards">
@@ -183,11 +183,11 @@
 	}
 
 	.hl {
+		display: inline-block;
 		background: var(--volt);
 		color: var(--black);
-		padding: 0 0.18em;
-		box-decoration-break: clone;
-		-webkit-box-decoration-break: clone;
+		padding: 0.02em 0.18em 0.06em;
+		margin-top: 0.08em;
 	}
 
 	.sub {
@@ -196,6 +196,7 @@
 		margin: 1.4rem auto 3rem;
 		font-size: 1.05rem;
 		font-weight: 300;
+		text-wrap: balance;
 	}
 
 	.cards {
@@ -210,7 +211,7 @@
 		background: var(--black);
 		border: 1px solid var(--line);
 		border-radius: 20px;
-		padding: 1.05rem 1.15rem 1.15rem;
+		padding: 0.95rem 1.15rem 1rem;
 		font-size: 1.05rem;
 		font-weight: 500;
 		line-height: 1.35;
@@ -237,13 +238,11 @@
 	}
 
 	.card-q {
-		display: block;
 		font-family: var(--font-display);
-		text-transform: uppercase;
-		font-size: 0.78rem;
-		letter-spacing: var(--track-caps);
+		font-size: 0.95em;
+		letter-spacing: 0.02em;
 		color: var(--volt);
-		margin-bottom: 0.45rem;
+		margin-right: 0.35em;
 		transition: color 200ms ease;
 	}
 
@@ -390,7 +389,8 @@
 	}
 
 	.composer-send:disabled {
-		opacity: 0.35;
+		background: var(--panel-2);
+		color: var(--faint);
 		cursor: not-allowed;
 	}
 
