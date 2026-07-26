@@ -4,9 +4,12 @@ Ask questions, get answers grounded in what Steven Bartlett and his guests actua
 **The Diary of a CEO** — cited to the minute, running **entirely in your browser**. No server,
 no login, no API keys: the LLM, the embeddings, and the search index all live client-side.
 
-![Ask the Diary](docs/hero.png)
+![The landing screen, ON AIR once Gemma has loaded onto the GPU](docs/hero.png)
 
-![A cited answer](docs/conversation.png)
+![An answer about training in your 60s, with eight citations and one transcript excerpt opened](docs/conversation.png)
+
+Both shots are the real thing — real Gemma 4 on WebGPU, real retrieval over the transcripts, no mocks.
+Regenerate them with `node scripts/shots/readme.mjs ["a question"]` (see [Screenshots / E2E](#screenshots--e2e)).
 
 ## How it works
 
@@ -38,13 +41,18 @@ question ──▶ MiniLM embedding (transformers.js, in-browser)
   quantized to int8 (scale-per-row). The browser embeds your question with the same model,
   searches locally, and hands the best excerpts to Gemma with instructions to answer only from
   them and cite `[n]`.
+- **No CDN at boot** — transformers.js would fetch the MiniLM weights from huggingface.co and the
+  ONNX runtime WASM from jsdelivr, so a blocked or flaky CDN broke startup outright. Both are
+  vendored into `static/embedder/` (gitignored) by `scripts/vendor-embedder.mjs`, which `predev`
+  and `prebuild` run for you. Queries use the q8 model — 23 MB instead of 90 MB, and it retrieves
+  near-identically against the fp32-built index (`npx tsx scripts/rag/check-q8.mjs`).
 
 ## Develop
 
 ```bash
 npm install
 npm run dev            # app on :5173 — add ?mock=1 to skip the 2 GB download
-npx vitest run         # 25 unit tests (chunking, quantized search, dedupe, prompt, rendering)
+npx vitest run         # 113 unit tests (chunking, quantized search, dedupe, prompt, rendering)
 ```
 
 ### Rebuild the data (optional)
