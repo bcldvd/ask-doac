@@ -47,20 +47,15 @@
 	{#if app.messages.length === 0}
 		<section class="hero">
 			<p class="eyebrow">228 episodes · every word indexed · runs entirely in your browser</p>
-			<h1>The diary answers back.</h1>
+			<h1>The diary <mark class="hl">answers back</mark></h1>
 			<p class="sub">
 				Ask a question and Gemma 4 replies with only what Steven Bartlett and his guests actually
 				said — cited to the minute. Nothing you type leaves this page.
 			</p>
 
 			<div class="cards">
-				{#each CARDS as card, i (card)}
-					<button
-						class="card"
-						style:--tilt="{[-1.4, 0.9, -0.7, 1.2][i]}deg"
-						disabled={!ready}
-						onclick={() => submit(card)}
-					>
+				{#each CARDS as card (card)}
+					<button class="card" disabled={!ready} onclick={() => submit(card)}>
 						<span class="card-q">Q.</span>
 						{card}
 					</button>
@@ -154,25 +149,35 @@
 	.eyebrow {
 		font-family: var(--font-mono);
 		font-size: 0.68rem;
-		letter-spacing: 0.14em;
+		letter-spacing: var(--track-caps);
 		text-transform: uppercase;
-		color: var(--faint);
+		color: var(--muted);
 		margin-bottom: 1.6rem;
 	}
 
 	h1 {
 		font-family: var(--font-display);
-		font-size: clamp(2.6rem, 7vw, 4.2rem);
-		font-weight: 460;
-		line-height: 1.04;
-		letter-spacing: -0.015em;
+		font-size: clamp(3rem, 9vw, 5.4rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		line-height: 0.98;
+		letter-spacing: 0.005em;
+	}
+
+	.hl {
+		background: var(--volt);
+		color: var(--black);
+		padding: 0 0.18em;
+		box-decoration-break: clone;
+		-webkit-box-decoration-break: clone;
 	}
 
 	.sub {
 		color: var(--muted);
 		max-width: 34rem;
-		margin: 1.3rem auto 3rem;
-		font-size: 1.02rem;
+		margin: 1.4rem auto 3rem;
+		font-size: 1.05rem;
+		font-weight: 300;
 	}
 
 	.cards {
@@ -184,25 +189,28 @@
 
 	.card {
 		text-align: left;
-		background: linear-gradient(160deg, var(--panel-2), var(--panel));
+		background: var(--black);
 		border: 1px solid var(--line);
-		border-radius: 12px;
+		border-radius: 20px;
 		padding: 1.05rem 1.15rem 1.15rem;
-		font-family: var(--font-display);
-		font-size: 1.02rem;
-		font-weight: 430;
+		font-size: 1.05rem;
+		font-weight: 500;
 		line-height: 1.35;
-		color: var(--paper);
-		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-		transform: rotate(var(--tilt));
+		color: var(--white);
 		transition:
-			transform 200ms ease,
+			background 200ms ease,
+			color 200ms ease,
 			border-color 200ms ease;
 	}
 
 	.card:hover:enabled {
-		transform: rotate(0deg) translateY(-3px);
-		border-color: color-mix(in srgb, var(--ember) 45%, var(--line));
+		background: var(--volt);
+		border-color: var(--volt);
+		color: var(--black);
+	}
+
+	.card:hover:enabled .card-q {
+		color: var(--black);
 	}
 
 	.card:disabled {
@@ -212,11 +220,13 @@
 
 	.card-q {
 		display: block;
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		letter-spacing: 0.12em;
-		color: var(--ember);
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 0.78rem;
+		letter-spacing: var(--track-caps);
+		color: var(--volt);
 		margin-bottom: 0.45rem;
+		transition: color 200ms ease;
 	}
 
 	/* ---- conversation feed ---- */
@@ -230,7 +240,7 @@
 	.turn-label {
 		font-family: var(--font-mono);
 		font-size: 0.66rem;
-		letter-spacing: 0.14em;
+		letter-spacing: var(--track-caps);
 		text-transform: uppercase;
 		color: var(--faint);
 		margin-bottom: 0.5rem;
@@ -238,20 +248,21 @@
 
 	.question {
 		font-family: var(--font-display);
-		font-style: italic;
-		font-weight: 480;
-		font-size: 1.45rem;
-		line-height: 1.25;
+		font-weight: 400;
+		text-transform: uppercase;
+		font-size: 1.9rem;
+		line-height: 1.05;
+		letter-spacing: 0.005em;
 	}
 
 	.turn-assistant {
-		border-left: 2px solid var(--ember);
+		border-left: 2px solid var(--volt);
 		padding-left: 1.25rem;
 	}
 
 	.answer :global(p) {
 		margin-bottom: 0.85rem;
-		color: var(--paper);
+		color: var(--white);
 	}
 
 	.answer :global(p:last-child) {
@@ -261,7 +272,7 @@
 	.answer :global(.cite) {
 		font-family: var(--font-mono);
 		font-size: 0.68em;
-		color: var(--ember);
+		color: var(--volt);
 		margin-left: 0.1em;
 		user-select: none;
 		-webkit-user-select: none;
@@ -318,17 +329,17 @@
 		display: flex;
 		gap: 0.6rem;
 		padding: 1rem 0 1.4rem;
-		background: linear-gradient(transparent, var(--ink) 35%);
+		background: linear-gradient(transparent, var(--black) 35%);
 	}
 
 	.composer-input {
 		flex: 1;
-		background: var(--panel);
+		background: var(--black);
 		border: 1px solid var(--line);
-		border-radius: 14px;
-		padding: 0.95rem 1.15rem;
+		border-radius: 999px;
+		padding: 0.95rem 1.4rem;
 		font: inherit;
-		color: var(--paper);
+		color: var(--white);
 		transition:
 			border-color 160ms ease,
 			box-shadow 160ms ease;
@@ -340,24 +351,24 @@
 
 	.composer-input:focus {
 		outline: none;
-		border-color: color-mix(in srgb, var(--ember) 55%, var(--line));
-		box-shadow: 0 0 0 3px var(--ember-soft);
+		border-color: var(--volt);
+		box-shadow: 0 0 0 3px var(--volt-soft);
 	}
 
 	.composer-send {
-		width: 3.2rem;
-		border-radius: 14px;
-		background: var(--ember);
-		color: #fff;
+		width: 3.4rem;
+		border-radius: 999px;
+		background: var(--volt);
+		color: var(--black);
 		display: grid;
 		place-items: center;
 		transition:
-			filter 160ms ease,
+			transform 160ms ease,
 			opacity 160ms ease;
 	}
 
 	.composer-send:hover:enabled {
-		filter: brightness(1.12);
+		transform: scale(1.06);
 	}
 
 	.composer-send:disabled {

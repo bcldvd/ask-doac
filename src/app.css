@@ -1,25 +1,31 @@
-@import '@fontsource-variable/fraunces';
-@import '@fontsource/instrument-sans/400.css';
-@import '@fontsource/instrument-sans/500.css';
-@import '@fontsource/instrument-sans/600.css';
+@import '@fontsource/anton';
+@import '@fontsource/barlow/300.css';
+@import '@fontsource/barlow/400.css';
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/600.css';
 @import '@fontsource/spline-sans-mono/400.css';
 @import '@fontsource/spline-sans-mono/500.css';
 
 :root {
-	/* studio at night */
-	--ink: #100d0c;
-	--panel: #1b1614;
-	--panel-2: #241d1a;
-	--line: #322924;
-	--paper: #ede5da;
-	--muted: #93857a;
-	--faint: #5f554c;
-	--ember: #e5442a;
-	--ember-soft: rgba(229, 68, 42, 0.14);
+	/* DOAC brand — see docs/design-system.md */
+	--black: #000000;
+	--panel: #111111;
+	--panel-2: #1a1a1a;
+	--line: #333333;
+	--white: #ffffff;
+	--muted: #919191;
+	--faint: #666666;
+	--volt: #dbff00;
+	--volt-soft: rgba(219, 255, 0, 0.12);
+	--red: #ff2e29;
+	--red-soft: rgba(255, 46, 41, 0.14);
 
-	--font-display: 'Fraunces Variable', georgia, serif;
-	--font-body: 'Instrument Sans', system-ui, sans-serif;
+	/* Zuume → Anton, Paralucent → Barlow (free stand-ins) */
+	--font-display: 'Anton', 'Arial Narrow', sans-serif;
+	--font-body: 'Barlow', system-ui, sans-serif;
 	--font-mono: 'Spline Sans Mono', ui-monospace, monospace;
+
+	--track-caps: 0.12em; /* DOAC small caps: letter-spacing 2px */
 
 	--w-column: 44rem;
 }
@@ -34,12 +40,11 @@ html {
 }
 
 body {
-	background:
-		radial-gradient(90rem 60rem at 50% -20rem, #241a15 0%, transparent 60%),
-		var(--ink);
-	color: var(--paper);
+	background: var(--black);
+	color: var(--white);
 	font-family: var(--font-body);
-	font-size: 1rem;
+	font-size: 1.02rem;
+	font-weight: 400;
 	line-height: 1.6;
 	min-height: 100dvh;
 	-webkit-font-smoothing: antialiased;
@@ -54,13 +59,14 @@ button {
 }
 
 :focus-visible {
-	outline: 2px solid var(--ember);
+	outline: 2px solid var(--volt);
 	outline-offset: 2px;
 	border-radius: 4px;
 }
 
 ::selection {
-	background: var(--ember-soft);
+	background: var(--volt);
+	color: var(--black);
 }
 
 @media (prefers-reduced-motion: reduce) {

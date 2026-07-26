@@ -31,7 +31,8 @@
 
 <header class="header">
 	<a class="wordmark" href="/">
-		Ask <em>the Diary</em>
+		<span class="logobox">Ask DOAC</span>
+		<span class="wordmark-sub">The Diary Of A CEO</span>
 	</a>
 
 	<div class="header-right">
@@ -88,24 +89,36 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		padding: 0.9rem 1.4rem;
-		background: color-mix(in srgb, var(--ink) 82%, transparent);
+		padding: 0.8rem 1.4rem;
+		background: color-mix(in srgb, var(--black) 84%, transparent);
 		backdrop-filter: blur(12px);
 		border-bottom: 1px solid var(--line);
 	}
 
 	.wordmark {
-		font-family: var(--font-display);
-		font-size: 1.15rem;
-		font-weight: 560;
-		letter-spacing: 0.01em;
-		color: var(--paper);
+		display: flex;
+		align-items: baseline;
+		gap: 0.65rem;
 		text-decoration: none;
 	}
 
-	.wordmark em {
-		font-style: italic;
-		color: var(--ember);
+	.logobox {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 1.05rem;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		background: var(--white);
+		color: var(--black);
+		padding: 0.32rem 0.5rem 0.26rem;
+	}
+
+	.wordmark-sub {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 0.72rem;
+		letter-spacing: var(--track-caps);
+		color: var(--white);
 	}
 
 	.header-right {
@@ -118,6 +131,7 @@
 		font-family: var(--font-mono);
 		font-size: 0.72rem;
 		letter-spacing: 0.06em;
+		text-transform: uppercase;
 		color: var(--muted);
 		display: flex;
 		align-items: center;
@@ -126,25 +140,25 @@
 	}
 
 	.status.on-air {
-		color: var(--paper);
+		color: var(--red);
 	}
 
 	.status.error {
-		color: var(--ember);
+		color: var(--red);
 	}
 
 	.lamp {
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background: var(--ember);
-		box-shadow: 0 0 10px 2px rgba(229, 68, 42, 0.55);
+		background: var(--red);
+		box-shadow: 0 0 10px 2px var(--red-soft);
 		animation: lamp-in 600ms ease-out;
 	}
 
 	@keyframes lamp-in {
 		from {
-			box-shadow: 0 0 0 0 rgba(229, 68, 42, 0);
+			box-shadow: 0 0 0 0 rgba(255, 46, 41, 0);
 			opacity: 0;
 		}
 	}
@@ -154,12 +168,12 @@
 		display: grid;
 		place-items: center;
 		padding: 0.35rem;
-		border-radius: 8px;
+		border-radius: 999px;
 		transition: color 160ms ease;
 	}
 
 	.gear:hover {
-		color: var(--paper);
+		color: var(--volt);
 	}
 
 	.loadline {
@@ -174,8 +188,7 @@
 
 	.loadline-fill {
 		height: 100%;
-		background: linear-gradient(90deg, #8c2c1c, var(--ember));
-		box-shadow: 0 0 12px rgba(229, 68, 42, 0.7);
+		background: var(--volt);
 		transition: width 300ms ease;
 	}
 
