@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { app } from '$lib/state/app.svelte';
 	import { GEMMA_MODELS } from '$lib/llm/models';
+	import { versionLabel } from '$lib/version';
 
 	function isCached(url: string) {
 		return app.cachedModels.includes(url);
@@ -59,6 +60,8 @@
 			Switching models reloads the page and downloads the new model once. Models stay cached in
 			your browser, so the next visit starts instantly — even offline.
 		</p>
+
+		<p class="build">Build {versionLabel(__BUILD_DATE__, __COMMIT_HASH__)}</p>
 	</div>
 </div>
 
@@ -182,5 +185,14 @@
 		color: var(--faint);
 		font-size: 0.8rem;
 		line-height: 1.5;
+	}
+
+	.build {
+		margin-top: 1.1rem;
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--faint);
 	}
 </style>
