@@ -1,0 +1,137 @@
+{
+	"id": "gemma-4-E4B",
+	"engine": "litert",
+	"model": "gemma-4-E4B",
+	"label": "Gemma 4 E4B",
+	"cold": {
+		"loadMs": 238147.29999998212,
+		"downloadBytes": 2969059328
+	},
+	"warm": {
+		"loadMs": 1718.0999999940395
+	},
+	"contextWindow": 32768,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 6,
+			"promptChars": 24934,
+			"ttftMs": 8632,
+			"totalMs": 16741,
+			"answer": "You can manage your dopamine levels by focusing on a few key areas:\n\n*   **Exercise and Sleep:** Exercise is mentioned as a way to get a \"really high dopamine\" [4]. Additionally, getting enough sleep is critical for improving libido and overall dopamine balance [4].\n*   **Mindfulness and Creativity:** Practices like \"open monitoring meditation,\" where you pay attention to everything around you without focusing on your breath, are associated with improved creative capacity [6]. You can also try to access a state of mind where \"ideas spring to the surface\" by doing things like going for a long run or walking where you are not listening to anything [6].\n*   **Cold Exposure:** You can spike dopamine and epinephrine with a cold shower or cold plunge, which is described as a \"state shifting tool\" [6].\n*   **Diet and Stimuli:** Certain foods can cause a \"dopamine rush,\" but these are temporary and can lead to a crash [4]. Conversely, successful people often have a \"good dopamine map,\" meaning they get dopamine from \"good sources instead of bad ones\" [3].\n\nIt is important to be aware that chronic overstimulation of neurons can lead to receptor downregulation, which is the basis of tolerance and addiction [1]. If you are struggling with a substance or behavior, a \"30 day dopamine fast\" (fasting from the problematic substance/behavior, not dopamine itself) is recommended as a starting point to help receptors come back up [5].\n\nThe excerpts do not provide a specific daily schedule, but they emphasize balancing pleasure and pain, as the brain seeks to keep this balance level [2].",
+			"thinkChars": 0
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 2391,
+			"totalMs": 5693,
+			"answer": "Most startups fail because they get caught in a cycle of \"uninformed optimism\" followed by \"informed pessimism\" [4]. This cycle can repeat for years, with founders hopping between different ideas when things aren't working [4].\n\nThe guests also touched on the psychological toll of failure:\n*   One guest noted that \"a million failures\" can keep them up more than success does [3].\n*   Another mentioned that failure in their culture is often seen as a \"stepping stone\" [2].\n\nThe excerpts don't provide a single definitive reason for failure, but they highlight the importance of understanding and breaking free from the \"crash burn cycle\" [4].",
+			"thinkChars": 0
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 2942,
+			"totalMs": 12004,
+			"answer": "The 10,000 hours rule is not accurate, according to the research discussed. David Epstein notes that the idea that \"the only route to true expertise is through 10,000 hours of so-called Deliberate Practice\" is a popular misconception [1].\n\nHere are a few key points from the excerpts:\n\n*   **It's not a universal rule:** While some studies, like one on chess, show an average of 11,053 hours to reach international master status, this doesn't tell you about the \"breadth of human skill development\" because some people achieve mastery in far fewer hours, while others practice for over 20,000 hours without succeeding [1].\n*   **Individual variation matters:** The original research on violinists only reported the average, which obscured the fact that \"there was not complete correspondence\" [1]. Some people who practiced less were better than those who practiced more [1].\n*   **Other factors are crucial:** Epstein points out that other factors, such as sleep, play a huge role. For example, the top-tier violinists in the study got significantly more sleep [1].\n*   **Focus on what works for you:** Instead of just \"head down doing the same thing,\" Epstein suggests that \"finding where you learn better is really important if you want to maximize your advantages\" [1]. He also mentions \"skill stacking,\" which is getting proficient in several things and overlapping them to become unique [1].\n\nThe excerpts do not cover a direct comparison between the 10,000-hour rule and the importance of sleep or regularity, but they do emphasize that individual variation and other factors are more important than a fixed number of hours [1, 3, 4, 6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 2953,
+			"totalMs": 12945,
+			"answer": "To become more charismatic and instantly likeable, you need to signal both **high warmth and high competence**, as this combination makes up 82% of people's impressions [1]. Charisma isn't about being a \"bubbly extrovert\"; you can be a \"quiet, powerful introvert\" while still being charismatic [2].\n\nHere are some key strategies based on the excerpts:\n\n*   **Focus on Warmth and Competence:** Charismatic people signal that you are trustworthy, likable, and reliable, while also being capable [1].\n*   **Find Your \"Recipe\":** You don't have to use all 97 body language cues; you get to \"make your own recipe\" by choosing the cues that feel natural to you [2].\n*   **Be Enthusiastic:** When asked \"How are you?\", be more enthusiastic than just \"fine.\" Instead, try saying you are \"fantastic or wonderful or great or ecstatic or electric\" [3].\n*   **Lead with Humanization:** To make a good first impression, try to \"go there first in humanizing the interaction.\" This can mean cracking the first joke, being vulnerable first, or giving the first compliment [3].\n*   **Prioritize Character Over Reputation:** One mindset to adopt is to \"care more about my character than my reputation\" [5].\n*   **Be of Service:** Instead of focusing on \"me, me, me,\" try shifting your focus to \"how can I be of service to this person?\" and being generous to others [6].\n*   **Maintain Integrity:** When faced with pressure, \"ignore virtue signaling\" and \"do what's best for the conversation\" rather than doing things purely for optics [5].\n\nThe excerpts don't cover specific, step-by-step instructions on how to \"fix\" your resting face, but they do mention that research shows some people are perceived as angry, sad, or afraid when at rest [2].",
+			"thinkChars": 0
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 6,
+			"promptChars": 28691,
+			"ttftMs": 3861,
+			"totalMs": 16468,
+			"answer": "The decision between buying a house and investing in stocks depends heavily on your personal goals, emotional comfort, and time horizon [1, 3, 6].\n\nHere is a synthesis of the advice from the excerpts:\n\n**Arguments for Buying a House (Stability and Lifestyle):**\n*   **Stability:** For some, especially when starting a family, having an \"established, secure home base that nobody could take away from me\" is more valuable than financial returns [6].\n*   **Lifestyle Decision:** Some view homeownership as a \"purely lifestyle decision\" rather than an investment, prioritizing stability over spreadsheets [6].\n*   **Generational Wealth:** Home equity is often how \"generational wealth is created for better or worse\" because equity is what transfers to the next generation [2].\n\n**Arguments for Investing in Stocks (Financial Growth):**\n*   **Long-Term Returns:** Over the long term, stocks are described as \"stunningly reliable\" and the \"single most effective, strongest wealth building tool that's ever been created\" [4].\n*   **Opportunity Cost:** When you buy a house, you incur \"unrecoverable costs\" like mortgage interest and property taxes, and the equity you build is money that could have been invested in the stock market, which historically has \"far outpaced inflation\" [3].\n*   **Flexibility:** Renting allows for more flexibility, which is important if you need to move for a new job or career [6].\n\n**Key Considerations and Caveats:**\n*   **Mortgage Interest:** If your mortgage interest rate is 3.5% or less, it is considered \"pretty easy\" money, and you might not be in a hurry to pay it off [1]. However, if the rate is 6% or higher, paying it off locks in a guaranteed return equal to that interest rate [1].\n*   **Risk Tolerance:** Stocks are \"very, very volatile\" in the short term, and you must be willing to \"endure that volatility\" and not panic-sell [4].\n*   **The \"Apples to Apples\" Comparison:** Experts caution that comparing the two isn't always straightforward because homeownership involves significant costs like maintenance and taxes that renters don't pay [2, 3].\n\nIn short, if your primary goal is financial growth, the excerpts lean toward the stock market, but if your goal is stability and lifestyle, homeownership may be the right choice for you [6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 6,
+			"promptChars": 33716,
+			"ttftMs": 4735,
+			"totalMs": 14737,
+			"answer": "The dangers of short-form video for your brain are significant and involve several neurological and cognitive changes.\n\n*   **Attention and Cognition:** Heavy use of short-form video is associated with \"reduced thinking ability, especially shorter attention spans and weaker impulse control\" [1, 2]. It is actively \"rewiring your brain for the worst,\" increasing \"distractability, irritability, [and] complex problem solving\" [6].\n*   **Brain Rewiring:** These videos can \"hijack their attention\" and \"change the way the parts of the brain that learn to pay attention, what's called executive function\" [1]. This process is described as \"literally training you to do things where television didn't do that\" [6].\n*   **Dopamine and Reward Circuits:** Short-form content can prevent children from \"learning the connection between hard work and a reward,\" instead setting them up for a life where their brain demands \"quick dopamine\" [1].\n*   **Stress and Amygdala Activation:** The \"primal urge to scroll\" is linked to the amygdala, which houses the \"stress response, your fight or flight response\" [1, 2]. Chronic scrolling keeps the amygdala in a state of being \"continually being triggered\" [2].\n*   **Executive Function Decline:** When the amygdala is constantly active, it causes the prefrontal cortex—the area governing \"impulse control, memory, planning, organization, strategic thinking, complex problem solving\"—to \"downregulate\" [2].\n*   **Sleep and Physical Health:** Engaging with devices, especially before bed, leads to \"revenge, bedtime procrastination,\" which affects sleep quality and can increase the \"risk of heart disease later in life\" [1].\n*   **Mental Health:** There is a link between heavy social media use and increased depression in children [2].\n\nThe excerpts do not cover the specific long-term effects of AI chatbots on brain development.",
+			"thinkChars": 0
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 3329,
+			"totalMs": 11984,
+			"answer": "Yes, aging can be reversed, and it's not just a matter of accepting it as natural [1, 2]. Dr. Sinclair, a Harvard professor, states that he has seen evidence in his lab showing that they can \"literally now reverse the aging process\" [1, 2].\n\nThe reversal process involves treating the body like a computer and \"reinstalling the software\" [1, 6]. Specifically, his lab has found a way to access a \"backup copy of that information from youth\" that is present in every old person and can be \"reinstalled into cells, into tissues, into the entire body\" [6].\n\nIn terms of how this is done:\n*   **Cellular Rejuvenation:** In tests, cells have appeared \"75% younger\" after eight weeks [1].\n*   **Gene Therapy:** The technology involves introducing a set of three genes into tissues. For example, in the eye, they are introducing these genes into the optic nerve and turning them on for 6 to 8 weeks, which resets the age of cells by about 75% [5].\n*   **Animal Studies:** In mice, injecting the reversal genes into the vein of very old mice (equivalent to 80-85 years old) resulted in an \"additional 100% lifespan extension\" [5].\n*   **Newer Technology:** A newer method involves a liquid that can be swallowed in a mouse, which can rejuvenate them in four weeks [5].\n\nWhen aging is reversed, diseases associated with it—such as Alzheimer's, cancer, and heart disease—\"go away or are cured\" because the underlying cause is aging itself [1, 3].",
+			"thinkChars": 0
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 2271,
+			"totalMs": 9985,
+			"answer": "The guests discuss the ketogenic and carnivore diets in relation to metabolic health and mental well-being.\n\nRegarding the ketogenic diet, one specialist explains that it is \"any diet that lowers insulin levels, to the fat burning point\" [2]. This process allows the liver to turn fat into ketones, which can be burned for energy and \"bridge any energy gaps\" [2]. A study mentioned involved 31 treatment-resistant patients with chronic mental illnesses, where 43% achieved clinical remission after trying a mildly ketogenic whole foods diet [3, 4]. Another guest noted that for people with food addictions and binge eating problems, the ketogenic diet can be \"knocking you off that roller coaster\" [5, 6].\n\nThe carnivore diet specialist emphasizes that all physical and mental diseases stem from \"metabolic malfunction\" [3, 4]. They suggest that understanding how to help your cells operate at their \"personal best\" gives you \"tremendous control over what you are at risk for\" [3, 4].\n\nHowever, there are caveats mentioned:\n*   One specialist warns that the diet itself isn't dangerous, but it can be \"potentially dangerous\" when combined with medications [2].\n*   Another specialist cautions that individual differences exist, and one might develop \"completely different conditions\" like cardiovascular disease or depression [3, 4].\n\nThe researcher also mentions that the Mediterranean diet, which includes salmon, sardines, olive oil, and avocado, showed \"tremendous success in keeping brain glioblastoma guys alive\" [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 2690,
+			"totalMs": 9946,
+			"answer": "People cheat for a variety of reasons, and it's more complicated than just one thing [1]. Esther Perel notes that cheating can stem from loneliness, sexual frustration, resentment, or a need for constant affirmation from someone who can make them feel better about themselves [1].\n\nFrom a broader perspective, affairs can be an \"antidote\" to a relationship that feels dead, as people might be seeking to \"feel alive\" and reconnect with an essence of something [1].\n\nThe Gottman Doctors suggest that betrayal shatters a person's world because it reveals that \"everything they believed about the partner is wrong\" [2].\n\nRegarding gender differences, the World No.1 Divorce Lawyer observes that while men and women both cheat, men tend to cheat in \"more scattershot, stupid ways\" [5]. He also points out that men often say the affair \"had nothing to do with my wife\" [5].\n\nEvolutionary psychologist Gad Saad suggests that men are \"much more likely to want more sexual partners\" [3], while women also have evolved a \"very strong desire for sexual variety\" [3].\n\nJordan B. Peterson also notes that the probability of cheating is \"proportionate to the number of partners before the marriage or the committed relationship\" [4].\n\nThe excerpts don't offer a single definitive reason, but rather a collection of factors including loneliness, the desire for novelty, and underlying relationship issues [1, 2, 5].",
+			"thinkChars": 0
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 3053,
+			"totalMs": 13232,
+			"answer": "Based on the excerpts, several types of jobs are at risk due to AI, particularly those involving mundane tasks or entry-level knowledge work.\n\n**Jobs at Risk:**\n*   **Entry-Level Knowledge Work:** This includes roles like call center agents, assistants, and travel agents, which can be done with \"a few clicks and is mundane\" [6].\n*   **Mundane Computer Tasks:** Jobs that involve \"clicking around on a computer\" or responding to phone calls are predicted to disappear quickly [6].\n*   **Knowledge Workers:** Roles like paralegals, financial analysts, and even some doctors performing diagnosis are at risk because AI can perform research or do the job of multiple people [6].\n*   **Creative/Artistic Roles:** Some music composers and graphic designers may lose their jobs as AI enters those fields [6].\n*   **Blue-Collar vs. White-Collar:** While some believe blue-collar jobs will be the first to go, one expert suggests blue-collar jobs like carpentry will stay for a long time, but entry-level knowledge work will see serious impact around 2027 [6].\n\n**How to Prepare:**\nThe most important skill set to focus on is the **entrepreneurial skill set** [1, 3]. This involves:\n*   Identifying an opportunity [3].\n*   Prototyping fast and cheap experiments to validate if people want what you have [3].\n*   Taking it to market, making initial sales, and scaling up [3].\n*   Exiting and then coming up with a new idea [3].\n\nAdditionally, you should aim to **build a personal brand**—not to become an influencer, but to position yourself with a group of people who know who you are and what you do [1].\n\n**What the excerpts don't cover:**\nThe excerpts do not provide a specific list of \"safe\" jobs, though they suggest that the entrepreneurial mindset is the most crucial skill for navigating the changes.",
+			"thinkChars": 0
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 2154,
+			"totalMs": 10429,
+			"answer": "Yes, creatine helps with several things beyond muscle, and it's beneficial for almost everyone [1, 2, 4, 6].\n\nHere's what the excerpts mention:\n\n*   **Brain and Cognitive Function:** Creatine is linked to cognitive performance [2]. It can help with \"brain fog\" [6], and at higher doses, it's shown to help with cognition [4]. It's also important for \"brain metabolism\" [5].\n*   **Energy and General Health:** It helps with \"cell energy metabolism\" by helping create ATP [6]. If you are low on energy, you should definitely be taking it [6].\n*   **Protection Against Disease:** It can protect the brain against \"insults,\" such as a concussion or stroke [6]. It also has potential benefits in \"neurodegenerative diseases\" [5].\n*   **Other Benefits:** It has been shown to support \"skin, hair, muscle, bone, et cetera\" [2]. It can also help with \"gut health\" and the \"integrity of the intestinal cells and the mucosal lining\" [5].\n*   **Mental Health:** For women, taking 3 to 5 grams of creatine has been linked to coming out of a depressive episode more so than using an SSRI, suggesting benefits for mood and anxiety [5].\n*   **Cancer:** There is evidence suggesting \"anti-cancer effects\" when dosed at higher amounts [6].\n\nIt's worth noting that while it helps with muscle mass and strength, the evidence for muscle performance is described as \"more robust\" than the evidence for huge increases in muscle mass [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 2233,
+			"totalMs": 7604,
+			"answer": "The guests discussed quantum computing in terms of its potential and current state, rather than specific hardware roadmaps.\n\nMichio Kaku explained that quantum computers compute on atoms, unlike traditional transistors, which are limited to \"up or down\" or \"on or off\" states [1]. He noted that these computers are so powerful that the CIA is worried they could eventually \"break into any known digital code\" [1]. Google has set a deadline of 2029 for the cybersecurity world to prepare for this threat, as quantum computers could potentially crack digital security, including Bitcoin [1].\n\nNeil deGrasse Tyson mentioned that the information technology revolution is built on the \"exploitation of the quantum\" [2]. He also discussed the theoretical possibility of simulating universes using quantum computing power, suggesting that the ability to create a \"perfectly simulated world\" is something we do not yet have the power to do [4, 5].\n\nRoman Yampolskiy noted that while quantum computers *can* break current algorithms, there are strategies for \"switching to quantum-resistant cryptography\" [3].",
+			"thinkChars": 0
+		}
+	]
+}

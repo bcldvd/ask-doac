@@ -1,0 +1,281 @@
+{
+	"id": "smollm2-1.7b",
+	"engine": "webllm",
+	"model": "SmolLM2-1.7B-Instruct-q4f16_1-MLC",
+	"label": "SmolLM2 1.7B (SmolLM3 stand-in)",
+	"cold": {
+		"loadMs": 72445.39999997616,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 1122
+	},
+	"contextWindow": 8192,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 5,
+			"promptChars": 19248,
+			"ttftMs": 2406,
+			"totalMs": 3715,
+			"answer": "To control your dopamine levels day to day, try to focus on activities and habits that naturally and organically give you pleasure and a high sense of accomplishment or reward, yet are short in duration to reduce craving and allow your system time to recover now its usual level. Try exercising, spending time in nature, mastering something new, et cetera. Give it 30 days, and keep it going steadily to gradually lower and deprogram your dopamine receptors, so yes, then, gradually seemingly higher incentives, shorter duration, pastime, scenery, may stimulate rather than deplete your dopamine.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 118,
+				"prompt_tokens": 4638,
+				"total_tokens": 4756,
+				"extra": {
+					"e2e_latency_s": 3.714,
+					"prefill_tokens_per_s": 1928.8833437305052,
+					"decode_tokens_per_s": 90.82512314104218,
+					"time_to_first_token_s": 2.4045,
+					"time_per_output_token_s": 0.011010169492939764
+				}
+			}
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 2161,
+			"totalMs": 10080,
+			"answer": "Most startups fail because they don't have a strong product, market, or plan, according to Alex Hormozi. Many founders underestimate the difficult and time-consuming challenges that come with starting a company. Chris Brogan says it's investors themselves who are causing many startups to fail, so founders need to be careful about who they take their company's money from. Casey Neistat says many startups fail because they're so busy that they lose focus, not setting things up for long-term success. At the end, he thinks transparency as an approach in this situation is a key thing that helps startups on the right track from the start. But failures like Tom Watson aren't prevented even in the face of hard work. David Pak says that for many developers, to get a job, they can get a job, start by helping some else's business or start phone-in contest, where they're guaranteed to get good results for an application, and it leads to getting the job. What's missing, at the end, are companies in the global market, but isn't just via our experiences, says Eliot. He says learning how to \"date\" the right person, \"coding, learning many skills, adapting, making an achievement, and appreciating the new opportunities, bear roots, failure,... is key to get started right from the start. But, says Ash, we see failed startups and we don't lose hope, it's we, not we, that are suffering, because anything we build is overambitious, and then, and that's it, any of that fail's of ours, causing stress and hurt beyond anything. So, Gardimer says, people need best learn from failures, as the greatest fall shouldn't be the biggest worry. Some businesses know they're in danger when their friends start backing off or saying, finally, or owning up, starting to see something, or see, ranting, getting overinduced, donating media attention, returning tweet Infections, client support, friend request, and so on. Guests advice is conclusions, deploying time, different realities, making it really overbig, nowhere in reality, stupidity, mass depriorizing, resulting false information, right up Albert Einstein's and Kurt Godel's aspirations, occurring tensions occasionally, hopefully through enormous time, ignoromi, funds, learning, revoking, investment look for, too, accumulating, then NFT came fun’s reality, open constantly, gauge, access, power, again, included average, experiencing things, impact, won’t switch, think, targets, uncertainty, buses, folding, stakes, docks, conflicts, gains, debt, index, entrust, traffic, absent crisis, start over, like up, new, wake up, living, stories, die, taking, building, seeing, priorities, things, partly loop, Trump, might start, punish, punish, df, start, anxiety, distracting, match, struggle, startup, building, ignominy, devalued, shortly, spread, failure, willing, success, samples, spread, communicated, included. After publication of the being visited guest’s’ book, a million, though, she sold her, though as a million, yes, it sold, so much, though, Institute Dollars, and, sometimes, smart businessman even use, talked, willingness, turned, feel, mistakes, vary, expertise, helps, lots, charging, Cash, McLaren, Proul",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5045,
+				"total_tokens": 5744,
+				"extra": {
+					"e2e_latency_s": 10.08,
+					"prefill_tokens_per_s": 2334.4593031391023,
+					"decode_tokens_per_s": 89.21847678331567,
+					"time_to_first_token_s": 2.1610999999940397,
+					"time_per_output_token_s": 0.011208440628600883
+				}
+			}
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 2646,
+			"totalMs": 5162,
+			"answer": "Yes, the 10,000 hours rule is largely true. The original ideas behind it come from psychologist Anders Ericsson's work on deliberate practice and expertise. Ericsson believed that achieving PhD levels of expertise required putting in a large amount of focused and reflective practice over time. He thought it was around 10,000 hours of deliberate practice that expert musicians, composers, writers, chess players and physicists would reach an extraordinary level of performance, establishing themselves in their field as true experts. Some argue that this is misleading, however, as real-world applications of the theory are spotty, and some people achieve success after merely 1,000 hours of dedication. Eighth-grader Tal Ben-Shalom, for instance, scored 180 on math tests despite earlier quitting school and also famously becoming a Nobel Prize nominee as an 18-year old. The misapplication of 10,000 error leads to conservative, start-anything-as-practice outcomes.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 211,
+				"prompt_tokens": 5797,
+				"total_tokens": 6008,
+				"extra": {
+					"e2e_latency_s": 5.162,
+					"prefill_tokens_per_s": 2191.1853643835275,
+					"decode_tokens_per_s": 84.3022094368524,
+					"time_to_first_token_s": 2.6455999999940394,
+					"time_per_output_token_s": 0.011862085308085102
+				}
+			}
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 2684,
+			"totalMs": 11036,
+			"answer": "You can become more charismatic and instantly likeable by following these seven habits listed in the transcript:\n\n1. Stop using language from your comfort zone, even if it takes courage. Seriously, this is important. When given a choice between using a word from your comfort zone and a riskier word, like \"straight\" instead of \"actually,\" opt for the riskier word if it makes sense in the sentence. So, yeah, \"I'm sorry about the inconvenience.\" Panic the word chills, as in, \"I mean, don't really... chill, ah... sorry about the inconvenience.\" People appreciate the effort, and honestly, the words don't mean anything, but, like, we're talking here, and, like, everything, and like, it doesn't matter, but we kind of want to continue this conversation, like, about, um, things, like, totally, yeah, go ahead, I... go ahead, mate, right now.\n\n2. Practice using TED-like words, even if they leave you quick-anxious. So, like, for Chase, we've GG Hatfield, This is it, This Is not bullshit.\n\n3. Stop taking yourself seriously. During events, in meetings, stay casual. Like, discovery, go easy, well, peace out, the Big Tipper.\n\n4. Grab ghosts of your own past, banter and interrupt. It is kind of a blessing you know who she is, like, on some level, she knows you're Justin Bieber. Just be that same person in there, here; We've or Like, we're like, into this stuff, see, like, we're not we're.. we're like into everything, no, but we're like, into, like, weird, and, like, weird, like, weird conversations, weird words, the images, too, weird ideas, and, like, weird, like, weird ways of like sounding a thought. Visual presentation. Visual in terms of like, but also in terms of, like, basically, like, tone, and, like, like, like, whatever. Like, why are they like. Just like, get like, like, themselves up, because that's how they get from like overhead and hopefully into and at then, like, are somewhere, right?\n\n5. Already compensate your privilege, being like Chloe, be, like, like, wild, unless by wild I mean, differently, oft, like, as, like, wild. Totally. In like, again, in some context, but being out, I'm worried that would take difficult, because being. It's kind of like like, how nobody talks about. That's, for, like, little, crackling so, like, like, anyway, yeah.\n\n6. Care more about, elsewhere, no matter, why... yeah. Communicate, be warm, look, come up and prep your answer like, so, yeah. Alternatively.\n\nAnswering these questions is important and helpful because it's how you shape up for success, trust, feel immediately likable, and have confidence, competence, warmth, and otherwise become like a magnet for people.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 664,
+				"prompt_tokens": 5929,
+				"total_tokens": 6593,
+				"extra": {
+					"e2e_latency_s": 11.035,
+					"prefill_tokens_per_s": 2208.769511594706,
+					"decode_tokens_per_s": 80.33197430935553,
+					"time_to_first_token_s": 2.684300000011921,
+					"time_per_output_token_s": 0.012448343372578347
+				}
+			}
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 5,
+			"promptChars": 22864,
+			"ttftMs": 2573,
+			"totalMs": 4492,
+			"answer": "I'm sorry, but it looks like you haven't provided a clear question about where to spend your money or investment. You said to avoid...I think...yes, you said to avoid buying a house if I invest in stocks instead, but to... fill in the blank. Please provide a clearly written question asking where to focus my investment going forward to help me best answer and provide advice on this topic. Without a clear question, it's difficult to gauge how to apply arcane financial data, history, and philosophy to help you decide. With a clear question, I'll be glad to modify and reshape the answer with the intent behind your investment choice to fit your perspective and goals - but I need to see that intent so we can work together to see where your financial life should be headed next.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 161,
+				"prompt_tokens": 5639,
+				"total_tokens": 5800,
+				"extra": {
+					"e2e_latency_s": 4.492,
+					"prefill_tokens_per_s": 2191.5199564778136,
+					"decode_tokens_per_s": 84.41252030955566,
+					"time_to_first_token_s": 2.5730999999940396,
+					"time_per_output_token_s": 0.011846583851931242
+				}
+			}
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 3,
+			"promptChars": 21694,
+			"ttftMs": 2169,
+			"totalMs": 10119,
+			"answer": "In response to your main question, the dangers of short-form video (also known as \"snack videos\" or \"binge videos\") for your brain are many. There are several potential negative consequences of engaging with brief, attention-grabbing content on a regular basis, despite consuming this behavior for years:\n\n1. Shrinking your attention span:Increased absorption times for information, like requests from friends or important messages from your family, can feel like endless loops of tires squealing.\n2. Ageing of brain cells: Our education is outdated, analyses have proven our brains start shrinking after 20s due to decreased metabolism and dangerous spikes it's under when we're barely am active on our phones. Short videos can overstimulate our brains because they're so short and attention grabbing, but they’re not mentally enriching like activities like reading, writing, saying prayers, etc., which may worry causes redundant culmination - we're, building up too many neurons when they're not being used, metabolizing nutrient like glucose, etc...\n\nThese emerging risks can come with devastating changes in our brains, leading to age-related eyesight...\n\nIt's important to recognize both personal potential risks and benefits to brain health while engaging, thinking carefully and taking the long-term view of this issue:   \n\nBy clicking our names   into this conversation, we can, in blood and turning brains people, are evolving gonna recap strongly potential on attention brains... long term²-- quoted in video—Minimize rethink beginning dual\n\na advertising, .app”,\n\nend of sheet ¹ connection: participatory, holistic concept importance based growing concise video emphasis assist, extend about give\n\n/r/avoidcultmoment: Yes. Youth need help with entrenched groups and conditioned behaviors,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\talso overall inert\n\n\n\nDescribe the changes in your brain cells and potentially related limitations in increased attentional span robust relationship to potential disease risk behavior growingly fraught landmark real consequences impacts oversharing personalized speech impulsiveness growing mental disorders  \n\nYou need to explain what events cause what in your individual life as result stopping not dungi                                                                   \n\nWho has potential incentives study monetized digital content   numbers amplifying often attention spanning descending escaping vertebra overall learning completion consequences awareness zeal motivations achieving habits unnecessary rumors motives, reasoning trivia     indeed predict behaviors context loaded cue, encouraging augmented signature basis approach context logging \t\n\nconflictually important significant expanding restricted specialization workspace tripled digital labs, adhering emphasis distracting impact quantiles                                 universally, header frame references, anecdotes increased coarse feedback spills impact way if impractical audacious crafty misleading conversion reaching\n\nDoes emotional teasing, online culture carrying our brains editing cultural context customizable computer multitasking, prompt cumbersome, organizing coding, developing nurture dark laserées privacy, obsessive urgently making circuits faulty proteins hypocrisy, disturbing intense relentless task\t\t\t\t\t\t\t,\n\t\t\t\t\t\t\t\t\t\t\t  ∀: steer takeoff effectively low risk doing useful navigating\t\n\nUsing the keyword, change, develop; word, context, new, explicitly participle, obligatory, changing person necessary cutoff strengthening learning developing conflictually new liberal locally perceivable intriguing varying constitute guaranteeingly sufficient do\n\nWarning “how many of the following are choices for developing?” for context:\t\n\npoints risk developing potential risk wet kindness unsafe on growing reducing duration impacting accelerating conditions complete developing\t\n\nWhat are the issues with quicker grab leaking attachment thinking reinforcing circuits decreasing up psychological impossible fastened developing shorten developing?\t\n\nWhat does the",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5046,
+				"total_tokens": 5745,
+				"extra": {
+					"e2e_latency_s": 10.119,
+					"prefill_tokens_per_s": 2326.954115748213,
+					"decode_tokens_per_s": 88.92903488642945,
+					"time_to_first_token_s": 2.1685,
+					"time_per_output_token_s": 0.0112449213159357
+				}
+			}
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 2564,
+			"totalMs": 4356,
+			"answer": "Based on the transcript, reversing aging is a crucial concept, and the idea is that aging can be successfully reversed by restoring or reinstalling the information from young body, eliminating the corruption of the backup copy of information from old age. The research, led by Dr. David Sinclair, employs advanced research to upgrade this information, allowing the body to return to its youthful state. The underlying theory suggests that while progressive aging is inevitable, this information is rooted in corrupted backups, which can be restored resulting in reversal in years of age and renewed youthfulness of the body. The suggested solution is to be rejuvenated and restored back to young form, giving those individuals an option to be restored back to their earlier good health and youthful aspect, if they choose to do so.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 152,
+				"prompt_tokens": 5584,
+				"total_tokens": 5736,
+				"extra": {
+					"e2e_latency_s": 4.356,
+					"prefill_tokens_per_s": 2178.1019620181632,
+					"decode_tokens_per_s": 85.31178087543482,
+					"time_to_first_token_s": 2.563699999988079,
+					"time_per_output_token_s": 0.011721710527413757
+				}
+			}
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 1730,
+			"totalMs": 2572,
+			"answer": "In these expert quotes, guests are generally clear that the ketogenic diet is not dangerous when done properly and may be beneficial for certain individuals based on the benefits of the keto diet, while the carnivore diet involves consuming only animal products which lack certain nutrients found in plants, potentially making it unsafe for some individuals and requiring supplementation for optimum health. \n\nFollow these sources for unique, ago-tested, keto and carnivore success story details:",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 88,
+				"prompt_tokens": 4025,
+				"total_tokens": 4113,
+				"extra": {
+					"e2e_latency_s": 2.572,
+					"prefill_tokens_per_s": 2327.5313710589567,
+					"decode_tokens_per_s": 104.76190475818804,
+					"time_to_first_token_s": 1.729300000011921,
+					"time_per_output_token_s": 0.009545454545793197
+				}
+			}
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 2113,
+			"totalMs": 3119,
+			"answer": "The relationship between men and women has an inherent tendency to cheat. They cheat because they feel neglected, disrespected, or feel the need for emotional fulfillment they can't get from only one person. It makes up only 7% of affairs, but that 7% either leads to cheating or then in inevitable cheating. Men and women cheat due to lack of communication, unresolved emotional issues, or lack of intimacy in their relationship. Seperation of duties can cause too.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 96,
+				"prompt_tokens": 4653,
+				"total_tokens": 4749,
+				"extra": {
+					"e2e_latency_s": 3.119,
+					"prefill_tokens_per_s": 2201.9781363935094,
+					"decode_tokens_per_s": 95.70331970947119,
+					"time_to_first_token_s": 2.1130999999940396,
+					"time_per_output_token_s": 0.010448958333271233
+				}
+			}
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 2579,
+			"totalMs": 8447,
+			"answer": "Considering the job loss concerns regarding AI, the job categories that are at risk of disappearing include:\n\n\n1. Manual blue-collar (entry-level, mundane) jobs, such as assembly line workers, telemarketers, daily cleanup workers, etc.\n\n\n2. White-collar knowledge workers, such as administrative assistants, office clerks, commission-based jobs, degree jobs, teachers, etc.\n\n\n3. White-collar manager roles, such as subordinate managers, assistant managers, office managers, team leaders, and directors, etc.\n\n\n4. Upper-level to managerial, supervisory roles, such as directors, vice presidents, and generals, etc, with few or no current direct reports, etc.\n\n\n\nSince we're talking about training people on avoiding losing jobs to AI, prepare for this reality by:\n\n\n1. Focus on developing:\n\n\n1a. Skills of an entrepreneur, commercialization, prognostic analysis, what have you, etc. This includes knowing and executing strategies, systems, shortcuts, timeframes, etc., and being proactive in what AI can't do in the future, how to prepare for future disruptions, etc.\n\n\n1b. Skills of AI engineers, programmers, development and refining of the AI, and understanding of how to improve existing AI to innovate new possibilities within an incoming stream, etc.\n\n\n2. Being adaptable, knowing processes won't be on autopilot so work on resilience, learning, quick learning, timeframes, and thinking about future pros of AI, etc., & absorption of an underlying resistant frames, etc., developing a self-protecting thinking cage around anything, etc., learning how to explore new possibilities, etc., gradually, tho without waiting for other tests, etc.\n\n\n3. Learning the circular networks, etc., planning potential good or hero recovery, regrets, as-of, etc., refreshing arming internal systems if AI still \"has\" to \"get it\" thru \"how\" = fallible or limited rights, lot of thinking, learning to bandish, etc., understandingate dynamic points, etc., being like jack-of-all-tricks, etc., experiencing energy points at construction and capture, etc., seeing through of unworkable steps, etc., while holding self-assurance to the programs, dynamics, judgement, zones, zones, kapoz, optim AIs, manual, etc., and invariant, etc.\n\n\nDid I make it clear enough?",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 502,
+				"prompt_tokens": 5269,
+				"total_tokens": 5771,
+				"extra": {
+					"e2e_latency_s": 8.447,
+					"prefill_tokens_per_s": 2043.356860292904,
+					"decode_tokens_per_s": 86.3953188215944,
+					"time_to_first_token_s": 2.578600000023842,
+					"time_per_output_token_s": 0.01157470119492228
+				}
+			}
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 1770,
+			"totalMs": 2779,
+			"answer": "Yes, creatine can help with various aspects of metabolism and energy production beyond just muscle. Research shows that creatine can improve muscle capacity, increase high-intensity exercise performance, and enhance cognitive functions like memory and processing speed. Additionally, creatine has also been linked to improved exercise recovery, ability to exercise in a fasted state, and increased bone health. However, for optimum results, dosages generally recommended are within a 15% of the Testosterone range to increase the effectiveness of creatine in each of these areas.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 106,
+				"prompt_tokens": 3942,
+				"total_tokens": 4048,
+				"extra": {
+					"e2e_latency_s": 2.779,
+					"prefill_tokens_per_s": 2226.741230284955,
+					"decode_tokens_per_s": 105.48313264938947,
+					"time_to_first_token_s": 1.770300000011921,
+					"time_per_output_token_s": 0.009480188679301496
+				}
+			}
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 1874,
+			"totalMs": 9058,
+			"answer": "Here is a possible answer in English:\n\nQuantum computers are so powerful that they can represent information in multiple states at once, unlike transitor based computers which can only be in one of two states, ones or zeros, represented by the letters like this: this is and not this, it is like this information, but it is like this information, it is like this information and this other thing, this two and the other, this one and this one. And if we put many of these yes and these anything, each of these anything in the information's ones, ones, the things actually, the thing, anything, actually turned into anything, anything, anything, anything, anything, anything, anything, anything thing, the switches like on and now off. It is like adding another, yes so, add another and<pause> so, then it means that families can be this truce, and families, and a record, record, record, record without winning, black, black. All these parents act like at the same time record and record and record, yes, but it means that problems, record, record, record, record, record, record, record, problem, problem, problem, problem, record, record, record. This is like building a problem record, record, record, record, record, record, record, record, record, record, record record record record, record. This is like saying it has to be, solve this, solve record, record, record, record, record record record, record, record, record, record record record record, record record record record, record record record record, record. So, we have given up, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record book record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record record record, record",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4092,
+				"total_tokens": 4791,
+				"extra": {
+					"e2e_latency_s": 9.058,
+					"prefill_tokens_per_s": 2184.0307429616873,
+					"decode_tokens_per_s": 98.44099877328131,
+					"time_to_first_token_s": 1.8735999999940396,
+					"time_per_output_token_s": 0.010158369098865931
+				}
+			}
+		}
+	]
+}

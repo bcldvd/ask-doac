@@ -1,0 +1,137 @@
+{
+	"id": "gemma-4-E2B",
+	"engine": "litert",
+	"model": "gemma-4-E2B",
+	"label": "Gemma 4 E2B (current default)",
+	"cold": {
+		"loadMs": 151902.59999999404,
+		"downloadBytes": 2008432640
+	},
+	"warm": {
+		"loadMs": 1030.7999999821186
+	},
+	"contextWindow": 32768,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 6,
+			"promptChars": 24934,
+			"ttftMs": 17961,
+			"totalMs": 22088,
+			"answer": "To control your dopamine levels day to day, you can focus on navigating life through learning and reward [1]. Dopamine is the learning neurotransmitter, meaning it's involved in learning both positive and negative things [1]. It's also the stimulus for reward, which is the motivation for reward, or \"foreplay\" [1].\n\nTo manage the cycle of craving and tolerance, you can try a 30-day dopamine fast, which involves abstaining from the substance or behavior causing the problems [5]. This is the beginning, and after the first 14 days, you might start to feel better, and by 30 days, you might feel much better than you have in a long time [5].\n\nOther ways to influence your state of mind and dopamine include:\n*   **Movement:** Exercise can be a really high dopamine [4].\n*   **Cold Exposure:** You can spike your dopamine, epinephrine, and norepinephrine with a cold shower or cold plunge; this is a state-shifting tool [6].\n*   **Mindfulness/Open Monitoring Meditation:** This practice, where you pay attention to everything around you, can improve memory and lower stress [6].\n*   **Lifestyle Adjustments:** Reducing stress, getting enough sleep, and hydration are also important for improving libido [4].\n\nRemember, the ultimate goal is to get those dopamine receptors back up [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 735,
+			"totalMs": 1958,
+			"answer": "Most tech startups fail because of the cycle of the entrepreneur life cycle, which involves stages like uninformed optimism, becoming an informed pessimist, and then going around in circles [4]. There are also many failures, as Casey Neistat mentioned, for a single success [3]. Furthermore, the pressure to achieve an exit can lead to disappointment, as people might feel they let down the people who helped them get there [3].",
+			"thinkChars": 0
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 864,
+			"totalMs": 3992,
+			"answer": "The idea of the 10,000 hours rule is a popular misconception [1]. It suggests that the only route to true expertise is through 10,000 hours of \"Deliberate Practice\" [1].\n\nHowever, the research underlying this idea has been scrutinized. For instance, studies have shown that the idea that two people at the same level of performance will progress the same amount for the same unit of deliberate practice is false [1]. Furthermore, the original research on violinists showed that the average number of hours was reported, which obscured the real story, as there was significant individual variation—some people practiced less and were better than those who practiced more [1].\n\nUltimately, the key takeaway is that \"fit turns out to be really important\" [1], meaning finding where you learn better is crucial to maximize your advantages [1]. Instead of focusing on doing the same thing for 10,000 hours, skill stacking—getting proficient at a number of things and overlapping them uniquely—is suggested as a better approach [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 863,
+			"totalMs": 6872,
+			"answer": "To become more charismatic and instantly likeable, focus on being both highly warm and highly competent [1]. Charisma is about signaling high warmth and high competence, which makes up 82% of impressions [1].\n\nHere are some ways to cultivate this:\n\n*   **Choose Your Cues:** You get to make your own recipe for warmth and competence by choosing which cues to purposefully add from the 97 available cues [2]. You don't need to be a bubbly extrovert; you can be a quiet, powerful introvert, or a compassionate, empathetic healer [2].\n*   **Be Enthusiastic:** Instead of just saying \"fine,\" try to be \"fantastic,\" \"wonderful,\" \"great,\" \"ecstatic,\" or \"electric\" when answering \"how are you?\" Genuine enthusiasm is fun [3].\n*   **Build Trust and Respect:** Before expressing interest in someone, communicate that you are fun, that they can trust you, and that there is something to respect about you. This can flip the dynamic on its head [3].\n*   **Focus on Service:** Instead of focusing on \"me\" and how you can be liked, shift your focus to \"how can I be of service to this person? How can I help?\" This is about being genuine and focusing on others [6].\n*   **Mindset Shift:** Adopt mindsets like \"no matter what, I will be okay\" to help you focus on what you actually want to do and stop focusing on how to be safe [5]. Also, care more about your character than your reputation [5].\n*   **Go First:** In social scenarios, you can lead the interaction by cracking the first joke, being vulnerable first, or giving the first compliment to humanize the interaction [3].\n\nThe excerpts also suggest that focusing on serving others in the long term is more effective than focusing on short-term appearances, as trying to be nicey or caring too much about how you appear can be a form of long-term sabotage [6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 6,
+			"promptChars": 28691,
+			"ttftMs": 1059,
+			"totalMs": 5874,
+			"answer": "Whether you should buy a house or invest in stocks really depends on your personal situation and goals [6].\n\nHere are some key points from the conversation:\n\n*   **Buying a House:** It can be a good emotional and social life decision, especially when you need stability for your family [6]. However, it's important to separate this from making money; don't buy a house *to make money* because everyone can buy one, and the returns aren't necessarily huge [6]. The opportunity cost of owning a home is significant, including mortgage interest, property taxes, and maintenance costs, which is money you can't get back [3].\n*   **Investing in Stocks:** Stocks are described as the \"single most effective, strongest wealth building tool that's ever been created\" when looking at the long term [4]. They are \"extremely safe and extremely powerful in building wealth\" over long periods, even when the world is crazy, as stock returns have been positive despite turmoil [5]. However, they are very volatile, and you must be willing to endure that volatility; you shouldn't panic and sell when the market drops [4].\n*   **The Comparison:** When comparing the two, the key is looking at the opportunity cost. The money you could have invested in the stock market with a down payment on a house could have grown significantly over time [3]. Some suggest that if you are young and need mobility, renting and investing in the stock market might be better than buying a house [2].\n\nUltimately, it really depends on your time horizon, your goals, and your situation [6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 6,
+			"promptChars": 33716,
+			"ttftMs": 1184,
+			"totalMs": 7681,
+			"answer": "The dangers of short-form video for your brain are multifaceted, affecting your attention, cognition, and overall well-being.\n\nHere are some of the key points:\n\n*   **Attention and Cognitive Function:** Heavy short-form video use is associated with reduced thinking ability, especially shorter attention spans and weaker impulse control [1, 2]. Over time, engaging with this content rewires your brain, increasing your sense of stress, worsening your mental health, attention, cognition, distractability, irritability, and complex problem-solving [6].\n*   **Amygdala and Prefrontal Cortex Tension:** The primal urge to scroll is triggered by your amygdala, which is your sense of self-preservation and stress response [2]. When you scroll, the amygdala is triggered, and this causes it to upregulate while the prefrontal cortex—the area that governs executive functions like impulse control, planning, and strategic thinking—downregulates [2]. This imbalance is problematic [2].\n*   **Rewiring the Brain:** Through neuroplasticity, engaging with high-volume, low-quality, quick videos actively rewires your brain for the worst outcomes [6].\n*   **Dopamine Circuits:** These quick dopaminogenic tasks prevent you from learning the connection between hard work and a reward, setting your brain up to seek quick dopamine instead of applying yourself for longer-term rewards [1].\n*   **Long-Term Risks:** Consuming graphic videos can increase your personal risk of PTSD through vicarious trauma [1]. Furthermore, the constant engagement with devices, from waking up to going to bed, is linked to issues like sleep debt, which has ramifications for your health [1].\n*   **Impact on Development (Especially in Kids):** When children are exposed to touch screen devices instead of long-form stories, it trains their brains to respond to quick, variable reinforcement (like a Skinner box), which is different from the pattern-based learning provided by television. This can change how their brains develop patterns and attention [6].\n\nIt's important to remember that this is a vast network of things that can happen simply because you are thinking it is harmless [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 843,
+			"totalMs": 5499,
+			"answer": "Can aging be reversed, and how?\n\nDavid Sinclair believes that aging can be reversed [1]. He states that the underlying cause of many diseases, like Alzheimer's, cancer, and heart disease, is aging, and reversing aging can lead to these diseases going away or being cured [3]. He explains that when aging is reversed, the body can heal itself when it is young [3].\n\nThe method involves finding a way to \"reinstall the software\" of the body, viewing it like a computer [1]. His theory suggests that aging is not just wearing out, but rather the body losing the information it inherited from its parents and the womb, which is stored in the cells [6]. He believes they have found a \"backup copy of that information from youth that we can reinstall into cells, into tissues, into the entire body of a mouse and hopefully a human\" [6].\n\nFor example, in his lab, they are introducing a set of three genes into the optic nerve at the back of the eye and turning them on for 6 to 8 weeks to reset the age of cells, including nerves, by about 75% [5]. This technology is being tested in human trials for treating blindness [5]. Furthermore, they have shown that the same drug used to treat multiple sclerosis can also be used to treat other diseases in the body [5].\n\nHe is confident that the science is solid and believes that medicines will be on the market that can reset or reverse the age of the body [5]. He also suggests that reversing aging could allow people to live dramatically longer [6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 568,
+			"totalMs": 4277,
+			"answer": "Guests discuss the ketogenic diet and the carnivore diet in relation to metabolic function and mental health.\n\nRegarding the ketogenic diet, it is defined as any diet that lowers insulin levels to the fat-burning point so that if insulin levels are too high, the body can't burn fat [2]. When in ketosis, the liver can turn fat into ketones, which can cross into the brain and be used for energy, bridging energy gaps [2]. A study involving treatment-resistant patients with bipolar disorder, major depression, or schizophrenia found that 43% achieved clinical remission from their primary psychiatric treatment resistant chronic mental illness after adopting a mildly ketogenic whole foods diet [4]. Furthermore, the ketogenic diet can give people \"this space,\" allowing them to \"pull back and see things from a different perspective,\" buying them time and perspective, and giving them a sense of control over their emotions and behaviors [5, 6]. It is also noted that the ketogenic diet can help people with food addictions and binge eating problems [5, 6].\n\nThe carnivore diet specialist mentioned that metabolic malfunction is at the heart of many physical and mental diseases, and that understanding how to help cells operate at their personal best gives you control over what you are at risk for [3, 4].",
+			"thinkChars": 0
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 698,
+			"totalMs": 2371,
+			"answer": "Men and women cheat for a host of reasons, including loneliness, being sexually frustrated for years, resentment, vengeance, vindictiveness, and a need to be constantly affirmed by others [1]. Affairs can also be experienced as an antidote to a feeling that the relationship or the partnership is dead [1]. For men, it's often about needing to constantly be affirmed, and for women, it can be about feeling alive and reconnecting with an essence of something [1]. Men are also more likely to want more sexual partners, which is seen as evolutionary sense for cheating [3].",
+			"thinkChars": 0
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 796,
+			"totalMs": 4312,
+			"answer": "It sounds like you're asking about job displacement due to AI and how to prepare.\n\nRegarding jobs, some roles that are at risk include entry-level knowledge work, such as things that involve clicking on a computer or responding to phone calls [6]. There's also a concern about middle knowledge workers, like paralegals or financial analysts, as AI can handle research or perform similar tasks [6]. Some professions, like graphic design or music composition, might see changes because AI can generate similar outputs [6].\n\nFor preparation, the entrepreneurial skill set is highlighted as the most important skill set. This involves skills like identifying an opportunity, prototyping fast and cheap experiments to see if people want something, taking it to market, making initial sales, scaling up, and then exiting or starting a new idea [3]. You need to go through that process as fast and cheap as possible, just like an entrepreneur would [3]. Also, building a personal brand is suggested—positioning yourself with people who know who you are and what you do so they can enroll you in an opportunity [1]. Finally, learning \"how entrepreneurs think\" and the skills that make an entrepreneur successful is something everyone should focus on [1].",
+			"thinkChars": 0
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 569,
+			"totalMs": 1684,
+			"answer": "Creatine has benefits beyond just muscle. It can help with cognitive performance [2], support in neurodegenerative diseases [5], and it has potential cognitive benefits [4]. It also helps with brain metabolism [5], and it can be a protective molecule against insults like concussions, strokes, and stress [6]. Furthermore, it can help with energy metabolism by helping ATP create energy [6].",
+			"thinkChars": 0
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 620,
+			"totalMs": 2214,
+			"answer": "The guests discussed quantum computing in relation to its power and its implications. They mentioned that quantum computers compute on atoms, which is much more powerful than traditional transistors that operate in a linear, binary way [1]. They also noted that quantum computers are so powerful that even the CIA is worried they could break into any known digital code [1]. Furthermore, there are concerns that quantum computers could crack algorithms securing things like Bitcoin, leading to potential chaos if they did [3]. There are also strategies being developed to switch to quantum-resistant cryptography [3].",
+			"thinkChars": 0
+		}
+	]
+}

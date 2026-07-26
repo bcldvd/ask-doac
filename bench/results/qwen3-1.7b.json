@@ -1,0 +1,282 @@
+{
+	"id": "qwen3-1.7b",
+	"engine": "webllm",
+	"model": "Qwen3-1.7B-q4f16_1-MLC",
+	"nothink": true,
+	"label": "Qwen3 1.7B",
+	"cold": {
+		"loadMs": 75513.90000000596,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 1183.9000000059605
+	},
+	"contextWindow": 8192,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 5,
+			"promptChars": 19248,
+			"ttftMs": 3066,
+			"totalMs": 8037,
+			"answer": "To control your dopamine levels day to day, focus on the following key strategies:  \n\n1. **Exercise**: Physical activity increases dopamine levels.  \n2. **Diet**: Eat foods that naturally boost dopamine, such as those high in tyrosine (e.g., nuts, seeds, lean proteins).  \n3. **Stress Reduction**: Manage stress through relaxation techniques, which can lower dopamine levels and reduce cravings.  \n4. **Sufficient Sleep**: Aim for 7-8 hours of sleep, as sleep deprivation can lower dopamine.  \n5. **Limit Stimulants**: Reduce or eliminate caffeine, sugar, and alcohol, which can disrupt dopamine signaling.  \n\nRemember, dopamine is a chemical that can be influenced by lifestyle choices, and consistency is key. If you're feeling overwhelmed, take it one step at a time.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 172,
+				"prompt_tokens": 4559,
+				"total_tokens": 4731,
+				"extra": {
+					"e2e_latency_s": 8.037,
+					"prefill_tokens_per_s": 1487.8271653199515,
+					"decode_tokens_per_s": 34.71031017098384,
+					"time_to_first_token_s": 3.0642000000178813,
+					"time_per_output_token_s": 0.028809883722558962
+				}
+			}
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 2715,
+			"totalMs": 5893,
+			"answer": "According to the guests, most startups fail because they lack long-term thinking and focus on short-term gains. The guests mention that entrepreneurs often focus on immediate results and fail to understand the long-term implications of their decisions. They also highlight that many startups are driven by a \"crash burn cycle,\" where they act quickly but fail to plan for the future. This mindset leads to frequent failures and a lack of sustainable growth. The guests emphasize that true success requires long-term vision and careful planning, which many startups neglect.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 107,
+				"prompt_tokens": 4939,
+				"total_tokens": 5046,
+				"extra": {
+					"e2e_latency_s": 5.893,
+					"prefill_tokens_per_s": 1819.3538880987544,
+					"decode_tokens_per_s": 33.727344365642246,
+					"time_to_first_token_s": 2.714699999988079,
+					"time_per_output_token_s": 0.02964953271028037
+				}
+			}
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 3489,
+			"totalMs": 10531,
+			"answer": "The 10,000 hours rule is not actually true, as evidenced by the research and analysis discussed in the transcript. The rule suggests that mastering a skill requires 10,000 hours of deliberate practice, but this is a misconception. The research shows that the average time to reach international master status in chess is around 11,053 hours, and some people achieve mastery in fewer hours. This indicates that the 10,000-hour rule is not universally accurate and is based on flawed assumptions.\n\nAdditionally, the study found that the correlation between deliberate practice and skill development is not consistent. Some individuals progress faster, while others continue to practice for many hours but do not achieve the same level of skill. The rule also ignores the variability in human performance and the fact that the \"10,000 hours\" is not a fixed, universal standard.\n\nTherefore, the 10,000 hours rule is not true in the way it is commonly understood.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 210,
+				"prompt_tokens": 5681,
+				"total_tokens": 5891,
+				"extra": {
+					"e2e_latency_s": 10.532,
+					"prefill_tokens_per_s": 1628.120253340381,
+					"decode_tokens_per_s": 29.890685492445357,
+					"time_to_first_token_s": 3.4893000000119208,
+					"time_per_output_token_s": 0.03345523809591929
+				}
+			}
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 3532,
+			"totalMs": 11203,
+			"answer": "To become more charismatic and instantly likeable, focus on being **warm** and **competent**. These two traits make up 82% of how people perceive someone as charismatic [1]. Here’s how to do it:\n\n1. **Be Warm**: Show genuine interest in others, smile, and let your warmth come through. When people feel safe and comfortable with you, they’re more likely to trust and like you [2].\n2. **Be Competent**: Demonstrate expertise in your field, and be confident in your abilities. People see you as reliable and trustworthy when you signal warmth and competence [1].\n\nAdditionally, practice **non-verbal communication**. Make eye contact, smile, and use body language that shows you’re engaged and trustworthy. Avoid being too stiff or distant – people enjoy being around someone who is **fun**, **trustworthy**, and **vibrant** [3].\n\nRemember, charisma isn’t about being perfect, but about being **real** and **authentic**. Focus on being genuine, and you’ll naturally attract people who value those qualities.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 225,
+				"prompt_tokens": 5801,
+				"total_tokens": 6026,
+				"extra": {
+					"e2e_latency_s": 11.202,
+					"prefill_tokens_per_s": 1642.7843226154237,
+					"decode_tokens_per_s": 29.393705828982238,
+					"time_to_first_token_s": 3.531199999988079,
+					"time_per_output_token_s": 0.03402088888751137
+				}
+			}
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 5,
+			"promptChars": 22864,
+			"ttftMs": 3303,
+			"totalMs": 13579,
+			"answer": "Based on the excerpts, here's the answer:\n\n**Should you buy a house or invest in stocks?**  \nThe answer depends on your perspective and long-term goals.  \n\nIf you value **stability and immediate returns**, buying a house might be better. A house can provide a **rental-like experience** with the added benefit of **home equity** and **tax advantages**. However, this comes with **higher costs** (mortgage, taxes, maintenance) and **lower flexibility**.  \n\nIf you value **long-term growth and flexibility**, investing in stocks might be better. Stocks have historically outpaced inflation and offer **reinvestable returns**. But they are **volatile** and require **emotional discipline**.  \n\n**Key takeaways from the excerpts:**  \n- A house is a **fixed expense** but offers **home equity** and **tax benefits**.  \n- Stocks are **volatile** but **can grow** and **reinvest**.  \n- Buying a house requires **commitment** to paying it off or using it for rent.  \n- Investing in stocks requires **emotional resilience** and **long-term thinking**.  \n\n**Final recommendation:**  \nIf you’re **comfortable with risk** and **value flexibility**, invest in stocks. If you’re **fiscally responsible** and **value stability**, buy a house. But remember: **both have their place**, and the best choice depends on your **risk tolerance** and **long-term goals**.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 308,
+				"prompt_tokens": 5549,
+				"total_tokens": 5857,
+				"extra": {
+					"e2e_latency_s": 13.579,
+					"prefill_tokens_per_s": 1679.9878897971541,
+					"decode_tokens_per_s": 30.060804809623782,
+					"time_to_first_token_s": 3.303,
+					"time_per_output_token_s": 0.033265909091025274
+				}
+			}
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 3,
+			"promptChars": 21694,
+			"ttftMs": 2823,
+			"totalMs": 4890,
+			"answer": "The dangers of short-form video for your brain include reduced attention spans, weakened impulse control, and increased risk of mental health issues such as depression and anxiety. These videos can rewire your brain's reward systems and create a constant state of hyper-vigilance and distraction, leading to long-term cognitive and emotional challenges.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 68,
+				"prompt_tokens": 5056,
+				"total_tokens": 5124,
+				"extra": {
+					"e2e_latency_s": 4.891,
+					"prefill_tokens_per_s": 1791.25628853209,
+					"decode_tokens_per_s": 32.948929159136185,
+					"time_to_first_token_s": 2.8225999999940394,
+					"time_per_output_token_s": 0.03035000000061358
+				}
+			}
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 3221,
+			"totalMs": 10062,
+			"answer": "Can aging actually be reversed, and how?  \n[2] Yes, aging can be reversed. The process involves resetting the age of cells, including nerves, by about 75% through the use of specific genes. This technology is being tested in humans, and if it works, it could revolutionize how we approach aging and health.  \n\nHow?  \n[2] The process involves inserting three genes into the optic nerve of mice, which resets their cellular age. This method is being adapted for humans, and if successful, it could reverse aging at a cellular level.  \n\n[5] The key is that this process is not just about reversing aging, but about resetting the body's ability to function and heal. It's a step towards understanding and reversing the natural process of aging.  \n\n[1] The technology is already being used in labs, and if it works, it could mean we're on the path to resetting the human body's age. This is a major breakthrough in understanding and reversing aging.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 208,
+				"prompt_tokens": 5499,
+				"total_tokens": 5707,
+				"extra": {
+					"e2e_latency_s": 10.062,
+					"prefill_tokens_per_s": 1707.2337783297112,
+					"decode_tokens_per_s": 30.494956603544146,
+					"time_to_first_token_s": 3.221,
+					"time_per_output_token_s": 0.03279230769207848
+				}
+			}
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 1965,
+			"totalMs": 7296,
+			"answer": "The guests discuss the keto and carnivore diets in the following ways:\n\n- **Keto Diet**: The guests mention that the keto diet is not about carbohydrates but about lowering insulin levels to enter ketosis. They also note that the keto diet can help with mental health, as seen in studies where patients showed improvement. However, they also mention that the keto diet can be restrictive and that some people may not tolerate it well. They also allude to the potential for metabolic issues and the importance of individual metabolism.\n\n- **Carnivore Diet**: The guests mention that the carnivore diet is not recommended, as it can be harmful and not suitable for everyone. They also note that the carnivore diet is more extreme and can lead to other health issues, especially if not approached carefully.\n\nIn summary, the guests suggest that the keto and carnivore diets can have benefits but also come with risks and may not be suitable for everyone. They emphasize the importance of individual metabolism and the need for careful consideration when following any diet.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 209,
+				"prompt_tokens": 3930,
+				"total_tokens": 4139,
+				"extra": {
+					"e2e_latency_s": 7.296,
+					"prefill_tokens_per_s": 1999.8982240150224,
+					"decode_tokens_per_s": 39.3671124496717,
+					"time_to_first_token_s": 1.9650999999940395,
+					"time_per_output_token_s": 0.025401913876168466
+				}
+			}
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 2412,
+			"totalMs": 6016,
+			"answer": "Why do men and women cheat in relationships? The excerpts reveal that cheating is complex and multifaceted. Men and women cheat for various reasons, including emotional and psychological factors. Men often feel a lack of emotional connection and may seek stimulation or validation, while women may feel lonely or sexually frustrated. Both genders can cheat due to conflict, disconnection, or a desire for novelty. The excerpts also highlight that cheating is not always about infidelity but can be a coping mechanism or a way to reconnect with one's true self. Ultimately, it's a reflection of deeper issues within the relationship and the individuals involved.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 126,
+				"prompt_tokens": 4560,
+				"total_tokens": 4686,
+				"extra": {
+					"e2e_latency_s": 6.016,
+					"prefill_tokens_per_s": 1890.2337920696125,
+					"decode_tokens_per_s": 35.09162814107576,
+					"time_to_first_token_s": 2.4124000000059604,
+					"time_per_output_token_s": 0.028496825396068504
+				}
+			}
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 3009,
+			"totalMs": 6156,
+			"answer": "The jobs that will disappear because of AI include entry-level knowledge work, such as call center agents, travel agents, and routine tasks like clicking on a computer or responding to a phone call. These roles will become obsolete as AI automates these tasks.\n\nTo prepare, focus on developing skills that AI cannot easily replace, such as critical thinking, creativity, and emotional intelligence. Build a personal brand that highlights your unique value, and stay adaptable by continuously learning and evolving in a rapidly changing world.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 102,
+				"prompt_tokens": 5136,
+				"total_tokens": 5238,
+				"extra": {
+					"e2e_latency_s": 6.156,
+					"prefill_tokens_per_s": 1706.9360895974696,
+					"decode_tokens_per_s": 32.497530825604365,
+					"time_to_first_token_s": 3.0089000000059603,
+					"time_per_output_token_s": 0.030771568626749745
+				}
+			}
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 1956,
+			"totalMs": 3573,
+			"answer": "Creatine helps with muscle, but it also supports several other areas. It enhances muscle strength and mass, improves exercise performance, and supports cognitive function. Additionally, it aids in muscle recovery and may provide some protection against brain injuries and stress. Creatine is known for its broad benefits beyond just muscle growth.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 65,
+				"prompt_tokens": 3878,
+				"total_tokens": 3943,
+				"extra": {
+					"e2e_latency_s": 3.574,
+					"prefill_tokens_per_s": 1982.6175869120655,
+					"decode_tokens_per_s": 40.31757846674439,
+					"time_to_first_token_s": 1.956,
+					"time_per_output_token_s": 0.02480307692151803
+				}
+			}
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 2020,
+			"totalMs": 11793,
+			"answer": "The guests discussed quantum computing hardware roadmaps in the following ways:\n\n[1] Michio Kaku mentioned that quantum computers compute on atoms, which is different from traditional transistors, and that they have the potential to be much more powerful. However, he also noted that quantum computers are still \"weak\" and that the road to full power is uncertain.\n\n[2] Neil deGrasse Tyson explained that quantum computing is tied to the information technology revolution and that quantum computers have the potential to break any known digital code, but they are still in the early stages of development.\n\n[3] Roman Yampolskiy discussed the potential of quantum computing, especially in relation to Bitcoin and the concept of \"immortality\" through quantum-resistant cryptography, but he also acknowledged that quantum computers are still not fully capable of handling complex tasks.\n\n[4] Neil deGrasse Tyson and Roman Yampolskiy both mentioned that quantum computing is still in its early stages and that the road to full power is uncertain, with some predicting it could take a few decades and others suggesting it might happen sooner.\n\n[5] Neil deGrasse Tyson and Roman Yampolskiy both emphasized that quantum computing is still in its infancy and that the road to full power is not clear, with some people predicting it could take a few decades and others suggesting it might happen sooner.\n\n[6] Roman Yampolskiy mentioned that quantum computing is still in its early stages and that the road to full power is not clear, with some people predicting it could take a few decades and others suggesting it might happen sooner.\n\nIn summary, the guests discussed quantum computing hardware roadmaps in general terms, with some predicting it could take a few decades and others suggesting it might happen sooner, but all agreed that it is still in its early stages.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 370,
+				"prompt_tokens": 4012,
+				"total_tokens": 4382,
+				"extra": {
+					"e2e_latency_s": 11.792,
+					"prefill_tokens_per_s": 1986.1386138613861,
+					"decode_tokens_per_s": 38.051750380657495,
+					"time_to_first_token_s": 2.02,
+					"time_per_output_token_s": 0.026279999999903315
+				}
+			}
+		}
+	]
+}

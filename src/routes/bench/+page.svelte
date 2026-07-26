@@ -112,7 +112,7 @@
 				model_lib:
 					webllm.modelLibURLPrefix +
 					webllm.modelVersion +
-					'/Qwen2-1.5B-Instruct-q4f16_1-ctx4k_cs1k-webgpu.wasm',
+					'/Qwen2-1.5B-Instruct-q4f16_1_cs1k-webgpu.wasm',
 				low_resource_required: true,
 				vram_required_MB: 1700,
 				overrides: { context_window_size: 4096 }

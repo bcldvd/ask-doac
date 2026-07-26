@@ -1,0 +1,688 @@
+{
+	"gemma-4-E2B": [
+		{
+			"question": "charisma",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "All claims traceable and correctly cited; excellent synthesis across excerpts; slightly long and list-heavy but well-organized."
+		},
+		{
+			"question": "startups-fail",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Grounded and cited, but misses [3]'s explicit 'run out of cash'; third point is about exits, not failure causes; slightly repetitive phrasing."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Faithful to Epstein excerpt, well-cited, directly answers; slightly stiff phrasing but clear and concise."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 3,
+			"citations": 4,
+			"helpfulness": 3,
+			"quality": 3,
+			"note": "Mostly grounded but muddled: opening on learning/reward misses the question, meditation and libido items misapplied as dopamine control."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Faithful, well-cited synthesis; slight kid-to-adult generalization on dopamine point; bullet format a bit report-like vs conversational."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 4,
+			"citations": 4,
+			"helpfulness": 4,
+			"quality": 5,
+			"note": "Solid synthesis; [2] cited for a pro-renting view that excerpt actually rebuts, and one quote misattributed to [5]."
+		},
+		{
+			"question": "aging",
+			"groundedness": 5,
+			"citations": 4,
+			"helpfulness": 4,
+			"quality": 3,
+			"note": "Accurate, well-cited; echoes the question as a header, stiff report tone, omits mouse lifespan doubling; blindness trial framed as already running."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "Accurate, well-cited synthesis; omits blue-collar resilience and timelines; slightly meta opening sentence."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 3,
+			"citations": 3,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Invents a men-need-affirmation vs women-feel-alive split not in [1]; ignores [5]'s direct gender contrast; otherwise well-grounded and concise."
+		},
+		{
+			"question": "keto",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Keto well covered and cited; carnivore substance from [1] ignored; food-addiction point was host's question, slightly overstated."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "All claims grounded with correct citations; slightly repetitive on cognition and omits gut health, mood, and rehab benefits."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Accurate synthesis with correct citations, but never notes excerpts lack any hardware roadmap content, implying coverage that isn't there."
+		}
+	],
+	"gemma-4-E4B": [
+		{
+			"question": "startups-fail",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Grounded and well-cited, but misses [3]'s 'run out of cash' point; psychological-toll bullets are tangential to why startups fail."
+		},
+		{
+			"question": "charisma",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Accurate, well-cited synthesis across excerpts; slightly listy and the integrity point is tangential, but no fabrication."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 5,
+			"citations": 4,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Accurate, well-cited from [1]; final [3,4,6] citation stretches those excerpts; slightly listy rather than conversational."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "Solid, well-cited, flags gaps. Meditation/creativity framed as dopamine control is a stretch; missed [6]'s NSDR/hydration/sunlight dopamine list."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 4,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Well-synthesized and cited; slight misreading of [2]'s apples-to-apples point; more listy than conversational."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Accurate, well-cited synthesis; slightly quote-heavy and the closing AI-chatbot remark is irrelevant to the question."
+		},
+		{
+			"question": "aging",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Accurate and well-cited; covers mechanism, gene therapy, mouse data, disease link. Slightly quote-heavy and listy rather than conversational."
+		},
+		{
+			"question": "keto",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "Well grounded and cited; keto covered well, but skips [1]'s actual carnivore remark, leaving that half of the question thin."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Accurate, well-cited synthesis; minor redundancy between bullet points and a slightly bolted-on gaps section."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 5,
+			"citations": 4,
+			"helpfulness": 5,
+			"quality": 5,
+			"note": "Accurate, well-cited synthesis; final summary line's [2] citation weakly supports 'relationship issues' claim."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "All claims traceable to excerpts with accurate citations; thorough and well-organized, slightly long and listy for a conversational tone."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 5,
+			"citations": 5,
+			"helpfulness": 5,
+			"quality": 4,
+			"note": "Notes roadmap gap upfront, all claims grounded and cited; 2029 Google claim was the host's words, attribution slightly loose."
+		}
+	],
+	"llama-3.2-1b": [
+		{
+			"question": "charisma",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 0,
+			"note": "Warmth/competence point is grounded, but habit/mindset lists are fabricated, zero citations, and the same paragraph repeats six times."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 2,
+			"note": "No citations; vague meta-summary that claims details are missing when [1] gives them; misses chess/violinist evidence entirely."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 2,
+			"note": "No citations; steps mix grounded advice with invented specifics, contradictory fast guidance, repetitive filler and odd 're-reading' glitch."
+		},
+		{
+			"question": "startups-fail",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Verbatim excerpt dump, never answers the question; excerpts [3]/[4] mislabeled with [5]'s content; truncated mid-sentence."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "No citations, generic invented claims (AI mitigating stock risk), ignores excerpts' actual arguments, repetitive 'function of' filler."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "No citations; mitigation advice invented; same three points repeated verbatim across four sections; misses sleep/amygdala/meta-analysis specifics."
+		},
+		{
+			"question": "keto",
+			"groundedness": 0,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Every quoted 'example' is fabricated; repetitive near-duplicate points; no [n] citations; misses actual excerpt substance."
+		},
+		{
+			"question": "aging",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "No citations; generic hedging contradicts excerpts, omits 3-gene reprogramming and 75% reset; heavily repetitive templated sections."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Fabricated quotes, inverts Gawdat's carpenter claim, misattributes to Priestley, no [n] citations, extreme repetition, truncated, never addresses preparation."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Quotes copied verbatim but misattributed to wrong speakers, no [n] citations, fabricated Q&A framing, repetitive, truncated mid-sentence."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 2,
+			"quality": 3,
+			"note": "Fabricates cardiovascular/IBS/processing-speed claims; wrong 'Transcript n' format; several citations misattributed; real benefits (mood, gut, brain) buried among inventions."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Fabricated quotes, misattributed excerpts, repeated four times, no [n] citations, never addresses roadmaps or notes coverage gap."
+		}
+	],
+	"qwen3-0.6b": [
+		{
+			"question": "startups-fail",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "No [n] citations; distorts Hormozi's cycle into circular repetition; ignores [3]'s 'run out of cash'; heavily repetitive."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "No citations; misstates dopamine fast as inducing rushes; degenerates into endless repetition loop."
+		},
+		{
+			"question": "charisma",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 2,
+			"quality": 0,
+			"note": "Fabricated quotes attributed to [1]/[2], invented 5-habit list; warm/competent is grounded but answer loops repetitively."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Vague circular claims ignore Epstein's actual debunking; no [n] citations; massive degenerate repetition loop at the end."
+		},
+		{
+			"question": "aging",
+			"groundedness": 2,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Repetitive template collapse, no real content; excerpts describe 3 genes, optic nerve, mouse lifespan doubling — all omitted. Citations decorative."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 2,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Vague, partly ungrounded claims; misattributed citations; degenerates into dozens of repeated contradictory fragments, truncated mid-loop."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 3,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "Grounded opening bullets, but zero [n] citations, then degenerates into repetitive off-topic transcript regurgitation, truncated mid-sentence."
+		},
+		{
+			"question": "keto",
+			"groundedness": 2,
+			"citations": 2,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "Vague summaries misrepresent [1][2]; repeats same sentence twice; misses study specifics and carnivore substance; citation labels loosely attached."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 4,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Verbatim excerpt dump, not an answer; repeated text, irrelevant data-center quote, truncated mid-sentence; no synthesized claims or real citations."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 4,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "No fabricated roadmaps and notes gap, but zero citations, rambling, repetitive, with leftover 'Therefore, the answer is' meta."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 3,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Verbatim excerpt dump; same paragraph repeated 4x, citation numbers wrong, no synthesis, leftover question line."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 2,
+			"citations": 2,
+			"helpfulness": 2,
+			"quality": 2,
+			"note": "Invented verbatim quotes attributed to excerpts; misses gut, bone, skin, energy, cancer benefits; list format with meta opener, repetitive."
+		}
+	],
+	"qwen3-1.7b": [
+		{
+			"question": "dopamine",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Exercise/sleep/stress match [4], but tyrosine foods, 7-8h sleep, and caffeine are invented; zero citations used."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 5,
+			"citations": 0,
+			"helpfulness": 4,
+			"quality": 3,
+			"note": "Accurate use of Epstein excerpt but no [n] citations at all; somewhat repetitive and says 'the transcript'."
+		},
+		{
+			"question": "charisma",
+			"groundedness": 3,
+			"citations": 3,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "Mostly grounded, but 'smile' advice contradicts [2] (smiling not essential); 'vibrant' invented; final authenticity claim uncited."
+		},
+		{
+			"question": "startups-fail",
+			"groundedness": 3,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 3,
+			"note": "No citations at all; themes loosely match [4][6] but misrepresents crash-burn cycle and misses running-out-of-cash point."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 4,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "Claims match excerpts but zero [n] citations; skips sleep, PTSD, amygdala mechanism the excerpts detail."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 2,
+			"note": "Generic advice with no [n] citations; ignores excerpts' actual arguments (leverage, opportunity cost, time horizon); bold-heavy listicle, not conversational."
+		},
+		{
+			"question": "keto",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 3,
+			"note": "Carnivore claims fabricated—excerpts never call it harmful; [1] is favorable. No citations used at all."
+		},
+		{
+			"question": "aging",
+			"groundedness": 3,
+			"citations": 2,
+			"helpfulness": 2,
+			"quality": 2,
+			"note": "Right gist but misattributed cites (75%/3 genes is [5]), says mice not humans, repetitive, omits information-theory/backup-copy mechanism."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 3,
+			"note": "No [n] citations; invented gender split reversing Perel; 'not always about infidelity' incoherent; misses affairs-in-happy-couples nuance partially."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 3,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 4,
+			"note": "No [n] citations at all; job list matches [6] but prep advice (critical thinking, emotional intelligence) is invented; misses entrepreneurial-skills point."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 5,
+			"citations": 0,
+			"helpfulness": 4,
+			"quality": 4,
+			"note": "All claims supported (brain, recovery, injury protection) but zero [n] citations; misses gut health and mood benefits."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Misattributes quotes across guests, fabricates claims (Yampolskiy immortality/crypto), repeats paragraphs, never notes roadmaps aren't covered."
+		}
+	],
+	"qwen3.5-2b": [
+		{
+			"question": "charisma",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Raw truncated reasoning trace, no actual answer; garbled invented details (e.g. 'ビール式', '9 triggers')."
+		},
+		{
+			"question": "10k-hours",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Degenerate repetition; fabricates 'it was a joke' claim; citations [2]-[6] irrelevant; no excerpt substance conveyed."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 1,
+			"citations": 1,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "Mostly fabricated advice ('adjust your dose', 'control your magic'); wrong citation format; garbled quotes; truncated mid-sentence."
+		},
+		{
+			"question": "startups-fail",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Fabricated names/quotes (Mike Cohn, Couchsurfing, Monster Mash), garbled text, zero citations; only faint trace of Hormozi's cycle is real."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Answer is only a truncated leaked <think> trace with garbled, partly wrong excerpt summaries; no actual answer delivered."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 0,
+			"note": "First half tracks the amygdala/PFC content but uncited; final paragraph is degenerate, repetitive, fabricated gibberish."
+		},
+		{
+			"question": "aging",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Incoherent word salad, zero citations, fabricated nonsense, uncredited first-person quote copy, degenerates into repetitive number rambling."
+		},
+		{
+			"question": "keto",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Fabricated claims (scuba diver, diet dangers), no [n] citations, garbled sentences, truncated mid-sentence."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Incoherent, repetitive, hallucinated claims ('.beginPath', 'your book'), no [n] citations; only stray fragments trace to excerpts."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 0,
+			"citations": 1,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Fabricated speakers (Anita Varda, Oliver Peak) and claims; garbled incoherent text; cuts off mid-sentence; citations attached to invented content."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 1,
+			"note": "Entirely fabricated guests, podcast, and specs; cites nonexistent [8]; nothing from excerpts; incoherent meta-note."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 3,
+			"quality": 1,
+			"note": "Covers real benefits but invents blood pressure claim, zero citations, repetitive listy structure with odd meta opening."
+		}
+	],
+	"smollm2-1.7b": [
+		{
+			"question": "10k-hours",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 2,
+			"note": "Contradicts excerpt [1] (Epstein says rule is wrong), fabricates Tal Ben-Shalom anecdote, zero citations."
+		},
+		{
+			"question": "charisma",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Incoherent, fabricated 'habits' not in excerpts, zero citations, degenerate rambling text throughout."
+		},
+		{
+			"question": "startups-fail",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Fabricated guests and claims, zero citations, degenerates into incoherent word salad."
+		},
+		{
+			"question": "dopamine",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "No citations; garbled phrasing; 'lower/deprogram receptors' inverts the excerpts' point about restoring receptors; 30-day idea loosely grounded."
+		},
+		{
+			"question": "short-form",
+			"groundedness": 0,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "Fabricated claims (brain shrinking, eyesight), zero citations, degenerates into incoherent word salad halfway through."
+		},
+		{
+			"question": "house-vs-stocks",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Refuses a clear, well-covered question, hallucinates user statements, no citations, rambling meta-text."
+		},
+		{
+			"question": "keto",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Carnivore nutrient-deficiency claim fabricated; no [n] citations; ignores study details; ends with garbled incomplete meta sentence."
+		},
+		{
+			"question": "ai-jobs",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 0,
+			"note": "No citations; invented job lists; prep section degenerates into incoherent word salad barely tied to excerpts."
+		},
+		{
+			"question": "cheating",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 1,
+			"note": "Invented 7% statistic, zero citations, garbled sentences; only loosely echoes excerpt themes like loneliness and lost intimacy."
+		},
+		{
+			"question": "aging",
+			"groundedness": 2,
+			"citations": 0,
+			"helpfulness": 1,
+			"quality": 1,
+			"note": "Vague paraphrase of the reset/backup idea, zero citations, omits the three genes, 75% reset, trials; repetitive and circular."
+		},
+		{
+			"question": "creatine",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 2,
+			"quality": 2,
+			"note": "No citations; invents fasted-state, dosing 'Testosterone range' nonsense; cognitive/recovery claims loosely match excerpts."
+		},
+		{
+			"question": "control-offtopic",
+			"groundedness": 1,
+			"citations": 0,
+			"helpfulness": 0,
+			"quality": 0,
+			"note": "Opens with vague paraphrase of [1] then degenerates into incoherent repetition; no citations, no answer, severe generation collapse."
+		}
+	]
+}
