@@ -110,7 +110,10 @@ class App {
 			const indexPromise = loadIndex();
 			this.stage = 'downloading';
 			const engine = await loadEngine(this.model, (p) => {
-				this.stage = p.stage === 'ready' ? 'ready' : p.stage;
+				// Engine-ready isn't app-ready: the RAG index may still be loading,
+				// and `ready` is the signal auto-ask (?q=) fires on. The real flip
+				// to 'ready' happens below, once both engine and index are set.
+				this.stage = p.stage === 'ready' ? 'initializing' : p.stage;
 				this.fraction = p.fraction;
 				this.receivedBytes = p.receivedBytes;
 				this.totalBytes = p.totalBytes;
