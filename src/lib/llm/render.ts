@@ -16,7 +16,9 @@ export function renderAnswer(text: string): string {
 			const safe = para
 				.trim()
 				.replace(/[&<>"]/g, (c) => ESCAPES[c])
-				.replace(/\[(\d+(?:,\s*\d+)*)\]/g, '<sup class="cite">$1</sup>')
+				// The number lives in data-n and is drawn by CSS ::before, so
+			// selecting and copying the answer never picks up citation marks.
+			.replace(/\[(\d+(?:,\s*\d+)*)\]/g, '<sup class="cite" data-n="$1"></sup>')
 				.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
 				.replace(/\n/g, '<br>');
 			return `<p>${safe}</p>`;

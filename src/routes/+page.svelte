@@ -266,6 +266,12 @@
 		font-size: 0.68em;
 		color: var(--ember);
 		margin-left: 0.1em;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+
+	.answer :global(.cite)::before {
+		content: attr(data-n);
 	}
 
 	.thinking span {

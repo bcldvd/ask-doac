@@ -8,15 +8,15 @@ describe('renderAnswer', () => {
 		);
 	});
 
-	test('turns [n] citations into styled sup marks', () => {
+	test('turns [n] citations into copy-proof sup marks (number in data-n, drawn by CSS)', () => {
 		expect(renderAnswer('Volume wins [1]. Identity too [12].')).toBe(
-			'<p>Volume wins <sup class="cite">1</sup>. Identity too <sup class="cite">12</sup>.</p>'
+			'<p>Volume wins <sup class="cite" data-n="1"></sup>. Identity too <sup class="cite" data-n="12"></sup>.</p>'
 		);
 	});
 
 	test('styles grouped citations like [6, 7] too', () => {
 		expect(renderAnswer('Lift heavy [6, 7].')).toBe(
-			'<p>Lift heavy <sup class="cite">6, 7</sup>.</p>'
+			'<p>Lift heavy <sup class="cite" data-n="6, 7"></sup>.</p>'
 		);
 	});
 
