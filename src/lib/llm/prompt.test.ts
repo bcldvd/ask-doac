@@ -40,19 +40,34 @@ describe('buildGroundedPrompt', () => {
 		expect(SYSTEM_PROMPT).not.toMatch(/don't cover the question, say so/i);
 	});
 
-	test('system prompt tells the model to answer in the language of the question', () => {
-		// The excerpts are always English, so without this a small model
-		// answers French questions in English.
-		expect(SYSTEM_PROMPT).toMatch(/same language as the question/i);
+	test('system prompt defers language choice to the user turn instead of asking the model to infer it', () => {
+		expect(SYSTEM_PROMPT).not.toMatch(/same language as the question/i);
+		expect(SYSTEM_PROMPT).toMatch(/language/i);
+		expect(SYSTEM_PROMPT).toMatch(/translate quoted phrases/i);
 	});
 
-	test('user turn repeats the language instruction near the question', () => {
+	test('pins English questions to an explicit "Answer in English."', () => {
+		// "Same language as the question" makes the small model INFER the
+		// language, and it sometimes misfires (an English question once got a
+		// Portuguese answer). When we know the question is English, say so.
+		const prompt = buildGroundedPrompt('How do I get rich?', [source()], true);
+		expect(prompt).toContain('Answer in English.');
+		expect(prompt).not.toMatch(/same language as the question/i);
+	});
+
+	test('non-English questions keep the mirror-the-question instruction near the tail', () => {
 		// Small models weight the tail of the prompt most; the system prompt
 		// alone is too far away once excerpts pile up.
-		const prompt = buildGroundedPrompt('Comment devenir riche ?', [source()]);
+		const prompt = buildGroundedPrompt('Comment devenir riche ?', [source()], false);
 		const reminderAt = prompt.search(/same language as the question/i);
 		expect(reminderAt).toBeGreaterThan(-1);
 		expect(reminderAt).toBeGreaterThan(prompt.indexOf('volume'));
+		expect(prompt).not.toContain('Answer in English.');
+	});
+
+	test('defaults to the English pin when no language flag is given', () => {
+		const prompt = buildGroundedPrompt('How do I get rich?', [source()]);
+		expect(prompt).toContain('Answer in English.');
 	});
 
 	test('states when there are no relevant excerpts', () => {

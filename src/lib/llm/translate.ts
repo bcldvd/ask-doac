@@ -15,6 +15,22 @@ export function cleanTranslation(raw: string, fallback: string): string {
 	return line || fallback;
 }
 
+const words = (s: string) => new Set(s.toLowerCase().match(/[\p{L}\p{N}']+/gu) ?? []);
+
+/**
+ * Was the question already in English? True when it (near-)matches its own
+ * English translation — the translator passes English through unchanged, so
+ * high word overlap means English. Fails safe to English (the common case).
+ */
+export function isEnglish(question: string, englishTranslation: string): boolean {
+	const a = words(question);
+	const b = words(englishTranslation);
+	if (a.size === 0 || b.size === 0) return true;
+	let shared = 0;
+	for (const w of a) if (b.has(w)) shared++;
+	return shared / Math.min(a.size, b.size) >= 0.8;
+}
+
 /** Translate a question to English for embedding; on any failure, return it as-is. */
 export async function toEnglishQuery(engine: Engine, question: string): Promise<string> {
 	try {

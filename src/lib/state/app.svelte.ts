@@ -2,7 +2,7 @@
 // grounded question/answer turns. `?mock=1` swaps in a canned engine so the
 // UI can be developed and screenshotted without a 2 GB download.
 import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/engine';
-import { toEnglishQuery } from '$lib/llm/translate';
+import { isEnglish, toEnglishQuery } from '$lib/llm/translate';
 import { buildGroundedPrompt } from '$lib/llm/prompt';
 import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
@@ -205,7 +205,10 @@ class App {
 				const sources = await retrieve(this.index!, await embedQuery(searchQuery), 8);
 				reply.sources = sources;
 				reply.status = readingStatus(sources);
-				const turn = buildGroundedPrompt(q, sources);
+				// If the question survived translation (near-)unchanged it was
+				// English, and the prompt pins the answer language explicitly —
+				// letting the model infer it occasionally lands on the wrong one.
+				const turn = buildGroundedPrompt(q, sources, isEnglish(q, searchQuery));
 				// Fresh conversation per question: every turn carries ~2k tokens of
 				// excerpts, so a shared history would blow the context window fast.
 				const conversation = await createGroundedConversation(this.engine!);
