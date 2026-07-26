@@ -23,11 +23,16 @@ export async function loadEngine(model: GemmaModel, onProgress: ProgressCallback
 	const file = await getModelFile(model, onProgress);
 	onProgress({ fraction: -1, receivedBytes: file.size, totalBytes: file.size, stage: 'initializing' });
 
+	// Label failures: this stage covers the WASM fetch (jsdelivr CDN), WebGPU
+	// device setup and streaming the weights onto the GPU — the boot error
+	// card shows this message.
 	const engine = await Engine.create({
 		model: file,
 		// Gemma 4 E2B/E4B are trained for a 32k context — use all of it so long
 		// excerpt sets and long answers never hit the window.
 		mainExecutorSettings: { maxNumTokens: 32768 }
+	}).catch((e) => {
+		throw new Error(`engine startup failed: ${e instanceof Error ? e.message : String(e)}`);
 	});
 	onProgress({ fraction: 1, receivedBytes: file.size, totalBytes: file.size, stage: 'ready' });
 	return engine;

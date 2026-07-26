@@ -14,14 +14,23 @@ export interface RagIndex {
 }
 
 export async function loadIndex(fetchFn = fetch): Promise<RagIndex> {
+	// label failures with the file — the boot error card shows this message
+	const load = (path: string) =>
+		fetchFn(path).then((r) => {
+			if (!r.ok) throw new Error(`episode index failed to load: HTTP ${r.status} on ${path}`);
+			return r;
+		});
 	const [meta, emb, sc, youtube] = await Promise.all([
-		fetchFn('/rag/index.json').then((r) => r.json()),
-		fetchFn('/rag/embeddings.bin').then((r) => r.arrayBuffer()),
-		fetchFn('/rag/scales.bin').then((r) => r.arrayBuffer()),
+		load('/rag/index.json').then((r) => r.json()),
+		load('/rag/embeddings.bin').then((r) => r.arrayBuffer()),
+		load('/rag/scales.bin').then((r) => r.arrayBuffer()),
 		fetchFn('/rag/youtube.json')
 			.then((r) => (r.ok ? r.json() : {}))
 			.catch(() => ({}))
-	]);
+	]).catch((e) => {
+		const msg = e instanceof Error ? e.message : String(e);
+		throw msg.startsWith('episode index') ? e : new Error(`episode index failed to load: ${msg}`);
+	});
 	return {
 		dims: meta.dims,
 		episodes: meta.episodes,

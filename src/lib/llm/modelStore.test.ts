@@ -18,14 +18,19 @@ function fakeOpfs(seed: Record<string, Uint8Array | string> = {}) {
 		async getFile() {
 			return new File([store.get(name)!.slice()], name);
 		},
-		async createWritable() {
-			let bytes = new Uint8Array(0);
+		async createWritable(opts?: { keepExistingData?: boolean }) {
+			let bytes = opts?.keepExistingData ? store.get(name)!.slice() : new Uint8Array(0);
 			return {
-				async write(chunk: Uint8Array | string) {
-					const data = typeof chunk === 'string' ? new TextEncoder().encode(chunk) : chunk;
-					const next = new Uint8Array(bytes.length + data.length);
+				async write(
+					chunk: Uint8Array | string | { type: 'write'; position: number; data: Uint8Array }
+				) {
+					const positioned = typeof chunk === 'object' && 'type' in chunk;
+					const raw = positioned ? chunk.data : chunk;
+					const data = typeof raw === 'string' ? new TextEncoder().encode(raw) : raw;
+					const at = positioned ? chunk.position : bytes.length;
+					const next = new Uint8Array(Math.max(bytes.length, at + data.length));
 					next.set(bytes);
-					next.set(data, bytes.length);
+					next.set(data, at);
 					bytes = next;
 				},
 				async close() {
@@ -114,6 +119,83 @@ describe('getModelFile', () => {
 		expect(await file.text()).toBe('legacy-bytes');
 		expect(fetchSpy).not.toHaveBeenCalled();
 		expect(legacyDelete).toHaveBeenCalledWith(MODEL.url);
+	});
+});
+
+describe('getModelFile — flaky networks', () => {
+	it('resumes a partial file with a Range request instead of starting over', async () => {
+		// 6 bytes already on disk from an interrupted download (no manifest)
+		fakeOpfs({ [`${MODEL.id}.litertlm`]: 'abcdef' });
+		const fetchSpy = vi.fn(async (_url: string, init?: RequestInit) => {
+			expect(new Headers(init?.headers).get('Range')).toBe('bytes=6-');
+			return new Response('ghijkl', {
+				status: 206,
+				headers: { 'Content-Length': '6' }
+			});
+		});
+		vi.stubGlobal('fetch', fetchSpy);
+
+		const file = await getModelFile(MODEL, () => {});
+		expect(await file.text()).toBe('abcdefghijkl');
+		expect(fetchSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('retries after a network failure, resuming from the committed bytes', async () => {
+		vi.useFakeTimers();
+		fakeOpfs();
+		let pulled = false;
+		const half = new Response(
+			new ReadableStream<Uint8Array>({
+				pull(controller) {
+					if (pulled) return controller.error(new TypeError('Load failed'));
+					pulled = true;
+					controller.enqueue(new TextEncoder().encode('abcdef'));
+				}
+			}),
+			{ headers: { 'Content-Length': '12' } }
+		);
+		const rest = new Response('ghijkl', { status: 206, headers: { 'Content-Length': '6' } });
+		const fetchSpy = vi.fn().mockResolvedValueOnce(half).mockResolvedValueOnce(rest);
+		vi.stubGlobal('fetch', fetchSpy);
+
+		const pending = getModelFile(MODEL, () => {});
+		// swallow to avoid unhandled-rejection noise if the retry path breaks
+		pending.catch(() => {});
+		await vi.runAllTimersAsync();
+		const file = await pending;
+		expect(await file.text()).toBe('abcdefghijkl');
+		expect(new Headers(fetchSpy.mock.calls[1][1]?.headers).get('Range')).toBe('bytes=6-');
+		vi.useRealTimers();
+	});
+
+	it('treats a cleanly-ended-early stream as a failure and resumes it', async () => {
+		vi.useFakeTimers();
+		fakeOpfs();
+		// server claims 12 bytes but the connection closes after 6 — no error thrown
+		const short = new Response('abcdef', { headers: { 'Content-Length': '12' } });
+		const rest = new Response('ghijkl', { status: 206, headers: { 'Content-Length': '6' } });
+		vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(short).mockResolvedValueOnce(rest));
+
+		const pending = getModelFile(MODEL, () => {});
+		pending.catch(() => {});
+		await vi.runAllTimersAsync();
+		expect(await (await pending).text()).toBe('abcdefghijkl');
+		vi.useRealTimers();
+	});
+
+	it('gives up with a message naming the model download after repeated failures', async () => {
+		vi.useFakeTimers();
+		fakeOpfs();
+		vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('Load failed')));
+
+		const pending = getModelFile(MODEL, () => {});
+		const outcome = pending.then(
+			() => 'resolved',
+			(e: Error) => e.message
+		);
+		await vi.runAllTimersAsync();
+		expect(await outcome).toMatch(/model download failed.*Load failed/);
+		vi.useRealTimers();
 	});
 });
 
