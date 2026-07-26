@@ -1,42 +1,72 @@
-# sv
+# Ask the Diary
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Ask questions, get answers grounded in what Steven Bartlett and his guests actually said on
+**The Diary of a CEO** — cited to the minute, running **entirely in your browser**. No server,
+no login, no API keys: the LLM, the embeddings, and the search index all live client-side.
 
-## Creating a project
+![Ask the Diary](docs/hero.png)
 
-If you're seeing this, you've probably already done this step. Congrats!
+![A cited answer](docs/conversation.png)
 
-```sh
-# create a new project
-npx sv create my-app
+## How it works
+
+```
+question ──▶ MiniLM embedding (transformers.js, in-browser)
+                 │
+                 ▼
+        cosine top-k over 30,308 int8-quantized chunks   ← 228 scraped episode transcripts
+                 │  (11 MB static index, overlap-deduped)
+                 ▼
+        numbered excerpts + question ──▶ Gemma 4 E2B (LiteRT-LM, WebGPU)
+                 │
+                 ▼
+        streamed answer with [n] citations → episode + timestamp links
 ```
 
-To recreate this project with the same configuration:
+- **Model** — real [Gemma 4](https://deepmind.google/models/gemma/gemma-4/) `E2B-it` (2.0 GB web
+  build) via Google's [LiteRT-LM JS API](https://ai.google.dev/edge/litert-lm/js), running on
+  WebGPU. Preferences let you switch to `E4B` (3.0 GB) — the Gemma-family models with published
+  web-compatible builds.
+- **First load** — the model downloads once with a live progress bar ("Warming up the studio"),
+  then a **service worker** stores the bytes in the Cache API. Later visits boot straight from
+  disk — the app even works fully offline.
+- **RAG** — transcripts for all 228 episodes were scraped from
+  [happyscribe](https://podcasts.happyscribe.com/the-diary-of-a-ceo-with-steven-bartlett),
+  chunked (~1000 chars, 1-paragraph overlap) and embedded with `all-MiniLM-L6-v2` at build time,
+  quantized to int8 (scale-per-row). The browser embeds your question with the same model,
+  searches locally, and hands the best excerpts to Gemma with instructions to answer only from
+  them and cite `[n]`.
 
-```sh
-# recreate this project
-npx sv@0.16.6 create --template minimal --types ts --install npm ask-doac
+## Develop
+
+```bash
+npm install
+npm run dev            # app on :5173 — add ?mock=1 to skip the 2 GB download
+npx vitest run         # 25 unit tests (chunking, quantized search, dedupe, prompt, rendering)
 ```
 
-## Developing
+### Rebuild the data (optional)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```bash
+node scripts/scrape/scrape.mjs      # scrape transcripts (Playwright + real Chrome)
+node scripts/rag/build-index.mjs    # chunk + embed + quantize into static/rag/
+node scripts/rag/smoke.mjs "what did the sleep expert say about caffeine?"
 ```
 
-## Building
+### Screenshots / E2E
 
-To create a production version of your app:
-
-```sh
-npm run build
+```bash
+npm run build && npx vite preview --port 5220
+node scripts/shots/shoot.mjs        # design shots (mock mode)
+node scripts/shots/e2e-real.mjs     # full run: download Gemma 4, ask, verify offline reload
 ```
 
-You can preview the production build with `npm run preview`.
+## Requirements
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+A browser with WebGPU (Chrome/Edge 121+, Safari 26+) and ~2 GB of free storage for the model
+cache.
+
+---
+
+Built autonomously by [Claude Code](https://claude.com/claude-code) —
+SvelteKit · Svelte 5 runes · LiteRT-LM · transformers.js · Playwright · Vitest.

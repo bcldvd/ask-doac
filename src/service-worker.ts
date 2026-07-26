@@ -13,8 +13,9 @@ const sw = self as unknown as ServiceWorkerGlobalScope;
 
 const APP_CACHE = `ask-doac-app-${version}`;
 const MODEL_CACHE = 'ask-doac-models-v1';
-// RAG index shards are versioned with the app build.
-const APP_ASSETS = [...build, ...files];
+// App shell: the SPA fallback page plus all build + static assets.
+const SHELL = '/index.html';
+const APP_ASSETS = [SHELL, ...build, ...files];
 
 sw.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -58,6 +59,17 @@ sw.addEventListener('fetch', (event) => {
 					return toPage;
 				}
 				return res;
+			})()
+		);
+		return;
+	}
+
+	// SPA navigations get the cached shell so the app opens offline.
+	if (event.request.mode === 'navigate' && url.origin === sw.location.origin) {
+		event.respondWith(
+			(async () => {
+				const cache = await caches.open(APP_CACHE);
+				return (await cache.match(SHELL)) ?? fetch(event.request);
 			})()
 		);
 		return;

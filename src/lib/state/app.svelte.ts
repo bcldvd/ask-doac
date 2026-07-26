@@ -6,7 +6,7 @@ import { buildGroundedPrompt } from '$lib/llm/prompt';
 import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
-import type { Conversation } from '@litert-lm/core';
+import type { Engine } from '@litert-lm/core';
 
 export type Stage = 'boot' | 'downloading' | 'initializing' | 'ready' | 'error';
 
@@ -51,7 +51,7 @@ class App {
 
 	mock = false;
 	private index: RagIndex | null = null;
-	private conversation: Conversation | null = null;
+	private engine: Engine | null = null;
 	private booted = false;
 
 	async boot() {
@@ -60,14 +60,31 @@ class App {
 		this.mock = new URLSearchParams(location.search).has('mock');
 		if (this.mock) return this.bootMock();
 		try {
+			// Ask for durable storage so the 2 GB model cache isn't evicted.
+			navigator.storage?.persist?.().catch(() => {});
 			if ('serviceWorker' in navigator) {
 				navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
 				navigator.serviceWorker.addEventListener('message', (e) => {
 					if (e.data?.type === 'model-cache-status') this.cachedModels = e.data.cached;
 				});
-				navigator.serviceWorker.ready.then((reg) =>
-					reg.active?.postMessage({ type: 'model-cache-status' })
-				);
+				// The model download must go through the worker to be cached, and on
+				// the very first visit the page starts uncontrolled — wait (briefly)
+				// for the worker to claim us before fetching 2 GB.
+				await navigator.serviceWorker.ready;
+				if (!navigator.serviceWorker.controller) {
+					await new Promise<void>((resolve) => {
+						const timer = setTimeout(resolve, 3000);
+						navigator.serviceWorker.addEventListener(
+							'controllerchange',
+							() => {
+								clearTimeout(timer);
+								resolve();
+							},
+							{ once: true }
+						);
+					});
+				}
+				navigator.serviceWorker.controller?.postMessage({ type: 'model-cache-status' });
 			}
 			const indexPromise = loadIndex();
 			this.stage = 'downloading';
@@ -77,7 +94,7 @@ class App {
 				this.receivedBytes = p.receivedBytes;
 				this.totalBytes = p.totalBytes;
 			});
-			this.conversation = await createGroundedConversation(engine);
+			this.engine = engine;
 			this.index = await indexPromise;
 			this.stage = 'ready';
 		} catch (e) {
@@ -118,7 +135,10 @@ class App {
 				const sources = await retrieve(this.index!, await embedQuery(q), 5);
 				reply.sources = sources;
 				const turn = buildGroundedPrompt(q, sources);
-				for await (const piece of streamAnswer(this.conversation!, turn)) {
+				// Fresh conversation per question: every turn carries ~2k tokens of
+				// excerpts, so a shared history would blow the context window fast.
+				const conversation = await createGroundedConversation(this.engine!);
+				for await (const piece of streamAnswer(conversation, turn)) {
 					reply.text += piece;
 				}
 			}
