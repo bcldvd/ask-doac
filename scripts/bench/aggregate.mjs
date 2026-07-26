@@ -55,5 +55,11 @@ for (const r of rows) {
 }
 md += `\nTTFT/answer time exclude the control question. "Excerpts used" < 6 means the model's context window forced trimming.\n`;
 
-await writeFile(path.join(root, 'bench', 'REPORT.md'), md);
+// preserve hand-written analysis below the generated table across regenerations
+const reportPath = path.join(root, 'bench', 'REPORT.md');
+const existing = await readFile(reportPath, 'utf8').catch(() => '');
+const keepFrom = existing.indexOf('\n## Findings');
+if (keepFrom !== -1) md += existing.slice(keepFrom);
+
+await writeFile(reportPath, md);
 console.log(md);
