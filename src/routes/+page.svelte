@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { replaceState } from '$app/navigation';
 	import { app } from '$lib/state/app.svelte';
 	import { renderAnswer } from '$lib/llm/render';
+	import { questionFromSearch, searchWithQuestion } from '$lib/share';
 	import SourceItem from '$lib/components/SourceItem.svelte';
 
-	let draft = $state('');
+	// A shared link (?q=…) queues its question: it prefills the composer so
+	// it's visible during model warm-up, then auto-asks once ready.
+	let sharedQ = questionFromSearch(location.search);
+	let draft = $state(sharedQ ?? '');
 	let feed: HTMLElement | undefined = $state();
 
 	const CARDS = [
@@ -19,11 +24,24 @@
 	});
 
 	async function submit(question?: string) {
-		const q = question ?? draft;
-		if (!q.trim()) return;
+		const q = (question ?? draft).trim();
+		if (!q || !ready || app.generating) return;
+		// The first question of a session becomes the shareable URL — no
+		// database, so the link carries the question itself.
+		if (app.messages.length === 0) replaceState(searchWithQuestion(location.search, q), {});
 		draft = '';
 		await app.ask(q);
 	}
+
+	// Auto-ask the shared question once the model is ready — unless the
+	// visitor rewrote the draft during warm-up (then they've taken over).
+	$effect(() => {
+		if (ready && sharedQ) {
+			const q = sharedQ;
+			sharedQ = null;
+			if (draft === q) submit(q);
+		}
+	});
 
 	// keep the newest message in view while streaming
 	$effect(() => {
