@@ -69,6 +69,15 @@ class App {
 		this.mock = new URLSearchParams(location.search).has('mock');
 		if (this.mock) return this.bootMock();
 		try {
+			// The engine runs on WebGPU, full stop — fail fast with a clear
+			// message rather than pulling 2 GB and dying in Engine.create.
+			if (!('gpu' in navigator)) {
+				throw new Error(
+					'WebGPU is not available in this browser. The model runs on your GPU — ' +
+						'on iPhone/iPad that needs iOS 26 or later (and WebGPU stays off in Lockdown Mode); ' +
+						'elsewhere use a current Safari, Chrome or Edge.'
+				);
+			}
 			// Ask for durable storage so the 2 GB model cache isn't evicted.
 			navigator.storage?.persist?.().catch(() => {});
 			if ('serviceWorker' in navigator) {
@@ -153,6 +162,9 @@ class App {
 			// Booted fine — future deploys may auto-reload this tab again.
 			sessionStorage.removeItem('ask-doac:sw-reloaded');
 		} catch (e) {
+			// Keep the full stack reachable via a remote Web Inspector — the UI
+			// only shows the message.
+			console.error('boot failed:', e);
 			this.stage = 'error';
 			this.error = e instanceof Error ? e.message : String(e);
 		}

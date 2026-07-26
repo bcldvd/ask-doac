@@ -104,6 +104,13 @@
 				<DownloadCard />
 			{/if}
 
+			{#if app.stage === 'error'}
+				<aside class="error-card" role="alert">
+					<p class="err-title">The studio went dark</p>
+					<p class="err-body">{app.error}</p>
+				</aside>
+			{/if}
+
 			<div class="cards">
 				{#each CARDS as card (card)}
 					<button class="card" disabled={!ready} onclick={() => submit(card)}>
@@ -254,6 +261,33 @@
 		font-size: 1.05rem;
 		font-weight: 300;
 		text-wrap: balance;
+	}
+
+	.error-card {
+		text-align: left;
+		background: var(--black);
+		border: 1px solid var(--red);
+		border-radius: 20px;
+		padding: 1.15rem 1.3rem 1.2rem;
+		margin: 0 auto 2.2rem;
+		max-width: 34rem;
+	}
+
+	.err-title {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 0.95rem;
+		letter-spacing: 0.02em;
+		color: var(--red);
+		margin-bottom: 0.55rem;
+	}
+
+	.err-body {
+		color: var(--muted);
+		font-size: 0.92rem;
+		font-weight: 300;
+		line-height: 1.5;
+		overflow-wrap: anywhere;
 	}
 
 	.cards {

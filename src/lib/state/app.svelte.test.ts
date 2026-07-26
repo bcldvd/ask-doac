@@ -23,6 +23,8 @@ import { app } from './app.svelte';
 
 describe('app.boot', () => {
 	it('only reaches ready once BOTH the engine and the RAG index are loaded', async () => {
+		// jsdom has no navigator.gpu; without it boot() fails the WebGPU preflight.
+		Object.defineProperty(navigator, 'gpu', { value: {}, configurable: true });
 		let resolveIndex!: (index: unknown) => void;
 		ragMocks.loadIndex.mockReturnValue(new Promise((r) => (resolveIndex = r)));
 		// The real loadEngine reports stage 'ready' via onProgress before it
