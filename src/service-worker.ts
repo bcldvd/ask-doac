@@ -13,9 +13,19 @@ const sw = self as unknown as ServiceWorkerGlobalScope;
 
 const APP_CACHE = `ask-doac-app-${version}`;
 const LEGACY_MODEL_CACHE = 'ask-doac-models-v1';
+// The vendored search embedder (~59 MB of weights + ONNX runtime WASM, see
+// scripts/vendor-embedder.mjs). Far too big to precache on install, and half of
+// it is the WASM build this browser won't pick — so it's cached on first use
+// instead, which still leaves a later boot fully offline-capable.
+const EMBEDDER_PREFIX = '/embedder/';
+// Deliberately NOT the versioned app cache: these bytes are pinned (one model
+// revision, one onnxruntime-web version), so a deploy has no reason to make
+// everyone re-download 36 MB. Bump the suffix if the vendored set ever changes.
+const EMBEDDER_CACHE = 'ask-doac-embedder-v1';
 // App shell: the SPA fallback page (served at '/') plus build + static assets.
 const SHELL = '/';
-const APP_ASSETS = [SHELL, ...build, ...files];
+const PRECACHE_FILES = files.filter((f) => !f.startsWith(EMBEDDER_PREFIX));
+const APP_ASSETS = [SHELL, ...build, ...PRECACHE_FILES];
 
 sw.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -25,7 +35,7 @@ sw.addEventListener('install', (event) => {
 				// Shell + build must cache; static data files are best-effort so a
 				// single bad URL can't leave the worker permanently redundant.
 				await cache.addAll([SHELL, ...build]);
-				await Promise.allSettled(files.map((f) => cache.add(f)));
+				await Promise.allSettled(PRECACHE_FILES.map((f) => cache.add(f)));
 			})
 			.then(() => sw.skipWaiting())
 	);
@@ -40,6 +50,7 @@ sw.addEventListener('activate', (event) => {
 				if (
 					key !== APP_CACHE &&
 					key !== LEGACY_MODEL_CACHE &&
+					key !== EMBEDDER_CACHE &&
 					key !== 'transformers-cache' &&
 					!key.startsWith('webllm/')
 				) {
@@ -61,6 +72,24 @@ sw.addEventListener('fetch', (event) => {
 			(async () => {
 				const cache = await caches.open(APP_CACHE);
 				return (await cache.match(SHELL)) ?? fetch(event.request);
+			})()
+		);
+		return;
+	}
+
+	// Embedder assets: serve from cache, and store on the first network hit so
+	// the next boot needs no network at all.
+	if (url.origin === sw.location.origin && url.pathname.startsWith(EMBEDDER_PREFIX)) {
+		event.respondWith(
+			(async () => {
+				const cache = await caches.open(EMBEDDER_CACHE);
+				const hit = await cache.match(url.pathname);
+				if (hit) return hit;
+				const res = await fetch(event.request);
+				// Only whole responses are worth keeping — a 206 or an error page
+				// cached here would poison every later boot.
+				if (res.ok && res.status === 200) await cache.put(url.pathname, res.clone());
+				return res;
 			})()
 		);
 		return;

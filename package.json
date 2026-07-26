@@ -4,7 +4,10 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"vendor:embedder": "node scripts/vendor-embedder.mjs",
+		"predev": "npm run vendor:embedder",
 		"dev": "vite dev",
+		"prebuild": "npm run vendor:embedder",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
