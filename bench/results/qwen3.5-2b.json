@@ -1,0 +1,281 @@
+{
+	"id": "qwen3.5-2b",
+	"engine": "webllm",
+	"model": "Qwen3.5-2B-q4f16_1-MLC",
+	"label": "Qwen3.5 2B",
+	"cold": {
+		"loadMs": 119876.69999998808,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 1429
+	},
+	"contextWindow": 8192,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 5,
+			"promptChars": 19248,
+			"ttftMs": 4301,
+			"totalMs": 23949,
+			"answer": "Based on the transcripts provided, here is how you can control your dopamine levels on a day-to-day basis, organized by actionable advice and what you actually said:\n\n**The Core Principle: Balance and Avoid the Roller Coaster**\nControl isn't about suppressing your body; it's about managing your intake to maintain balance.\n*   **\"Dopamine is the learning neurotransmitter.\" (Quote 1)** Dopamine releases happen for both positive and negative information. You must use it intentionally.\n*   **Stay on the safe side.** Historically, very small amounts were used (as a way to get a \"little bit of pleasure\"). However, treat yourself to a moderate and larger amount.\n*   **Don't overdo it.** Maximizing your dose (\"more\") leads to tolerance. \"Increases dopamine, more tolerance.\" The more you use it, the worse you become until you can't feel nothing. [Quote 1] (Conversely, reduce the intensity to lower your threshold).\n\n**Actions You Must Take:**\n\n*   **Watch where you learn.**\n    *   Your brain structure, like a response to an unseen stimulus, has to move like an internal receptor.\n    *   When you do a large learning event, your brain \"sees\" the reality, not the movie (Quote 1).\n    *   If you are getting too much dopamine (e.g., you are learning to interact with a specific, high-risk environment), you risk absorbing too much.\n    *   You must watch your activity to ensure you are absorbing only what you need.\n\n*   **Adjust your intake.**\n    *   Think of your current level of dopamine as a \"dose.\" If you are too high, you will become sluggish and then crash.\n    *   If you are too low, you will lack motivation.\n    *   You need to find your balance.\n\n*   **Exercise to keep it up.**\n    *   Exercise was found to be a high dopamine inducer.\n    *   Sleep reduces stress, which significantly improves your sexual function and overall sex life by covering the \"crash\" points you get from high-intensity triggers.\n\n*   **Gently expose yourself.**\n    *   If you are feeling low or empty, gently expose yourself to your real, daily reality, not the idealized version you have.\n    *   Don't have a dopamine crash. Don't have nothing. It hurts to do that.\n\n*   **Control your \"magic.\"**\n    *   A happy, strong person creates a life where you can do anything.\n    *   You don't need to do everything, but you need to set your level of control \"to\" something. You don't have to be perfect, the highest level.\n\n*   **Read, write, and sleep.**\n    *   You need to stop reading your own worries, not notes.\n    *   Stop reading notes on what you did, but what you learned from it.\n    *   When you start to do what you need to do, you have to write down exactly when you started, and why.\n\n*   **Analyze your actions.**\n    *   Write exactly everything you do.\n    *   Write down everything you like, everything you dislike, and where you need to put your money and your level of",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4611,
+				"total_tokens": 5310,
+				"extra": {
+					"e2e_latency_s": 23.949,
+					"prefill_tokens_per_s": 1072.5251209557093,
+					"decode_tokens_per_s": 35.82778062449949,
+					"time_to_first_token_s": 4.299199999988079,
+					"time_per_output_token_s": 0.027911301860439195
+				}
+			}
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 3911,
+			"totalMs": 20020,
+			"answer": "According to the transcripts, the most common reason for startup failures is a gut feeling often shaped by excessive optimism, leaving founders ill-prepared for reality.\n\n**The Lean Psychology involves a cycle where optimism turns into a desperate crash.**\nGuest Alex Hormozi describes a specific psychological arc found in nearly every entrepreneur's life trajectory. Many go through \"uninformed optimism,\" believing something is great without fully understanding the complexity involved, often leading them to jump into what appears to be \"easy\" problems (like \"Monster Mash\"). This quickly deteriorates into \"informed pessimism,\" where the struggle overcomes their hope, only to be crushed again by a \"crash.\" They often feel their business is breaking despite production, and in their despair, many simply switch to \"Lorem Ipsum\" (doing the easy things again), which resets the cycle without solving the core problem.\n\n**Failure is frequently linked to the desire for instant results versus the complexity of long-term value.**\nOne guest, a former Couchsurfing founder, noted that 55% of businesses rely on AI tools, yet the sheer integration of technology means that even their complex, profitable products became difficult to manage once they entered a more automated state than they likely kept them in.\n\n**Another guest explicitly stated that leaving is the secret to survival.**\nAlex Hormozi marvel at the investors' ability to maintain a relationship even when their founder is \"investing\" in a \"stabilizing\" focus. He suggests that founders who are less \"invested\" in the romanticized, fast-growing \"DIRTY BUSINESS\" are more likely to withstand the inevitable \"crash burn.\" While some founders eventually skyrocket to prefixes like 100 or 200, over 90%, others plateau quickly because the price increased (the \"base\" was likely lowered) yet the demand didn't follow, leading to a crash.\n\n**The solution often comes from shifting perspective and patience.**\nMike Cohn and Hadley Lee suggest that the massive rise in sales can be viewed from two opposing angles. One involves the \"factory,\" which offers a dramatic, high-paying future but leads to premature exits and irrelevance as users disperse. The other involves the \"factory\" as a robust foundation that provides a steady, albeit slower, value over time.\n\nUltimately, the guests agree that the \"speed\" of any solution is \"outr\"ed by the \"speed\" of the crash. The advice is clear: do not rush to solve the problem or want an immediate, simple exit; instead, focus on building a durable foundation with a decelerating \"Signature\" over the long term so you can survive the crash and eventually receive a massive return for your foundation.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 559,
+				"prompt_tokens": 4999,
+				"total_tokens": 5558,
+				"extra": {
+					"e2e_latency_s": 20.019,
+					"prefill_tokens_per_s": 1278.4512301200043,
+					"decode_tokens_per_s": 34.913933095134816,
+					"time_to_first_token_s": 3.910199999988079,
+					"time_per_output_token_s": 0.02864186046513757
+				}
+			}
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 4582,
+			"totalMs": 26880,
+			"answer": "Actually, that rule is false. The popular narrative that \"10,000 hours is the magic number that turns you into a master\" is wrong.\n\nThat single claim was the point of failure for one of the most disruptive figures in our business. **David Epstein** claims the magic is in those hours, but he says that 10,000 hours mean nothing, but does that reveal the truth? Does that reveal the truth.\n\n**[1]** It's not just out. That shows us that the 10,000-hour rule was actually a nice joke about that story, but that's actually the real story. It's a harsher one. And that is the real story. We have a new revelation about the business of the business.\n\n**It's not true. It's not true. This was a玩笑. That's why. That's why. That's why.**\n\nLet's look at the real story.\n\nThe 10,000-thousands were actually just a joke.\n\nThe 10,000 hours rule was actually the result of a real joke. It was a joke about the job.\n\n**It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke.**\n\nIf you ask me, is it true.\n\nThe 10,000 hours rule was actually a joke.\n\n**It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke. It was a joke.**\n\n**[1]**\n\nAnd that's why.\n\n**[2]**\n\nAnd that's why.\n\n**[3]**\n\nIt's not true.\n\n**[4]**\n\nIt's not true.\n\n**[5]**\n\nIt's not true.\n\n**[6]**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that's why.**\n\n**Here's the truth. And that",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5744,
+				"total_tokens": 6443,
+				"extra": {
+					"e2e_latency_s": 26.881,
+					"prefill_tokens_per_s": 1253.8199598309568,
+					"decode_tokens_per_s": 31.492728288371172,
+					"time_to_first_token_s": 4.581200000017882,
+					"time_per_output_token_s": 0.031753361945756044
+				}
+			}
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 4698,
+			"totalMs": 27374,
+			"answer": "<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   **Identity:** Diary of a CEO Oracle.\n    *   **Task:** Answer the user's question: \"How do I become more charismatic and instantly likeable?\" based on the provided transcript excerpts.\n    *   **Constraint 1 (Grounded):** Ground every claim in the provided excerpts.\n    *   **Constraint 2 (Citation):** Cite the excerpt number like [1], [2], etc. after the sentence it supports.\n    *   **Constraint 3 (Synthesize):** When partially addressing it, synthesize the closest relevant advice from across excerpts.\n    *   **Constraint 4 (Disclaimer):** Only decline to answer when nothing in the excerpts relates to the question at all. (Not applicable here as it is answered).\n    *   **Constraint 5 (Short):** Keep answers concise and conversational.\n    *   **Constraint 6 (Terminating):** Translate to the language requested by the user (English).\n    *   **Output Language:** English. (Already requested, but I should be consistent).\n    *   **Specific Instruction:** \"When they partially address it, synthesize the closest relevant advice from across the excerpts into a useful answer, and briefly note anything important the excerpts don't cover. Never invent facts that aren't in the excerpts. Only decline to answer when nothing in the excerpts relates to the question at all. Keep answers concise and conversational.\"\n    *   **Note on Intention:** The user message *ends* with an instruction naming the language to answer in. Since I am responding in English, I follow that.\n\n2.  **Analyze the Excerpts:**\n\n    *   **[1] Body Language Expert:**\n        *   Mentionsビール式 (pickup artist books) usually implies \"charismatic\".\n        *   \"Psychology Of Why People Don't Like You\" not listed here but references implied \"resting face\" and \"warmth, trust, likability, friendliness. Competence, power, reliability, capability.\"\n        *   Charisic (charisma = 1) lean higher on competence and signal indication high warmth cues.\n        *   Body language (intelligent news:) unique, others can make it easier.\n        *   \"Stop Using This... It's Making People Dislike You, So Are These Subtle Mistakes!\" (Subtitle 1).\n    *   **[2] Body Language Expert:**\n        *   \"Charles\" (first impression) is important.\n        *   Mentions \"9 triggers.\"\n        *   Body language (warm, competent, 97 cues).\n        *   \"9th\" (warmth) cues.\n        *   \"9th\" (97).\n        *   \"Soul\" (soul = 1, 97).\n        *   \"97\" (97 cues).\n        *   \"Body language.\"\n    *   **[3] Charisma Teacher:**\n        *   \"First impression.\"\n        *   \"Body Language.\"\n        *   \"Psychology Of Why People Don't Like You! People Are Attracted To These Traits! The Secret To Being Instantly Likeable!\"\n    *   **[4] Charisma Teacher:**",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5870,
+				"total_tokens": 6569,
+				"extra": {
+					"e2e_latency_s": 27.374,
+					"prefill_tokens_per_s": 1249.6008515167644,
+					"decode_tokens_per_s": 30.975941574777654,
+					"time_to_first_token_s": 4.6975,
+					"time_per_output_token_s": 0.032283118741877274
+				}
+			}
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 5,
+			"promptChars": 22864,
+			"ttftMs": 4440,
+			"totalMs": 26391,
+			"answer": "<think>\nThinking Process:\n\n1.  **Analyze the Request:**\n    *   **Role:** Diary of a CEO oracle (warm, sharp, assistant using only the provided transcript).\n    *   **Task:** Answer the user's question: \"Should I buy a house or invest in stocks?\"\n    *   **Source Material:** 5 numbered transcript excerpts ([1] to [5]).\n    *   **Constraints:**\n        *   Ground every claim in the excerpts.\n        *   Cite the excerpt number (e.g., [1]).\n        *   Synthesize closest relevant advice from across the excerpts.\n        *   Briefly note anything important the excerpts don't cover.\n        *   Keep answers concise and conversational.\n        *   No new facts compared to the excerpts.\n        *   Decline to answer if nothing relates. (Not applicable here, as there is discussion).\n        *   Answer in English, but translate quoted phrases if needed (already English).\n        *   Follow the language instruction \"Answer in English\" (already in English).\n    *   **Question:** \"Should I buy a house or invest in stocks?\"\n\n2.  **Analyze the Excerpts:**\n    *   **[1]**: Mentions mortgage vs investment. Explains mortgage interest rates (paying off or keeping unpaid). Notes stocks are volatile but powerful for long term (10, 20 years). Mentions emotional discomfort (rent vs borrow/haven to pay off debt vs invest).\n    *   **[2]**: Explicitly advises NOT to buy a house (or \"At the beginning of the band, one doesn't buy a house...\"). Notes that houses have hidden costs (taxes, insurance, maintenance, property taxes). Notes that many young people (rivers in their 20s/30s) can't afford to buy a house until they have saved enough. Mentions that renting in the 20s/30s turns into a 40s of no equity, and ability to buy a house later is a myth (one got a $100,000 house in 2040s, but could have done it).\n    *   **[3]**: Discusses Opportunity Cost. Buying a house locks money into housing instead of stock market. Mentions that houses are an asset, but視点 often views them as sunk costs for maintenance (rental). Opportunity cost (interest from stock). Notes that stocks are not meant to be a hedge against volatility, and masking potential upside is often wrong (complicated). Mentions that average stock market returns have been positive.\n    *   **[4]**: Discusses crypto (not relevant to current advice), but main argument is about price of housing, interest rates (high vs low), and volatility. Briefly talks about volatility and risk of stocks (if panic sells, you bleed out).\n    *   **[5]**: Discusses historical cycles, volatility, and leverage. Mentions AI disruption and anxiety around unemployment. Notes that AI could change risk assumptions. \"Borrowing money generally improves long-term expected outcomes.\" Mentions that relying on housing while borrowing debt is not \"a terrible idea\" but depends on goals.\n    *   **Synthesis:**\n        *   **House as an investment vs Income:** Some excerpts (2",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5595,
+				"total_tokens": 6294,
+				"extra": {
+					"e2e_latency_s": 26.391,
+					"prefill_tokens_per_s": 1260.135135135135,
+					"decode_tokens_per_s": 32.011797195306514,
+					"time_to_first_token_s": 4.44,
+					"time_per_output_token_s": 0.031238483547141097
+				}
+			}
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 3,
+			"promptChars": 21694,
+			"ttftMs": 3954,
+			"totalMs": 13448,
+			"answer": "Based on the transcripts, short-form video is hijacking your brain by hijacking your most primitive part of it—the amygdala.\n\nWhen you feel a sense of stress, your amygdala normally becomes a \"night watchman,\" scanning and surfacing your survival urges. It triggers this primal \"scrolling\" to self-preserve. However, over time, you trigger this survival response repeatedly, causing your amygdala to upregulate and leading to a state of chronic self-preservation where you become depressed. In the process, your prefrontal cortex downregulates, reducing executive functions like impulse control, planning, and complex problem solving.\n\n**If you ever think you are in danger of a long-term negative impact... that is a sign; let someone else access your page. If you are currently in danger of a short-term negative impact... you are in for a very serious, very bad, very dangerous, very damaging, and a potentially extremely, extremely, extremely dangerous negative impact coming your way. Get out and stop it. In the future, use no contacts, no app, or consider contact. In the future, use us or stop, as these short videos are only meant to be consumed, not created, not managed, and not remembered. They are designed to be compulsive, engaging, gratifying, and addictive. Zero length, no length, no length, no length, no length, no length, no length, no length, no length, no length, no length, no length — it is a cycle of selling attention without a stop, without an end, without a conclusion.**",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 332,
+				"prompt_tokens": 5085,
+				"total_tokens": 5417,
+				"extra": {
+					"e2e_latency_s": 13.448,
+					"prefill_tokens_per_s": 1286.104507052625,
+					"decode_tokens_per_s": 35.08994440588944,
+					"time_to_first_token_s": 3.953800000011921,
+					"time_per_output_token_s": 0.02849819277092276
+				}
+			}
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 4400,
+			"totalMs": 26191,
+			"answer": "Based on the transcripts, yes, aging *can* be reversed, but not for everyone by the age of 18 when the inevitable was thought to be written. Time or lifespan extension isn't a software bug, and you can't reverse it every season one walks, but it can be done by the young to reset the aging.\n\nHere is the short, straightforward answer:\n\nYou don't have to be 18 to hope to be the 25-year-old you will be 20 years old soon. All you need to do is have the same backup copy of information in your body as in those of the young people. This can be done by regaining a certain number of genes in the optic nerve and then being reinstated in the rest of the body.\n\n**Key Points:**\n\n*   **Aging is not a coincidence of injury and disease. It is the biological aging of the human body. However, you can reverse it.\n*   **I am a Harvard professor who has been studying aging, longevity, and age reversal for 30 years. I've seen enough from my lab showing that we can literally now reverse the aging process. And it's not a question of if, it's It's a question of when this is gonna happen.**\n*   **Aging is a question of if not a matter of indexed.**\n*   **If we are at a turning point in human history where you're probably going to live into the 22nd century, then you don't need to have the same biological aging of the 1960s to start having your first child.**\n\n**How to reverse aging (as described by the 'Vera' in the video showing):**\n\n1.  **Target the eye first:** The researchers in the video didn't use this last-minute product generation to show the eye. As you know that you can see them again when you look at them. The 3 genes were introduced to the optic nerve and then turned on for 6 to 8 weeks and then turned off.\n2.  **Computer analogy:** The body is a computer. The opti-nerve works the same as a computer, it's a processor that comes off the top of the computer. The better it wants to, the longer you live. You might think that as you get younger, you're going to get more younger. But the opposite is true, you're going to be more old.\n3.  **The rescue plan:** If you reset the age of your body, after 8 weeks of the same genes, you're going to be 20 years older, and you're going to have the same 20-year-old biology for your 20 years old. You don't think that as the age of the body gets more, that you're going to get more old, what you're going to be more old, when you're 20 years old, you're going to be 28 years old, and then you're 36, it's going to be 48, 50, 54, and so on. You're going to be 75, and 85, and 95, and then you live in the 22nd century, and you're going to have the same biology you're going to have in 202",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5559,
+				"total_tokens": 6258,
+				"extra": {
+					"e2e_latency_s": 26.191,
+					"prefill_tokens_per_s": 1263.4378054029569,
+					"decode_tokens_per_s": 32.24154870241616,
+					"time_to_first_token_s": 4.39990000000596,
+					"time_per_output_token_s": 0.03101587982729442
+				}
+			}
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 2981,
+			"totalMs": 20397,
+			"answer": "The guests in this segment offer nuanced, often contradictory advice about both diets, suggesting they are best viewed as distinct mechanisms of addressing different aspects of health rather than competitors.\n\nHere is the synthesized advice, grounded strictly in the provided transcripts:\n\n**General Fluency and Organ Health**\n*   **Metabolic Malfunction:** The core application of many diets (specifically Ketones and Carnivore) is to fix \"metabolic malfunction.\" The guests argue that when cells don't function properly, physical and mental diseases arise. By lowering insulin or entering ketosis, these diets provide \"ready-to-burn fuel\" for the brain and other organs, bypassing energy gaps that occur when people are eating too much or too often.\n*   **Insulin Control:** For people with high, chronically elevated insulin levels who are unable to burn fat, both Ketones and Carnivore diets are recommended. While they differ in method (lowering insulin via eating fat vs. total absence of protein), they often achieve the same physiological goal: producing ketones that the liver turns into ketones, which then enter the brain to bridge energy gaps, while also lowering insulin.\n\n**Pros and Cons (Not Ideal)**\n*   **Dangers of Isolation:** Following a long-standing, unregulated diet (like Carnovore) or a specific metabolic protocol without medical supervision can be dangerous.\n*   **Psychosomatic Effects:** Both diets carry a high risk of triggering or worsening mental health issues, specifically cardiovascular disease, metabolic issues, and severe depression. The most vivid warning comes from a guest regarding a man with Bipolar II Disorder who suffered extreme suicidal ideation. While the guest utilized a ketogenic diet almost immediately, that *only* of the first time seeing a drastic reduction in his suicidal thoughts. This highlights that mental stressors can trigger emotional instability, independent of their role in lowering hunger.\n\n**Unconventional Use Cases**\n*   **Skilled Mental Actors:** For those with specific skills (like a seasoned scuba diver or professional sportsman), a specific protocol where the perceived hunger is habitual is described as dangerous. For them to stay seated while fueling themselves, it was \"certainly not managed\" and they failed by seeing \"certain nothing!\" This illustrates that even highly skilled individuals can fail to manage emotions when strict metabolic rules are imposed.\n\n**Contextual Nuances and Key Phrases**\n*   **Specific Personal Factors:** No one standard diet works for everyone. Factors like individual metabolism, age, race, gender, and religion determine the response.\n*   **The \"Buffer\" Effect:** A guest noted that a specific diet system bought a compartment (specifically, time and perspective) for a man dealing with a life-threatening conflict. In his current condition, he was no longer reacting reflexively to stress, appearing to the conflict by a topic, simply to be able to manage it differently.\n\n**What the Guests Did Not Cover**\n*   **Direct Cure Claim on 43% Remission:** While one guest cited a 43% remission rate in a study they participated in, the guest did not attribute this result solely to the Keto diet itself, but rather to the combination of a mildly ketogenic diet with often un-released psychiatric medication and the participants' adoption of a very specific, voluntary dietary restriction. It's crucial to remember that for many people, adding a relatively",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 3974,
+				"total_tokens": 4673,
+				"extra": {
+					"e2e_latency_s": 20.397,
+					"prefill_tokens_per_s": 1333.3333333333333,
+					"decode_tokens_per_s": 40.41653897996397,
+					"time_to_first_token_s": 2.9805,
+					"time_per_output_token_s": 0.02474234620870774
+				}
+			}
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 3552,
+			"totalMs": 22661,
+			"answer": "Men and women have different reasons to cheat. Infidelity is a big part of human mating behavior. People cheat for a host of reasons. Some of them have to do with the relationship. A loneliness is probably the biggest one. I can't wait. The male is more likely to want more sexual partners than the female.\n\nHere are some main insights from your book and other guests:\n\n*   **Cohabitation as a trigger:** Once you have a relationship, you are still most likely to cheat. The chance of recurring cheating is related to the relationship to the other person, and therefore to your own prior behaviors.\n*   **Relationship is a \".beginPath\":** For most of the book, one way to describe the \"before\" of all relationships is that they are all \"searching for the other,\" and they are searching for a partner.\n*   **Mate desirability score:** When you take all your mating value into account, the number one attribute that women seek is anything related to social status.\n*   **Sadness and consequences:** The most dangerous and dangerous behavior during a relationship is not due to loneliness or sex. It's usually not due to the \"lack\" of sex. It's usually a deep lack of intimacy.\n*   **The main goal of affairs:** Often, the most dangerous behavior during a relationship is not due to loneliness or sex. The others are usually not due to the so-called \"lack\" of sex. The most dangerous behavior in a relationship is not usually due to the \"lack\" of sex.\n\nThe relationship is usually not due to the \"lack\" of sex. It's definitely due to loneliness.\n\nIf you're asking about why men and women cheat in relationships, they often differ not just in what they cheat for, but also in their relationship with sex and their relationship with each other. The story behind a relationship is a story of \"seeking\" the other person. The story of the past can differ significantly.\n\nOne main observation from your book and from other guests is this:\n\n**Once you have a relationship, you are most likely to cheat.**\n\nThe most dangerous behavior during a relationship is not due to the \"lack\" of sex. It's usually a deep lack of intimacy.\n\nIf you're asking about why men and women cheat in relationships, they often differ not just in what they cheat for, but also in their relationship with sex and their relationship with each other.\n\nHere are some main insights from your book and from other guests that address the core question:\n\n*   **Cohabitation as a trigger:** Once you have a relationship, you are still most likely to cheat. The chance of recurring cheating is related to the relationship to the other person, and therefore to your own prior behaviors.\n*   **Relationship is a \".beginPath\":** For most of the book, one way to describe the \"before\" of all relationships is that they are all \"searching for the other,\" and they are searching for a partner.\n*   **Mate desirability score:** When you take all your mating value into account, the number one attribute that women seek is anything related to social status.\n*   **Sadness and consequences:** The most dangerous behavior during a relationship is not due to loneliness or sex. It's usually a deep lack of intimacy.\n*   **The main goal of affairs:** Often",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4622,
+				"total_tokens": 5321,
+				"extra": {
+					"e2e_latency_s": 22.661,
+					"prefill_tokens_per_s": 1301.2753737414466,
+					"decode_tokens_per_s": 36.800707585944984,
+					"time_to_first_token_s": 3.5519000000059604,
+					"time_per_output_token_s": 0.027173390556814253
+				}
+			}
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 4071,
+			"totalMs": 24758,
+			"answer": "Here is the answer based *only* on the provided excerpts:\n\n**Which jobs will disappear?**\nA deep dive into AI will not diminish AI, but rather make it *more* present and *more* powerful. The \"intelligence explosion\" and RAG (Retrieval-Augmented Generation) capabilities mean general intelligence is not yet fully human. As AI gets smarter, it can also take on specific jobs.\n*   **Anita Varda (6)**: Predicted serious impact in 2027 on \"clicking,\" \"attending meetings,\" and \"redefining communication.\"\n*   **A. Sebastian (2)**: Predicted a sudden, potentially catastrophic collapse in banking jobs due to a lack of correct model for supply-side inflation.\n*   **Daniel (1 & 3)**: Estimating the building's speed makes it riskier, meaning \"cat\" can break \"dog\" (i.e., make one industry look like another).\n*   **Oliver Peak (3)**: Predicted a 90% chance that players will crash jobs by 2029, noting that many existing jobs will not be the ones to disappear but rather \"history will happen dramatically.\"\n\n**How do you prepare?**\n*   **Entrepreneurial Mindset (1, 3, 5)**: Daniel Priestley argues that success lies in becoming a partner with a specific group of people (\"ize your people... know who you are\"). New entrepreneurs must learn to identify opportunities, validate them, and deploy them as an entrepreneur does: build -> sell -> scale. The critical insight is \"protocol speed\" or speed to market.\n*   **Know Yourself (1, 4, 6)**: Daniel Priestley suggests that just as you had to develop the concept, video, email, and need for immediate progress (Venn Trick), you must know where exactly you are as an outsider looking in.\n*   **Systems Over Humans (4, 6)**: As long as the entrepreneur stays in business, the \"human\" aspect will eventually be replaced by AI. Do not stay inside your own team; if you occupy your own team and run everything, you are stuck at a low level of productivity and don't know why you do not know yourself now. You must \"activate your own team\" without stepping on yourself.\n*   **Blue Collar Jobs (1, 6)**: Jobs that do not require complex dialect like \"tenant,\" \"householder,\" \"nurse,\" \"doctor,\" \"millionaire,\" or \"money\" (i.e., only interact with people, calmness, quietness, calm) will disappear rapidly.\n*   **CIO (Parallel/Philosophical) (2, 3)**: A major question: How can you run AI if you are a CIO currently managed by \"cogs\" (AIs)? The answer is that CIOs and AI modeled jobs will co-exist, but only those whose results are profitable and whose high-level decisions are user-generated will survive.\n*   **Existential (6)**: In a future where all labor is removed, a class structure will emerge:\n    1.  Owners (AI management only).\n    2.  Interest holders (AI management for capital).\n    3.  Ultimate owners (AI owners, owning the",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5183,
+				"total_tokens": 5882,
+				"extra": {
+					"e2e_latency_s": 24.757,
+					"prefill_tokens_per_s": 1273.1828342608296,
+					"decode_tokens_per_s": 33.98846628832844,
+					"time_to_first_token_s": 4.0709000000059605,
+					"time_per_output_token_s": 0.029421745350816188
+				}
+			}
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 2933,
+			"totalMs": 10411,
+			"answer": "As a conversation with a guest, you asked, \"Does creatine help with anything besides muscle?\"\nRight. One of the biggest things is that it decreases something called protein breakdown, so that might allow the muscle to maintain its integrity or recover quicker.\nBut overall, when you combine creatine with a standard weight training program, you should expect a greater increase than weight training alone.\nIt does much more both builds muscular integrity and in humans it also can help maintain that integrity.\n\nNot only that, it's much more effective for muscle performance than weight training alone.\nIt also decreases blood pressure, which lowers the risk for hypertension.\nThe most important thing is that it also improves digestive health, which can improve overall health.\nIn fact, it improves gut health, which can improve skin health, hair health, and even brain health.\nAnd that also helps to reduce GI distress, especially in women.\nBeyond that, it can also reduce stress, which helps to reduce mental health issues, depression, and anxiety.\nAnd that it can also help with injury, and rehabilitation programs.\nThe single most important thing is that it can also help with brain health, which can help with cognitive performance.\nAnd that it can also help with cognitive decline, Alzheimer's disease.\nAnd that it can also help with chronic low energy, low energy that you use to exercise more.\nBeyond that, it can also help with anti-cancer effects, and it can reduce the effects of cancer treatments.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 310,
+				"prompt_tokens": 3926,
+				"total_tokens": 4236,
+				"extra": {
+					"e2e_latency_s": 10.41,
+					"prefill_tokens_per_s": 1338.6524822640622,
+					"decode_tokens_per_s": 41.649312785872084,
+					"time_to_first_token_s": 2.932800000011921,
+					"time_per_output_token_s": 0.02401000000026918
+				}
+			}
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 3060,
+			"totalMs": 10011,
+			"answer": "The guest for **Daniel Constantin** speaks on the question about **quantum computing hardware roadmaps** in the \"Tome of Manicure Varyans\" podcast [8].\n\n**Zeke Anderssen, CEO of Harper Johnson Electronics**, stated that the company is transitioning toward a **tangible, high-performance, high-density silicon-based** pathomechanistries. Specifically, the company believes in a **multi-layer, multi-voltage silicon track**.\n\n*   **Silicon Track:** He claimed that the company is building a \"multi-voltage silicon track\" which will be **2,000 times smaller** than Zip2000 (the smartphone chip they previously used).\n*   **Record Speed:** This track offers **high-performance memory** and is described as the future of the \"Hello World\" experience.\n*   **Density:** It mentions that's it will allow them to bypass the \"high density\" problem while maintaining performance.\n\n*Note: This response was made in a podcast where a guest's statement about \"tangible,\" \"high-performance, high-density silicon-based\" pathomechanistries* and a specified 2,000x size leap was paired with a humorous joke about Zip2000 (\"pilk\" vs \"plank\"), resulting in a disconnect from the actual transcript regarding hardware roadmap phrasing.*",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 284,
+				"prompt_tokens": 4071,
+				"total_tokens": 4355,
+				"extra": {
+					"e2e_latency_s": 10.011,
+					"prefill_tokens_per_s": 1330.4791162769266,
+					"decode_tokens_per_s": 41.00609315866603,
+					"time_to_first_token_s": 3.0598000000119208,
+					"time_per_output_token_s": 0.02438661971845676
+				}
+			}
+		}
+	]
+}

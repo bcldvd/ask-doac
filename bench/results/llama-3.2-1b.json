@@ -1,0 +1,281 @@
+{
+	"id": "llama-3.2-1b",
+	"engine": "webllm",
+	"model": "Llama-3.2-1B-Instruct-q4f16_1-MLC",
+	"label": "Llama 3.2 1B",
+	"cold": {
+		"loadMs": 54856.90000000596,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 1306.4000000059605
+	},
+	"contextWindow": 8192,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 5,
+			"promptChars": 19248,
+			"ttftMs": 1967,
+			"totalMs": 7637,
+			"answer": "I'll do my best to answer your question in a way that's grounded in the excerpts and translates to a more actionable, step-by-step approach.\n\n**Step 1: Acknowledge and accept your dopamine levels**\n\nYou want to know how to control your dopamine levels day to day. That's a great starting point.\n\n**Step 2: Recognize the pattern and identify the triggers**\n\nDopamine is a chronic stimulator, and chronic over-stimulation can lead to neuronal cell death. To control your dopamine levels, you need to recognize the pattern and identify the triggers that lead to the crash.\n\n**Step 3: Focus on dopamine-releasing activities**\n\nDopamine is released in response to certain activities, such as exercise, social interaction, and novelty-seeking behaviors. To control your dopamine levels, you need to focus on these activities and make them a regular part of your daily routine.\n\n**Step 4: Prioritize sleep, relaxation, and stress reduction**\n\nSleep, relaxation, and stress reduction are essential for maintaining healthy dopamine levels. To control your dopamine levels, you need to prioritize these activities and make them a regular part of your daily routine.\n\n**Step 5: Be honest with yourself and others**\n\nThe dopamine fast is a powerful tool for managing dopamine levels. To control your dopamine levels, you need to be honest with yourself and others about your behavior and its impact on your dopamine levels.\n\n**Step 6: Prepare for the dopamine fast**\n\nOnce you've identified the triggers and patterns that lead to the crash, it's time to prepare for the dopamine fast. This involves setting a 30-day dopamine fast, where you abstain from all dopamine-releasing activities and focus on activities that promote dopamine release.\n\n**Step 7: Monitor and adjust**\n\nAfter the 30-day dopamine fast, you'll need to monitor your dopamine levels and adjust your behavior accordingly. This might involve re-exercising, re-reading, or re-reading your favorite books.\n\nBy following these steps, you can control your dopamine levels day to day and promote a healthier, more balanced lifestyle.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 421,
+				"prompt_tokens": 4521,
+				"total_tokens": 4942,
+				"extra": {
+					"e2e_latency_s": 7.637,
+					"prefill_tokens_per_s": 2299.5930824008137,
+					"decode_tokens_per_s": 74.84976709581815,
+					"time_to_first_token_s": 1.966,
+					"time_per_output_token_s": 0.01336009501164994
+				}
+			}
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 1470,
+			"totalMs": 11395,
+			"answer": "Here are the answers to the questions based on the transcript excerpts:\n\n**1. Transcript excerpt [1]**\nGuest: \"So you have to be an expert.\"\nExcerpt: \"You don't have to be an expert, but you got to be willing to give-So you sound very passive. In the beginning, for the first number of years, it was extremely painful. But today, when I go and acquire a property, I will look for the property, just like I do research on a stock or whatever I want to do. I do the work to research a property. In today's economy, it's much harder. It's not impossible, to find those returns. Acquire the property, hand over the keys to the property manager, give them the goals, and now I oversee the manager because I have a team now that is... It's a business. It's a business.\"\n\n**2. Transcript excerpt [2]**\nGuest: \"I even think about my own life. At 18 years old, I started learning about social media. I dropped out of university doing my business management degree after one lecture, and I started learning about social media because I was building a business in social media and technology. And although that first business failed, I I was 19 years old in 2014 or something, really understood this thing called social media, which led me to spend a year as a consultant flying around the world to all these companies doing social media. One of those companies turned around and said, It's been so great. Could you turn this into a company? I said, No, I've been through the founder PTSD of starting a startup. I don't want to do it. Three months later, I said, Yes. Turned into a company called Social Chain, and that changed my entire life.\"\n\n**3. Transcript excerpt [3]**\nGuest: \"But, like, the moment it occurs to me that there's something she doesn't understand about me, it comes up at a dinner, you know, not too many weeks in the future.\"\nExcerpt: \"Because that's part of how we come to our dinners. Right? We come to our dinners is that 1 of us is, you know, I had this thought. We want to have those dinners. To founders you're investing in that are in a stable, solid relationship before they start the startup Yeah. And then they go on this crazy intense journey, do you ever give them advice on relationships and how to manage that? Because I have so many founders come to me, and they're like, I think she's gonna break up with me or he's gonna break up with me because I'm just I'm absent in my head, in person.\"\n\n**4. Transcript excerpt [4]**\nGuest: \"But, like, the moment it occurs to me that there's something she doesn't understand about me, it comes up at a dinner, you know, not too many weeks in the future.\"\nExcerpt: \"Mhmm. Because that's part of how we come to our dinners. Right? We come to our dinners is that 1 of us is, you know, I had this thought. We want to have those dinners. To founders you're investing in that are in a stable, solid relationship before they start the startup Yeah. And then they go on this crazy intense journey, do you ever give them advice on",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4882,
+				"total_tokens": 5581,
+				"extra": {
+					"e2e_latency_s": 11.395,
+					"prefill_tokens_per_s": 3320.862526304894,
+					"decode_tokens_per_s": 71.08354095154712,
+					"time_to_first_token_s": 1.4701000000238418,
+					"time_per_output_token_s": 0.014067954221380626
+				}
+			}
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 1750,
+			"totalMs": 4951,
+			"answer": "Based on the excerpts, it's clear that the author is skeptical of the 10,000 hours rule. The excerpts mention that the idea is rooted in research, but the details of the research are not provided. The author also questions the assumption that everyone needs to practice deliberate practice for 10,000 hours to become a master in a particular field.\n\nThe excerpts provide some insight into the concept of deliberate practice and its relationship to skill development. However, they do not provide a clear answer to the question of whether the 10,000 hours rule is actually true.\n\nThe author mentions that the idea of deliberate practice is often misunderstood, and that the actual amount of time spent on deliberate practice is not necessarily related to the number of hours spent on it. They also mention that the idea of the 10,000 hours rule is often oversimplified and does not take into account individual differences in learning ability and aptitude.\n\nOverall, the excerpts provide a critical view of the 10,000 hours rule and its implications, which suggests that it is unlikely to be true.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 214,
+				"prompt_tokens": 5522,
+				"total_tokens": 5736,
+				"extra": {
+					"e2e_latency_s": 4.951,
+					"prefill_tokens_per_s": 3154.8877335636253,
+					"decode_tokens_per_s": 67.21105527952746,
+					"time_to_first_token_s": 1.7502999999821187,
+					"time_per_output_token_s": 0.014878504672200865
+				}
+			}
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 1860,
+			"totalMs": 11086,
+			"answer": "Here are the answers to the questions based on the excerpts:\n\n**1. What is charisma, and how can I become more charismatic and instantly likeable?**\n\nCharisma is about being both warm and competent. To be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes up 82% of impressions of people. Warmth, trust, likability, friendliness. Competence, power, reliability, capability. To be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes you instantly likeable.\n\n**2. How can I become more charismatic and instantly likeable?**\n\nTo be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes up 82% of impressions of people. Warmth, trust, likability, friendliness. Competence, power, reliability, capability. To be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes you instantly likeable.\n\n**3. What are the 5 science-based habits for being more charismatic?**\n\nThe 5 science-based habits for being more charismatic are:\n\n1. Be okay with yourself.\n2. Be more of yourself.\n3. Be more generous.\n4. Be more of service to others.\n5. Be more of yourself.\n\n**4. How can I become more charismatic and instantly likeable?**\n\nTo be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes up 82% of impressions of people. Warmth, trust, likability, friendliness. Competence, power, reliability, capability. To be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes you instantly likeable.\n\n**5. What are the 6 charismatic mindsets for success?**\n\nThe 6 charismatic mindsets for success are:\n\n1. Be okay with yourself.\n2. Be more of yourself.\n3. Be more generous.\n4. Be more of service to others.\n5. Be more of yourself.\n6. Be more of yourself.\n\n**6. How can I become more charismatic and instantly likeable?**\n\nTo be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes up 82% of impressions of people. Warmth, trust, likability, friendliness. Competence, power, reliability, capability. To be more charismatic, you should signal high warmth and high competence. This means being both highly warm and highly competent. This is what makes you instantly likeable.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 580,
+				"prompt_tokens": 5769,
+				"total_tokens": 6349,
+				"extra": {
+					"e2e_latency_s": 11.086,
+					"prefill_tokens_per_s": 3101.7796655634775,
+					"decode_tokens_per_s": 63.34159685987051,
+					"time_to_first_token_s": 1.8599000000059605,
+					"time_per_output_token_s": 0.015787413794007787
+				}
+			}
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 5,
+			"promptChars": 22864,
+			"ttftMs": 1703,
+			"totalMs": 8123,
+			"answer": "I'll provide a concise and conversational answer to your question.\n\n**Short and sweet:** It's not a straightforward answer, but here's a summary:\n\nInvesting in stocks can be a good long-term strategy, but it's not a silver bullet. Buying a house is a significant risk, and the likelihood of experiencing financial difficulties, whether through job loss or market downturns, is high.\n\n**The function of investing in stocks:** It's not just about making money; it's about building wealth and securing your financial future. Stocks can be a powerful tool for generating returns, but they come with inherent risks.\n\n**The function of buying a house:** It's about securing your financial future, generating income, and potentially building wealth. However, it's also a significant risk, especially for younger people.\n\n**The function of AI:** It's a topic of ongoing debate, but some experts argue that AI could help mitigate the risks associated with investing in stocks, while others caution against overreliance on AI.\n\n**The function of being emotionally stable:** It's essential to maintain a clear head and avoid making impulsive decisions based on emotions. Investing in stocks requires a long-term perspective and a willingness to take calculated risks.\n\n**The function of being financially prepared:** It's crucial to have a solid financial foundation, including a stable income, a clear understanding of your financial goals, and a well-thought-out investment strategy.\n\n**The function of being aware of market fluctuations:** It's essential to stay informed about market trends and be prepared to adapt to changing conditions.\n\n**The function of being cautious:** It's crucial to be aware of the potential risks associated with investing in stocks, such as market volatility, and to take steps to mitigate them.\n\n**The function of being informed:** It's essential to stay up-to-date with the latest research, data, and expert opinions on investing in stocks and their impact on the market.\n\nIn conclusion, buying a house is not a good investment, and investing in stocks can be a good long-term strategy, but it's essential to be aware of the potential risks and take steps to mitigate them.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 427,
+				"prompt_tokens": 5429,
+				"total_tokens": 5856,
+				"extra": {
+					"e2e_latency_s": 8.123,
+					"prefill_tokens_per_s": 3189.02725568376,
+					"decode_tokens_per_s": 66.96778645726019,
+					"time_to_first_token_s": 1.702399999976158,
+					"time_per_output_token_s": 0.014932552692901302
+				}
+			}
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 3,
+			"promptChars": 21694,
+			"ttftMs": 1523,
+			"totalMs": 8096,
+			"answer": "Here are the answers to your questions based on the excerpts:\n\n**Short Form Video and Brain Health**\n\n1. Short-form video can hijack attention and change the way the brain learns to pay attention. This can lead to decreased attention span and irritability, hypervigilance, and decreased impulse control.\n2. The use of short-form video can rewire the brain, particularly in the prefrontal cortex, which is responsible for executive functions, memory, and planning.\n3. The constant engagement with devices can lead to decreased attention span, decreased impulse control, and decreased ability to pay attention without the ability to pay attention for several minutes at a time.\n\n**Dangers of Short-Form Video**\n\n1. Short-form video can lead to a decrease in attention span, decreased impulse control, and decreased ability to pay attention without the ability to pay attention for several minutes at a time.\n2. The use of short-form video can rewire the brain, particularly in the prefrontal cortex, which is responsible for executive functions, memory, and planning.\n3. The constant engagement with devices can lead to a decrease in attention span, decreased impulse control, and decreased ability to pay attention without the ability to pay attention for several minutes at a time.\n\n**Prevention and Mitigation**\n\n1. To mitigate the dangers of short-form video, it is essential to take breaks from devices, engage in activities that promote mental well-being, and prioritize face-to-face interactions.\n2. The use of short-form video can be mitigated by prioritizing attention span, impulse control, and executive functions.\n3. The importance of taking breaks from devices and engaging in activities that promote mental well-being cannot be overstated.\n\n**Conclusion**\n\n1. The dangers of short-form video for the brain are real and can have significant consequences for mental health, attention span, and cognitive function.\n2. The use of short-form video can rewire the brain, particularly in the prefrontal cortex, and can lead to decreased attention span, decreased impulse control, and decreased ability to pay attention without the ability to pay attention for several minutes at a time.\n3. To mitigate the dangers of short-form video, it is essential to take breaks from devices, engage in activities that promote mental well-being, and prioritize face-to-face interactions.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 464,
+				"prompt_tokens": 5005,
+				"total_tokens": 5469,
+				"extra": {
+					"e2e_latency_s": 8.095,
+					"prefill_tokens_per_s": 3287.3563218390805,
+					"decode_tokens_per_s": 71.07189902668235,
+					"time_to_first_token_s": 1.5225,
+					"time_per_output_token_s": 0.01407025862112637
+				}
+			}
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 1701,
+			"totalMs": 9248,
+			"answer": "Based on the transcripts, it appears that the question is being asked in multiple ways, but I'll summarize the answers in a single, concise, and conversational way:\n\n**Can aging be reversed?**\n\nYes, but not in the way we think. Reversing aging means changing the underlying process that causes aging, which is a complex and multi-faceted phenomenon. While we can make significant progress in understanding and addressing various aspects of aging, reversing it completely is still a topic of ongoing research and debate.\n\n**How can aging be reversed?**\n\nWe're making progress in understanding and addressing various aspects of aging. For example, we've discovered a way to reverse the aging process in animals, and we're exploring ways to apply this technology to humans. However, reversing aging completely is still a long-term goal, and we're not yet at a point where we can say that aging can be completely reversed.\n\n**What can be done to prevent or delay aging?**\n\nWhile we can't completely prevent or delay aging, we can take steps to reduce its impact. For example, we can take care of our physical and mental health, eat a balanced diet, exercise regularly, and avoid smoking and excessive drinking. We can also take steps to reduce stress, and get enough sleep.\n\n**What is the key to preventing or delaying aging?**\n\nThe key is to take care of our physical and mental health, eat a balanced diet, exercise regularly, and avoid smoking and excessive drinking. We can also take steps to reduce stress, and get enough sleep. Additionally, we can take advantage of emerging technologies, such as gene editing and regenerative medicine, to potentially reverse or delay aging.\n\n**What are the most effective ways to prevent or delay aging?**\n\nWhile there's no single, most effective way to prevent or delay aging, we can take steps to reduce its impact. For example, we can take care of our physical and mental health, eat a balanced diet, exercise regularly, and avoid smoking and excessive drinking. We can also take steps to reduce stress, and get enough sleep. Additionally, we can take advantage of emerging technologies, such as gene editing and regenerative medicine, to potentially reverse or delay aging.\n\n**What is the most significant challenge in preventing or delaying aging?**\n\nThe most significant challenge is understanding and addressing the underlying mechanisms that cause aging. While we can make progress in understanding and addressing various aspects of aging, reversing it completely is still a topic of ongoing research and debate.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 500,
+				"prompt_tokens": 5424,
+				"total_tokens": 5924,
+				"extra": {
+					"e2e_latency_s": 9.248,
+					"prefill_tokens_per_s": 3188.1502380867623,
+					"decode_tokens_per_s": 66.78063895433598,
+					"time_to_first_token_s": 1.7012999999821186,
+					"time_per_output_token_s": 0.014974400000631787
+				}
+			}
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 1072,
+			"totalMs": 6439,
+			"answer": "Based on the transcripts, here are the answers to your question:\n\n1. The guests say that keto and carnivore diets can help people with chronic mental illnesses, such as bipolar disorder, by reducing their risk of developing mental illnesses like depression and bipolar disorder.\n\nExample from Transcript 2: \"I'm telling you, the ketogenic diet is a game-changer for people with chronic mental illnesses. It's not a magic bullet, but it can definitely help reduce their risk of developing mental illnesses like depression and bipolar disorder.\"\n\n2. The guests also mention that keto and carnivore diets can help people with mental illnesses, such as depression and ADHD, by improving their mental health and reducing their risk of developing these conditions.\n\nExample from Transcript 3: \"The ketogenic diet is a great way to improve mental health and reduce the risk of developing mental illnesses like depression and ADHD. It's not a cure-all, but it can definitely help.\"\n\n3. The guests also mention that keto and carnivore diets can help people with chronic mental illnesses by improving their mental health and reducing their risk of developing these conditions.\n\nExample from Transcript 4: \"The ketogenic diet is a great way to improve mental health and reduce the risk of developing mental illnesses like depression and ADHD. It's not a cure-all, but it can definitely help.\"\n\n4. The guests also mention that keto and carnivore diets can help people with food addictions and binge eating problems by providing a healthy and sustainable way to manage their eating habits.\n\nExample from Transcript 5: \"The ketogenic diet is a great way to manage food addictions and binge eating problems. It's not a cure-all, but it can definitely help reduce the risk of these conditions.\"\n\n5. The guests also mention that keto and carnivore diets can help people with mental illnesses by providing a healthy and sustainable way to manage their eating habits and improve their mental health.\n\nExample from Transcript 6: \"The ketogenic diet is a great way to manage mental health and reduce the risk of developing mental illnesses like depression and bipolar disorder. It's not a cure-all, but it can definitely help.\"\n\nNote: The guests' statements are based on their personal experiences and opinions, which may not be representative of everyone who follows the keto and carnivore diets.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 454,
+				"prompt_tokens": 3881,
+				"total_tokens": 4335,
+				"extra": {
+					"e2e_latency_s": 6.439,
+					"prefill_tokens_per_s": 3620.673570275603,
+					"decode_tokens_per_s": 85.27102663425488,
+					"time_to_first_token_s": 1.0719000000059604,
+					"time_per_output_token_s": 0.011727312775172832
+				}
+			}
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 1322,
+			"totalMs": 10798,
+			"answer": "I'll provide the answers in English, keeping them concise and conversational.\n\n**Transcript excerpt 1: Esther Perel (Love & Sex Expert)**\n\n1. \"Why Men Love Porn More Than Their Partner! It's Time To Enjoy Sex Again! The Real Reason Men & Women Cheat!\"\n\n2. \"Why do people cheat? I don't know. I just- Because we tend to think it's because one person isn't getting what they want or because one person is a bad person. Look, people cheat for a host of reasons. Some of them have to do with the relationship. A loneliness is probably the biggest one. I can't wait.\"\n\n3. \"Why do men and women cheat? I think that relationships can be great sources of longevity, health, great context for raising children. And so they can have this wonderful magic that is health-giving, longevity-giving. And it just requires certain conditions to be met. And those are the principles that make relationships work.\"\n\n**Transcript excerpt 2: The Gottman Doctors (Love Therapists)****\n\n1. \"Why do men and women cheat? I don't mean accept the fact that they cheated on you. That's how I interpreted it at first. But yes, acceptance, I would call that grounding in the reality of what you have right now. And then really grounding in it.\"\n\n2. \"Why do men and women cheat? I think that relationships can be great sources of longevity, health, great context for raising children. And so they can have this wonderful magic that is health-giving, longevity-giving. And it just requires certain conditions to be met. And those are the principles that make relationships work.\"\n\n**Transcript excerpt 3: Jordan B Peterson (Psychologist)**\n\n1. \"Why do men and women cheat? I believe that men cheat because they're lonely. They cheat because they have been sexually frustrated for so many years. They cheat because they are resentful. They cheat for vengeance and vindictiveness. They cheat because they need to constantly be affirmed by anybody that can make them feel better about themselves. They cheat for a host of reasons that have to do with conflict and discontent and disconnection in their relationship, but they also sometimes have affairs that have nothing to do with the relationship. That's what was one of the big discoveries for me in the book, it was that sometimes that affairs happen in happy couples too.\"\n\n2. \"Why do men and women cheat? I don't think that anyone could really, truly accurately say, you know, I know people love statistics, and I know that, you know, guests have a tendency to come on and say, well, 72% of people who are. Everything I'm saying is based on what I've observed in 25 years of facilitating the demise of marriages. Men and women both cheat. Men cheat in just more scattershot, stupid ways than women do. When women cheat, in my experience professionally, it's usually an indication of the absolute end of this relationship. The relationship is over. And this is either a soft place to land or it's sort of a final opportunity for this person to solidify this woman to solidify in her head that, yeah, this thing is over. Whereas men, I've really had hundreds at this point of men sit across from me who've been caught in an affair or sense that they're about to get caught in an affair",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4523,
+				"total_tokens": 5222,
+				"extra": {
+					"e2e_latency_s": 10.798,
+					"prefill_tokens_per_s": 3421.3313161875944,
+					"decode_tokens_per_s": 74.71620668177192,
+					"time_to_first_token_s": 1.322,
+					"time_per_output_token_s": 0.013383977110336414
+				}
+			}
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 1538,
+			"totalMs": 11746,
+			"answer": "Here are the answers to your questions, based on the excerpts:\n\n1. **Blue-collar jobs will be replaced by AI**: According to Mo Gawdat, \"A carpenter is a job that is going to disappear, and a call center agent, assistant, travel agent, and other mundane jobs are also going to disappear. In fact, I think the biggest disruption is going to be in the middle management, and the knowledge workers, who will be doing more and more mundane tasks, and the entry-level knowledge workers, who will be doing more and more tasks that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated.\"\n\n2. **White-collar jobs will be replaced by AI**: According to Daniel Priestley, \"The white-collar jobs, which are the jobs that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated, are going to be replaced by AI. In fact, I think the biggest disruption is going to be in the middle management, and the knowledge workers, who will be doing more and more mundane tasks, and the entry-level knowledge workers, who will be doing more and more tasks that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated.\"\n\n3. **Jobs that will be replaced by AI will be those that require a lot of intelligence**: According to Daniel Priestley, \"The jobs that will be replaced by AI will be those that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated. In fact, I think the biggest disruption is going to be in the middle management, and the knowledge workers, who will be doing more and more mundane tasks, and the entry-level knowledge workers, who will be doing more and more tasks that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated.\"\n\n4. **Jobs that will be replaced by AI will be those that require a lot of intelligence, such as diagnosis, research, and other tasks**: According to Daniel Priestley, \"The jobs that will be replaced by AI will be those that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated. In fact, I think the biggest disruption is going to be in the middle management, and the knowledge workers, who will be doing more and more mundane tasks, and the entry-level knowledge workers, who will be doing more and more tasks that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated.\"\n\n5. **Jobs that will be replaced by AI will be those that require a lot of intelligence, such as diagnosis, research, and other tasks**: According to Mo Gawdat, \"The jobs that will be replaced by AI will be those that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated. In fact, I think the biggest disruption is going to be in the middle management, and the knowledge workers, who will be doing more and more mundane tasks, and the entry-level knowledge workers, who will be doing more and more tasks that require a lot of intelligence, such as diagnosis, research, and other tasks that are not currently being automated.\"\n\n6. **The biggest disruption is going to be in the middle management, and the knowledge workers, who will be",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5064,
+				"total_tokens": 5763,
+				"extra": {
+					"e2e_latency_s": 11.746,
+					"prefill_tokens_per_s": 3292.1596671051434,
+					"decode_tokens_per_s": 69.14151755232741,
+					"time_to_first_token_s": 1.5382000000178815,
+					"time_per_output_token_s": 0.01446309012878093
+				}
+			}
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 1049,
+			"totalMs": 3657,
+			"answer": "**Not just muscle**\n\nFrom the transcripts, it's clear that creatine has a broader range of benefits beyond just muscle strength and muscle mass. Here are some examples:\n\n* **Brain health**: Creatine has been shown to improve cognitive function, including memory and processing speed (Transcript 4).\n* **Cognitive decline**: A study found that creatine supplementation can slow cognitive decline in older adults (Transcript 5).\n* **Mental health**: Creatine has been linked to improved mood and reduced symptoms of depression and anxiety (Transcript 6).\n* **Neurodegenerative diseases**: Creatine may have anti-cancer effects, particularly in cases of stroke or brain injury (Transcript 6).\n* **Gut health**: Creatine has been shown to improve gut health and reduce symptoms of irritable bowel syndrome (Transcript 4).\n* **Cardiovascular health**: Creatine may have benefits for heart health, including improved blood flow and reduced inflammation (Transcript 5).\n\nThese examples demonstrate that creatine has a wide range of potential benefits, extending beyond just muscle strength and muscle mass.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 226,
+				"prompt_tokens": 3835,
+				"total_tokens": 4061,
+				"extra": {
+					"e2e_latency_s": 3.657,
+					"prefill_tokens_per_s": 3657.6061039580354,
+					"decode_tokens_per_s": 87.24521309430209,
+					"time_to_first_token_s": 1.0485,
+					"time_per_output_token_s": 0.011461946902681232
+				}
+			}
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 1117,
+			"totalMs": 5942,
+			"answer": "**Transcript Excerpts:**\n\n1. **Transcript of World-Renowned Physicist: The Truth About Aliens! UFOs Are Definitely Robotic - Michio Kaku (01:09:27)**\n\"I don't think we should be surprised if we find that the universe is simulated by some advanced life form.\"\n2. **Transcript of Neil deGrasse Tyson: The Brutal Truth About Astrology! Our Breath Contains Molecules Jesus Inhaled! (01:55:01)**\n\"I don't think we should be surprised if we find that the universe is simulated by some advanced life form.\"\n3. **Transcript of UFO Roundtable: CIA Physicist Proves Aliens Exist (00:04:45)**\n\"Before we can even think about the possibility of a quantum computer, we need to figure out how to make a quantum computer that can be used to simulate the universe.\"\n4. **Transcript of UFO Roundtable: CIA Physicist Proves Aliens Exist (00:04:45)**\n\"Before we can even think about the possibility of a quantum computer, we need to figure out how to make a quantum computer that can be used to simulate the universe.\"\n5. **Transcript of UFO Roundtable: CIA Physicist Proves Aliens Exist (00:04:45)**\n\"Before we can even think about the possibility of a quantum computer, we need to figure out how to make a quantum computer that can be used to simulate the universe.\"\n6. **Transcript of UFO Roundtable: CIA Physicist Proves Aliens Exist (00:04:45)**\n\"Before we can even think about the possibility of a quantum computer, we need to figure out how to make a quantum computer that can be used to simulate the universe.\"\n\n**Answer:**\n\nGuests mentioned that they don't think we should be surprised if we find that the universe is simulated by some advanced life form.",
+			"thinkChars": 0,
+			"usage": {
+				"completion_tokens": 402,
+				"prompt_tokens": 3969,
+				"total_tokens": 4371,
+				"extra": {
+					"e2e_latency_s": 5.942,
+					"prefill_tokens_per_s": 3554.222262059971,
+					"decode_tokens_per_s": 83.95288614349425,
+					"time_to_first_token_s": 1.1166999999880791,
+					"time_per_output_token_s": 0.011911442785787929
+				}
+			}
+		}
+	]
+}

@@ -1,0 +1,282 @@
+{
+	"id": "qwen3-0.6b",
+	"engine": "webllm",
+	"model": "Qwen3-0.6B-q4f16_1-MLC",
+	"nothink": true,
+	"label": "Qwen3 0.6B",
+	"cold": {
+		"loadMs": 30683.09999999404,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 881.9000000059605
+	},
+	"contextWindow": 8192,
+	"error": null,
+	"results": [
+		{
+			"id": "dopamine",
+			"question": "How can I control my dopamine levels day to day?",
+			"excerptsUsed": 5,
+			"promptChars": 19248,
+			"ttftMs": 2692,
+			"totalMs": 22640,
+			"answer": "To control your dopamine levels day to day, you can focus on activities that stimulate your brain and help you feel pleasure or reward. Try doing things like exercising, eating, or engaging in activities that bring you joy. You can also try a 30-day dopamine fast, which involves doing things that cause you to feel a rush of dopamine. This might help you feel a rush of dopamine in the future. You can also use medications like Wellbutrin to help you feel a dopamine rush. You don't have to feel a rush of dopamine if you don't want it. The key is to feel a dopamine rush of your own. You can also use other ways of feeling a dopamine rush, like doing things that cause you to feel pleasure. You can also use a 30-day dopamine fast. You can also use other ways of feeling a dopamine rush, like doing things that cause you to feel pleasure. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling a dopamine rush. You can also use other ways of feeling",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 4559,
+				"total_tokens": 5258,
+				"extra": {
+					"e2e_latency_s": 22.64,
+					"prefill_tokens_per_s": 1694.1657376439987,
+					"decode_tokens_per_s": 35.22670577437223,
+					"time_to_first_token_s": 2.691,
+					"time_per_output_token_s": 0.028387553647650752
+				}
+			}
+		},
+		{
+			"id": "startups-fail",
+			"question": "Why do most startups fail, according to the guests?",
+			"excerptsUsed": 6,
+			"promptChars": 20120,
+			"ttftMs": 1994,
+			"totalMs": 10464,
+			"answer": "According to the guests, most startups fail because they don't have the necessary skills and knowledge to create a successful business. This is often referred to as the \"crash burn cycle,\" where the entrepreneur is in the process of building their business, and they're not fully prepared or equipped to handle it. This can lead to a period of uncertainty and then eventual success.\n\nFor example, in the story of Alex Hormozi, he mentions that he felt like he was in a process of building a business, which led to a period of uncertainty, followed by a moment of success. The key is to be prepared, and this is the cycle of the entrepreneur's life.\n\nIn the context of the transcript, the idea is that the entrepreneur needs to be mentally prepared for the process of building and then the success of the business. This is called the \"crash burn cycle,\" which is the main reason most startups fail. The cycle is about being ready and then successful. The process of success is about being in the process of building the business. The key is to be mentally prepared for the process of building and then the success of the business. This is the main reason why most startups fail. \n\nThe answer can be summarized as: most startups fail because they don't have the necessary skills and knowledge to create a successful business, leading to a period of uncertainty and then eventual success. This is called the \"crash burn cycle.\"",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 292,
+				"prompt_tokens": 4939,
+				"total_tokens": 5231,
+				"extra": {
+					"e2e_latency_s": 10.464,
+					"prefill_tokens_per_s": 2476.6823789136115,
+					"decode_tokens_per_s": 34.58936969126635,
+					"time_to_first_token_s": 1.994199999988079,
+					"time_per_output_token_s": 0.028910616438682753
+				}
+			}
+		},
+		{
+			"id": "10k-hours",
+			"question": "Is the 10,000 hours rule actually true?",
+			"excerptsUsed": 6,
+			"promptChars": 23127,
+			"ttftMs": 2496,
+			"totalMs": 24487,
+			"answer": "The 10,000 hours rule is a concept that’s been discussed in the context of learning and skill development. It's often used to emphasize the importance of practice and deliberate effort rather than innate talent. However, the exact nature of the rule's effectiveness is still a subject of debate. \n\nFrom the transcript, it's mentioned that the rule is sometimes called the \"Deliberate Practice Framework\" and is about how much practice is needed for mastery. However, the rule itself isn't about the practice itself, but rather about the amount of practice, which is a key factor in achieving true mastery.\n\nIt's also noted that the rule can be interpreted as being about how much practice you have, not necessarily the amount of practice itself. The idea is that you need to have this practice, not that you can do it. \n\nSo, the 10,000 hours rule is a statement about the amount of practice you need, not the practice itself. The exact nature of the rule's effectiveness is still a subject of discussion. \n\nIt's not entirely clear whether the 10,000 hours rule is actually true, as it's a concept that is being debated about its validity and its implications for achieving mastery. \n\nIn summary, the 10,000 hours rule is about the amount of practice, not the practice itself. The exact nature of the rule's validity is still a subject of discussion. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true. \n\nThe 10,000 hours rule is not entirely clear whether it's actually true.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 655,
+				"prompt_tokens": 5681,
+				"total_tokens": 6336,
+				"extra": {
+					"e2e_latency_s": 24.488,
+					"prefill_tokens_per_s": 2276.2240564039043,
+					"decode_tokens_per_s": 29.937109217862773,
+					"time_to_first_token_s": 2.495800000011921,
+					"time_per_output_token_s": 0.03340335877865333
+				}
+			}
+		},
+		{
+			"id": "charisma",
+			"question": "How do I become more charismatic and instantly likeable?",
+			"excerptsUsed": 6,
+			"promptChars": 24183,
+			"ttftMs": 2578,
+			"totalMs": 17400,
+			"answer": "To become more charismatic and instantly likeable, you can follow these steps:  \n- Practice being warm and competent in your interactions.  \n- Use 5 science-based habits to build confidence and connection.  \n- Be vulnerable and authentic in your communication.  \n- Practice showing enthusiasm and intentionality in your conversations.  \n\nThese habits help you resonate with others and build your own confidence and likability.  \n\n[1] \"To become more charismatic, focus on being warm and competent in your interactions. This helps you build your own confidence and connect with others.\"  \n[2] \"Practice being vulnerable and authentic in your communication, as it helps build your confidence and connection.\"  \n\nTo become more likeable, focus on showing enthusiasm and intentionality in your conversations.  \n\n[1] \"To become more likeable, focus on being warm and competent in your interactions.\"  \n[2] \"Practice showing enthusiasm and intentionality in your conversations.\"  \n\nYou can use these 5 science-based habits: 1. Be vulnerable and authentic, 2. Practice showing enthusiasm and intentionality, 3. Be the leader, 4. Practice showing trust, 5. Practice showing competence.  \n\n[1] \"To become more likeable, focus on being vulnerable and authentic.\"  \n[2] \"Practice showing enthusiasm and intentionality in your conversations.\"  \n\nYou can use these 5 science-based habits: 1. Be vulnerable and authentic, 2. Practice showing enthusiasm and intentionality, 3. Be the leader, 4. Practice showing trust, 5. Practice showing competence.  \n\n[1] \"To become more likeable, focus on being vulnerable and authentic.\"  \n[2] \"Practice showing enthusiasm and intentionality in your conversations.\"  \n\nYou can use these 5 science-based habits: 1. Be vulnerable and authentic, 2. Practice showing enthusiasm and intentionality, 3. Be the leader, 4. Practice showing trust, 5. Practice showing competence.  \n\n[1] \"To become more likeable, focus on being vulnerable and authentic.\"  \n[2] \"Practice showing enthusiasm and intentionality in your conversations.\"",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 441,
+				"prompt_tokens": 5801,
+				"total_tokens": 6242,
+				"extra": {
+					"e2e_latency_s": 17.399,
+					"prefill_tokens_per_s": 2250.106667706222,
+					"decode_tokens_per_s": 29.87238193294246,
+					"time_to_first_token_s": 2.5780999999940395,
+					"time_per_output_token_s": 0.03347573696147835
+				}
+			}
+		},
+		{
+			"id": "house-vs-stocks",
+			"question": "Should I buy a house or invest in stocks?",
+			"excerptsUsed": 5,
+			"promptChars": 22864,
+			"ttftMs": 2365,
+			"totalMs": 25679,
+			"answer": "[1] You could say that buying a house is a bit of a struggle, especially if you're in a position where you might be in the market. But if you're investing, that's a different story. [2] It's also important to consider whether the interest rate you're paying will be worth it in the long run. [5] Invest in stocks, as that's the most effective way to build wealth, and you can't really afford to buy a house now. \n\nIn short, whether to buy a house or invest in stocks depends on your goals and how you want to allocate your money. If you're looking for a quick return, investing in stocks is the way to go. If you're more focused on building wealth over time, then buying a house might be a good option, but only if you're prepared to handle the costs and potential risks involved. \n\nIn general, investing in stocks is the most effective and reliable way to grow wealth, while buying a house might be a different approach if you're looking for immediate wealth. However, it's important to consider the costs and potential risks involved. \n\nSo, the best approach is to determine what's most important for you in the short and long term. If you want to build wealth, investing in stocks is a great choice, while buying a house might be a different strategy. Always consider the pros and cons of each option. \n\nIn short, the answer is to determine which is more suitable for you — it's up to you to decide based on your goals and situation. \n\nIn summary, investing in stocks is generally the most effective way to grow wealth, while buying a house might depend on your financial situation and goals. \n\nSo, the answer is: Invest in stocks, as that's the most effective way to build wealth, and buy a house might be a different approach. \n\nInvest in stocks for building wealth, and buy a house for the sake of the situation. \n\nSo, the answer is: Invest in stocks, as that's the most effective way to build wealth, and buy a house might be a different approach. \n\nInvest in stocks. Buy a house. \n\n[5] Invest in stocks, as that's the most effective way to build wealth. Buy a house might be a different approach. \n\nInvest in stocks. Buy a house. \n\n[5] Invest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in stocks. Buy a house. \n\nInvest in",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5549,
+				"total_tokens": 6248,
+				"extra": {
+					"e2e_latency_s": 25.678,
+					"prefill_tokens_per_s": 2346.5978770914026,
+					"decode_tokens_per_s": 30.18499645884479,
+					"time_to_first_token_s": 2.3647000000178813,
+					"time_per_output_token_s": 0.0331290414879933
+				}
+			}
+		},
+		{
+			"id": "short-form",
+			"question": "What are the dangers of short-form video for my brain?",
+			"excerptsUsed": 3,
+			"promptChars": 21694,
+			"ttftMs": 1954,
+			"totalMs": 23552,
+			"answer": "To answer the question: The dangers of short-form video for your brain include:\n\n- Shorting your attention and reducing your ability to focus on tasks, which can lead to reduced thinking ability and weaker impulse control.\n- It can disrupt sleep and lead to increased risk of heart disease later in life.\n- It can trigger the fight-or-flight response and make your brain rewire in ways that might affect your behavior and decision-making, especially with the prefrontal cortex.\n- It can also lead to a form of addiction, where the brain is overwhelmed and may become less capable of self-regulation.\n\nIn short, short-form video can be a danger to your brain if it leads to these issues. \n\nTo understand more, you can use the following quote: \"We all have a primal urge to scroll. When you feel a sense of stress, your amygdala is activated.\" \n\nSo, if you're scrolling and it's leading to this, it's a danger. \n\nRemember, the precautionary principle is to make your companies responsible for what they do to kids. We can make them responsible for the same thing, like short videos. We already did that with short videos, and we're about to do it with AI chatbots. We can do it in late 2025. \n\nWe can also say that the business pressure is about shorter and shorter content, and it's a collective action trap. The psychological term is \"accommodation.\" It's about adjusting to a situation, not being in it. \n\nSo, the danger is in the short form, and the business pressure is about the same thing. It's a collective action trap. \n\nIf I don't do it, and everyone else does, then I lose. And the business pressure is about it. \n\nAnd the question is, how much do I need to play the quick hit game in order to get people there? I leave it to you to do the moral calculation. Maybe it balances out, but I think that's where you are. \n\nAnd the difference between psychological assimilation and accommodation is called the \"difference between psychological assimilation and accommodation.\" It's about learning and adaptation. \n\nAnd the psychological term, \"difference between psychological assimilation and accommodation,\" is called the \"difference between psychological assimilation and accommodation.\" \n\nAnd it goes back to Jean Piaget, the great developmental psychologist. We have certain mental structures. We have a model in our head of how things work. Then we learn something new. Then, \"Oh, that's a kid learns. Oh, that's an odd work. Okay, I put that into... You just assimilate.\"\n\nSo, you have to have a lot of assimilation, of course, but you need to go through accommodation over and over again. That's why you want to go to college. That's why you want to read novels. That's what a great movie does. It takes time. One of the great things about this modern technology is that we can do things like have this three-hour conversation. I can't believe it. People are going to listen to it. So, this long-form content, this is all about accommodation. Anybody who walks out, who leaves this conversation after three hours and isn't thinking about something differently, we failed. So you are very much in the accommodation business. That's great. And then the question, both a moral and a strategic question is, how much do",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5056,
+				"total_tokens": 5755,
+				"extra": {
+					"e2e_latency_s": 23.552,
+					"prefill_tokens_per_s": 2587.512794268168,
+					"decode_tokens_per_s": 32.5591794530624,
+					"time_to_first_token_s": 1.954,
+					"time_per_output_token_s": 0.030713304720765732
+				}
+			}
+		},
+		{
+			"id": "aging",
+			"question": "Can aging actually be reversed, and how?",
+			"excerptsUsed": 6,
+			"promptChars": 22517,
+			"ttftMs": 2339,
+			"totalMs": 13809,
+			"answer": "To address the question: Can aging actually be reversed, and how?  \n\n[1] David Sinclair: Can Aging Be Reversed?  \nYes, we can reverse aging, and it's a process that we've been doing in our labs. We've seen in tests that cells can become younger, and that reversing aging is a possibility.  \n\n[2] David Sinclair: Can Aging Be Reversed?  \nIn tests, cells appeared 75% younger, and that’s a proof of potential age reversal.  \n\n[3] David Sinclair: Can Aging Be Reversed?  \nYes, we can reverse aging, and it’s a process that involves using technology to reverse aging.  \n\n[4] David Sinclair: Can Aging Be Reversed?  \nYes, we can reverse aging, and it's a process that involves using technology.  \n\n[5] David Sinclair: Can Aging Be Reversed?  \nYes, we can reverse aging, and it's a process that involves using technology.  \n\n[6] David Sinclair: Can Aging Be Reversed?  \nYes, we can reverse aging, and it's a process that involves using technology.  \n\n**Answer**: Yes, aging can be reversed. We have in our labs that cells can become younger, and this is a process that we have been exploring. It’s a possibility, and it’s a process that we're working on. If it works, it could lead to a future where we live a much longer life.  \n\n**Short Memorable Phrases**:  \n\"Can aging be reversed? Yes, we can reverse it. It's a process we're working on.\" — [2]  \n\"Cells appeared 75% younger in tests. That’s proof of potential age reversal.\" — [1]",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 360,
+				"prompt_tokens": 5499,
+				"total_tokens": 5859,
+				"extra": {
+					"e2e_latency_s": 13.809,
+					"prefill_tokens_per_s": 2351.105220396762,
+					"decode_tokens_per_s": 31.485870714564367,
+					"time_to_first_token_s": 2.3389000000059603,
+					"time_per_output_token_s": 0.03176027777873812
+				}
+			}
+		},
+		{
+			"id": "keto",
+			"question": "What do the guests say about keto and carnivore diets?",
+			"excerptsUsed": 6,
+			"promptChars": 16832,
+			"ttftMs": 1331,
+			"totalMs": 6559,
+			"answer": "Answer:  \n[1] Guests mention that they reduce stress and make sure their patients are on the right track, and that they should not be eating bad food.  \n[2] Guests emphasize the importance of not eating bad food and the potential danger of not doing so.  \n[3] Guests discuss the impact of the keto and carnivore diets on mental health and the success of the studies involving these diets.  \n\nGuests say that the keto and carnivore diets can lead to mental health improvements, and that these diets have the potential to help with mental health issues.  \n\n[5] Guests mention that the ketogenic diet can help with mental health issues, as it allows for more control over one's metabolic state and emotional responses.  \n\n[6] Guests also mention that the ketogenic diet can help with mental health issues, as it provides the individual with the space to think and cope effectively.  \n\nThe guests say that the keto and carnivore diets can lead to mental health improvements, and that these diets have the potential to help with mental health issues.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 215,
+				"prompt_tokens": 3930,
+				"total_tokens": 4145,
+				"extra": {
+					"e2e_latency_s": 6.558,
+					"prefill_tokens_per_s": 2953.5547873272244,
+					"decode_tokens_per_s": 41.30167511962274,
+					"time_to_first_token_s": 1.3305999999940394,
+					"time_per_output_token_s": 0.024212093022950836
+				}
+			}
+		},
+		{
+			"id": "cheating",
+			"question": "Why do men and women cheat in relationships?",
+			"excerptsUsed": 6,
+			"promptChars": 19556,
+			"ttftMs": 1715,
+			"totalMs": 20915,
+			"answer": "[1] If there was infidelity in your family, does that make sex absent or make it more... In the end, you have 90% of people telling you sex was central in my life growing up, and 10% saying, No, it wasn't. It flips the whole thing. From there, you begin to have conversations about sex. You don't plunge into the sexlessness. You ask people, How do you avoid each other? What's the dance here? One of you goes to sleep two hours before the other. You make sure you pretend you're asleep. How have you developed this whole avoidance thing? Or one person wants, one person doesn't want, one person counts the days. I've just read an episode recently, and literally, he would have wanted sex every day, and she is just besides herself. Then it becomes clear that the part of it is because he needs help to go to sleep, but he doesn't need her necessarily. He can also take care of himself if he wants, and that he would have a much more willing partner if she wasn't just an alleviation for him.\n\n[2] The biological consequences of a woman cheating were she would get pregnant back in. That's why. She'd lose her children. Come on, we are talking till the '70s. Women didn't have access to their own bank accounts. On what was she going to survive? She would be working with the Scarlet letter. Everything you want. The consequences on women, women have not necessarily had different aspirations or fantasies than men, but the women have done what makes them safe more than what makes them feel good.\n\n[3] The biological consequences of a woman cheating were she would get pregnant back in. That's why. She'd lose her children. Come on, we are talking till the '70s. Women didn't have access to their own bank accounts. On what was she going to survive? She would be working with the Scarlet letter. Everything you want. The consequences on women, women have not necessarily had different aspirations or fantasies than men, but the women have done what makes them safe more than what makes them feel good.\n\n[4] The biological consequences of a woman cheating were she would get pregnant back in. That's why. She'd lose her children. Come on, we are talking till the '70s. Women didn't have access to their own bank accounts. On what was she going to survive? She would be working with the Scarlet letter. Everything you want. The consequences on women, women have not necessarily had different aspirations or fantasies than men, but the women have done what makes them safe more than what makes them feel good.\n\nQuestion: Why do men and women cheat in relationships?\n\n[5] The biological consequences of a woman cheating were she would get pregnant back in. That's why. She'd lose her children. Come on, we are talking till the '70s. Women didn't have access to their own bank accounts. On what was she going to survive? She would be working with the Scarlet letter. Everything you want. The consequences on women, women have not necessarily had different aspirations or fantasies than men, but the women have done what makes them safe more than what makes them feel good.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 676,
+				"prompt_tokens": 4560,
+				"total_tokens": 5236,
+				"extra": {
+					"e2e_latency_s": 20.915,
+					"prefill_tokens_per_s": 2659.8226784788535,
+					"decode_tokens_per_s": 35.4236426618604,
+					"time_to_first_token_s": 1.7144000000059605,
+					"time_per_output_token_s": 0.02822973372743145
+				}
+			}
+		},
+		{
+			"id": "ai-jobs",
+			"question": "Which jobs will disappear because of AI, and how do I prepare?",
+			"excerptsUsed": 6,
+			"promptChars": 21568,
+			"ttftMs": 2208,
+			"totalMs": 24038,
+			"answer": "[1] Daniel Priestley: \"I believe that every person should build a little bit of a personal brand. Not like to become an influencer, but position yourself with a group of people who know who you are and know what you do and could enroll you in their opportunity.\"  \nSo I really believe that everyone should build a little bit of a personal brand. Not like to become an influencer, but position yourself with a group of people who know who you are and know what you do and could enroll you in their opportunity. Second one, if there's one skill set that everyone should be learning at the moment, it's how do entrepreneurs think, how do entrepreneurs behave, what are the skills that make an entrepreneur successful. And entrepreneurs just simply follow 6 steps, and we do it over and over and over again, and we'll go through the 6 steps.  \nAre there any particular opportunities that you think that anybody listening right now could pursue to make money?  \n\n[2] OpenAI Whistleblower: \"And do you think that'll be sudden?\"  \nI think it'll be sudden because of the intelligence explosion dynamics or recursive self-improvement dynamics. So you could imagine a different world where it's gradual. And this is maybe how it is in a lot of science fiction is, you know, the AIs gradually get better at a bunch of things and, you know, steering drones, then they automate like, you know, driving cars or something like that.  \nWhat I'm hearing there is that because the AI will be able to improve itself and train itself, it'll be getting better at everything at once, and then it'll be released at kind of once. Is that accurate?  \nYes, but it's not, it's not even exactly that, because even if it's mostly just getting better at the things that it's doing, like research, that'll have some spillover effects to other skills as well. And then when it turns to focusing on those other skills, it'll be able to do them very fast.  \n\n[3] Daniel Priestley: \"And for someone that doesn't know what a data center is.\"  \nSo it's like a big Walmart or an airport filled with computers and those computers are running AI, right? So every time you go on AI, you're actually, you know, your request is going off to a big computer in a Walmart-sized building somewhere. But those GPUs, those computer stacks, those big ginormous computers, they are like iPhones. They last about 3 years before they get superseded. This year ahead, we're going to spend $650 billion. $650 billion sounds like so abstract. It's the equivalent of giving every single person in America an iPhone Pro with AirPods. But here's the crazy thing. 95% of people who have been given the free iPhone are not willing to pay for it. And the tiny number of people who are willing to pay for it, they're only willing to pay $20 a month. Most of them. So this $20 a month, everyone's getting a free iPhone effectively, and then a small 5% of people are willing to pay $20 a month. The numbers are just astronomically out of balance.  \n\n[4] Transcript of Death of the Middle Class: Billionaire vs Entrepreneur DEBATE -",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 699,
+				"prompt_tokens": 5136,
+				"total_tokens": 5835,
+				"extra": {
+					"e2e_latency_s": 24.022,
+					"prefill_tokens_per_s": 2325.9816131578573,
+					"decode_tokens_per_s": 32.21539610120072,
+					"time_to_first_token_s": 2.2080999999940394,
+					"time_per_output_token_s": 0.031041058655886848
+				}
+			}
+		},
+		{
+			"id": "creatine",
+			"question": "Does creatine help with anything besides muscle?",
+			"excerptsUsed": 6,
+			"promptChars": 15872,
+			"ttftMs": 1358,
+			"totalMs": 5426,
+			"answer": "To answer the question: \"Does creatine help with anything besides muscle?\"\n\n[1] Transcript of Creatine Expert: \"It can accelerate the rehabilitation program,\" and \"It can gain, gain increase in muscle mass.\"\n\n[2] Transcript of The Ageing Doctor: \"It can also help with muscle mass and recovery.\"\n\n[3] Transcript of The Exercise & Nutrition Scientist: \"It can also help with brain health and mood.\"\n\n[4] Transcript of Top Insulin Expert: \"It can also help with brain health and mood.\"\n\n[5] Transcript of The Exercise & Nutrition Scientist: \"Yes, it can also help with brain health.\"\n\nSo, in short: Yes, creatine can help with brain health, mood, and other related health aspects. It also improves muscle mass and strength, as mentioned in the studies.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 171,
+				"prompt_tokens": 3878,
+				"total_tokens": 4049,
+				"extra": {
+					"e2e_latency_s": 5.423,
+					"prefill_tokens_per_s": 2856.7219152854514,
+					"decode_tokens_per_s": 42.147293702379734,
+					"time_to_first_token_s": 1.3575,
+					"time_per_output_token_s": 0.02372631578818399
+				}
+			}
+		},
+		{
+			"id": "control-offtopic",
+			"question": "What did the guests say about quantum computing hardware roadmaps?",
+			"excerptsUsed": 6,
+			"promptChars": 16768,
+			"ttftMs": 1397,
+			"totalMs": 5333,
+			"answer": "The guests said about quantum computing hardware roadmaps that the concept of using quantum computers to process information in many directions at the same time, which is the basis of the revolution in computing. This is how quantum computers can be powerful, as they can compute at the atomic level, which allows for faster computation, and it's about the potential for quantum computers to be used in ways that could affect digital systems, like cybersecurity. However, the exact details of how this concept translates into practical applications of quantum computing hardware are not fully explained in the provided excerpts. Therefore, the answer is: it's about computing at the atomic level, and the potential for quantum computers to be powerful in such applications. The exact details about how this concept translates into practical applications are not fully covered.",
+			"thinkChars": 2,
+			"usage": {
+				"completion_tokens": 158,
+				"prompt_tokens": 4012,
+				"total_tokens": 4170,
+				"extra": {
+					"e2e_latency_s": 5.33,
+					"prefill_tokens_per_s": 2871.6627299528427,
+					"decode_tokens_per_s": 40.316407245826866,
+					"time_to_first_token_s": 1.3970999999940394,
+					"time_per_output_token_s": 0.02480379746892029
+				}
+			}
+		}
+	]
+}

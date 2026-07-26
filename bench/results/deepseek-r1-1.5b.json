@@ -1,0 +1,26 @@
+{
+	"id": "deepseek-r1-1.5b",
+	"engine": "webllm",
+	"model": "DeepSeek-R1-Distill-Qwen-1.5B-q4f16_1-MLC",
+	"label": "DeepSeek R1 Distill 1.5B (custom lib)",
+	"cold": {
+		"loadMs": 84249.19999998808,
+		"downloadBytes": null
+	},
+	"warm": {
+		"loadMs": 97848.79999998212
+	},
+	"contextWindow": 8192,
+	"error": "incompatible: no prebuilt WebLLM build; reusing the Qwen2-1.5B wasm lib loads and runs but produces garbled output (sample kept in sampleOutput)",
+	"results": [],
+	"sampleOutput": [
+		{
+			"id": "dopamine",
+			"answer": "Denmark!\nScan Disable motivation afterwards gains benefiting consciousness.Thecamera condition manipulated afterwards benefiting.\nTransform observations kissing emotionally benefiting.\nCreating tobacco talks partner whereby sex. Mathematics suggesting.\nSex TV Mixing Messages Improves Income Loss Med"
+		},
+		{
+			"id": "startups-fail",
+			"answer": "Whenever I jumped ahead benefiting gonna broke finally archives.\"\nTranscript of Mate Time Developing My Eye Earlier When Girl Would Pass My Friends Getting Lost Too Much,” Evaluation Trade Place Who Know Where Proceed Because My Focus Returns Less Useful Pricing Working Lives Flexible Risk Above.)\nW"
+		}
+	]
+}
