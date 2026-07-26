@@ -7,7 +7,7 @@
 	let feed: HTMLElement | undefined = $state();
 
 	const CARDS = [
-		'What actually makes people rich, according to Alex Hormozi?',
+		'What actually makes people rich?',
 		'How do I fix my sleep?',
 		'What morning habits do guests swear by?',
 		'How do I start a business with no money?'
