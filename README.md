@@ -60,6 +60,7 @@ node scripts/rag/smoke.mjs "what did the sleep expert say about caffeine?"
 ```bash
 npm run build && npx vite preview --port 5220
 node scripts/shots/shoot.mjs        # design shots (mock mode)
+node scripts/shots/readme.mjs       # the two shots above — real model, real answer
 node scripts/shots/e2e-real.mjs     # full run: download Gemma 4, ask, verify offline reload
 ```
 
