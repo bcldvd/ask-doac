@@ -199,7 +199,13 @@ class App {
 				// Excerpt count is budgeted per model (see models.ts): nearby hits in
 				// one episode merge into longer excerpts (see clusterHits), and the
 				// whole set must fit the model's context window with room to answer.
-				const sources = await retrieve(this.index!, await embedQuery(searchQuery), this.model.excerpts);
+				const sources = await retrieve(
+					this.index!,
+					await embedQuery(searchQuery),
+					this.model.excerpts,
+					fetch,
+					this.model.retrieval
+				);
 				reply.sources = sources;
 				reply.status = readingStatus(sources);
 				// If the question survived translation (near-)unchanged it was

@@ -9,6 +9,8 @@ export interface GemmaModel {
 	maxNumTokens: number;
 	/** how many transcript excerpts to feed the prompt — sized to the window */
 	excerpts: number;
+	/** overrides for excerpt clustering — small windows need shorter excerpts */
+	retrieval?: { gap?: number; maxSpan?: number; margin?: number };
 	/** appended to each user turn — e.g. Qwen 3's soft switch for thinking mode */
 	promptSuffix?: string;
 	/**
@@ -47,8 +49,13 @@ export const GEMMA_MODELS: GemmaModel[] = [
 		blurb: 'Phone-sized — fits mobile browsers (0.5 GB)',
 		url: 'https://huggingface.co/litert-community/Qwen3-0.6B/resolve/main/qwen3_0_6b_mixed_int4.litertlm',
 		sizeBytes: 497_664_000,
-		maxNumTokens: 4096,
+		// The build's own metadata caps max_num_tokens at 2048 — and KV cache
+		// for this architecture costs ~224 KB/token in fp16, so every token of
+		// window is real memory on a phone (~460 MB at 2048, ~920 MB at 4096).
+		maxNumTokens: 2048,
 		excerpts: 2,
+		// keep both excerpts short so prompt + answer fit the 2048 window
+		retrieval: { gap: 2, maxSpan: 8, margin: 1 },
 		// Qwen 3 "thinks" before answering by default, which burns the small
 		// window on preamble — this soft switch turns it off per turn.
 		promptSuffix: ' /no_think',
