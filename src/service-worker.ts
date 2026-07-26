@@ -3,16 +3,16 @@
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
 
-// Two jobs:
-//  1. cache the app shell (SvelteKit build + static files) — cache-first
-//  2. cache Gemma model downloads (*.litertlm) in MODEL_CACHE so the 2GB
-//     file is fetched from the network exactly once per model
+// One job: cache the app shell (SvelteKit build + static files), cache-first.
+// Model files live in OPFS, handled entirely by the page (see modelStore) —
+// they used to be cached here, so LEGACY_MODEL_CACHE is kept alive until the
+// page migrates its contents to OPFS and deletes it.
 import { build, files, version } from '$service-worker';
 
 const sw = self as unknown as ServiceWorkerGlobalScope;
 
 const APP_CACHE = `ask-doac-app-${version}`;
-const MODEL_CACHE = 'ask-doac-models-v1';
+const LEGACY_MODEL_CACHE = 'ask-doac-models-v1';
 // App shell: the SPA fallback page (served at '/') plus build + static assets.
 const SHELL = '/';
 const APP_ASSETS = [SHELL, ...build, ...files];
@@ -35,39 +35,16 @@ sw.addEventListener('activate', (event) => {
 	event.waitUntil(
 		caches.keys().then(async (keys) => {
 			for (const key of keys) {
-				if (key !== APP_CACHE && key !== MODEL_CACHE) await caches.delete(key);
+				if (key !== APP_CACHE && key !== LEGACY_MODEL_CACHE) await caches.delete(key);
 			}
 			await sw.clients.claim();
 		})
 	);
 });
 
-function isModelRequest(url: URL): boolean {
-	return url.pathname.endsWith('.litertlm');
-}
-
 sw.addEventListener('fetch', (event) => {
 	const url = new URL(event.request.url);
 	if (event.request.method !== 'GET') return;
-
-	if (isModelRequest(url)) {
-		event.respondWith(
-			(async () => {
-				const cache = await caches.open(MODEL_CACHE);
-				const hit = await cache.match(event.request.url);
-				if (hit) return hit;
-				const res = await fetch(event.request);
-				if (res.ok) {
-					// Clone into cache while streaming the original to the page.
-					const [toCache, toPage] = [res.clone(), res];
-					event.waitUntil(cache.put(event.request.url, toCache));
-					return toPage;
-				}
-				return res;
-			})()
-		);
-		return;
-	}
 
 	// SPA navigations get the cached shell so the app opens offline.
 	if (event.request.mode === 'navigate' && url.origin === sw.location.origin) {
@@ -88,15 +65,4 @@ sw.addEventListener('fetch', (event) => {
 			})()
 		);
 	}
-});
-
-// Let the page ask which models are already cached (for the preferences UI).
-sw.addEventListener('message', async (event) => {
-	if (event.data?.type !== 'model-cache-status') return;
-	const cache = await caches.open(MODEL_CACHE);
-	const keys = await cache.keys();
-	event.source?.postMessage({
-		type: 'model-cache-status',
-		cached: keys.map((k) => k.url)
-	});
 });

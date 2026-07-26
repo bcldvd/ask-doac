@@ -28,8 +28,9 @@ question ──▶ MiniLM embedding (transformers.js, in-browser)
   WebGPU. Preferences let you switch to `E4B` (3.0 GB) — the Gemma-family models with published
   web-compatible builds.
 - **First load** — the model downloads once with a live progress bar ("Warming up the studio"),
-  then a **service worker** stores the bytes in the Cache API. Later visits boot straight from
-  disk — the app even works fully offline.
+  streamed chunk-by-chunk into **OPFS** (origin-private file system) so the 2 GB never sits in
+  page memory — iOS kills tabs that try. Later visits boot straight from disk (a service worker
+  caches the app shell) — the app even works fully offline.
 - **RAG** — transcripts for all 228 episodes were scraped from
   [happyscribe](https://podcasts.happyscribe.com/the-diary-of-a-ceo-with-steven-bartlett),
   chunked (~1000 chars, 1-paragraph overlap) and embedded with `all-MiniLM-L6-v2` at build time,

@@ -5,6 +5,7 @@ import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/e
 import { isEnglish, toEnglishQuery } from '$lib/llm/translate';
 import { buildGroundedPrompt } from '$lib/llm/prompt';
 import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
+import { cachedModelUrls } from '$lib/llm/modelStore';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
@@ -51,7 +52,7 @@ class App {
 	messages = $state<Message[]>([]);
 	generating = $state(false);
 	prefsOpen = $state(false);
-	/** model urls already in the service worker cache */
+	/** model urls with a complete copy in OPFS */
 	cachedModels = $state<string[]>([]);
 	/** time-remaining estimate while downloading (null while warming up or stalled) */
 	eta = $state<EtaEstimate | null>(null);
@@ -78,7 +79,7 @@ class App {
 						'elsewhere use a current Safari, Chrome or Edge.'
 				);
 			}
-			// Ask for durable storage so the 2 GB model cache isn't evicted.
+			// Ask for durable storage so the 2 GB model in OPFS isn't evicted.
 			navigator.storage?.persist?.().catch(() => {});
 			if ('serviceWorker' in navigator) {
 				// If a NEW worker replaces the one controlling us, the page is
@@ -98,40 +99,14 @@ class App {
 						{ once: true }
 					);
 				}
+				// Fire-and-forget: the worker only caches the app shell now. Model
+				// files go straight from the page into OPFS (see modelStore).
 				navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
-				let cacheStatusKnown!: () => void;
-				const cacheStatus = new Promise<void>((r) => (cacheStatusKnown = r));
-				navigator.serviceWorker.addEventListener('message', (e) => {
-					if (e.data?.type === 'model-cache-status') {
-						this.cachedModels = e.data.cached;
-						cacheStatusKnown();
-					}
-				});
-				// The model download must go through the worker to be cached, and on
-				// the very first visit the page starts uncontrolled — wait (briefly)
-				// for the worker to claim us before fetching 2 GB.
-				await navigator.serviceWorker.ready;
-				if (!navigator.serviceWorker.controller) {
-					await new Promise<void>((resolve) => {
-						const timer = setTimeout(resolve, 3000);
-						navigator.serviceWorker.addEventListener(
-							'controllerchange',
-							() => {
-								clearTimeout(timer);
-								resolve();
-							},
-							{ once: true }
-						);
-					});
-				}
-				if (navigator.serviceWorker.controller) {
-					navigator.serviceWorker.controller.postMessage({ type: 'model-cache-status' });
-					// The first-visit explainer card keys off `modelCached`, so wait
-					// (briefly) for the worker's answer — otherwise a repeat visit
-					// flashes "first visit: downloading…" while reading from disk.
-					await Promise.race([cacheStatus, new Promise((r) => setTimeout(r, 500))]);
-				}
 			}
+			// The first-visit explainer card keys off `modelCached` — resolve it
+			// from OPFS before entering the downloading stage so a repeat visit
+			// never flashes "first visit: downloading…".
+			this.cachedModels = await cachedModelUrls();
 			const indexPromise = loadIndex();
 			this.stage = 'downloading';
 			const etaTracker = new DownloadEta();
@@ -158,6 +133,8 @@ class App {
 			});
 			this.engine = engine;
 			this.index = await indexPromise;
+			// A download may have just completed — refresh the "cached" tags.
+			this.cachedModels = await cachedModelUrls();
 			this.stage = 'ready';
 			// Booted fine — future deploys may auto-reload this tab again.
 			sessionStorage.removeItem('ask-doac:sw-reloaded');

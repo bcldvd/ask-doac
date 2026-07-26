@@ -1,5 +1,6 @@
 import { Engine, type Conversation } from '@litert-lm/core';
 import type { GemmaModel } from './models';
+import { getModelFile } from './modelStore';
 import { SYSTEM_PROMPT } from './prompt';
 
 export interface LoadProgress {
@@ -13,43 +14,22 @@ export interface LoadProgress {
 export type ProgressCallback = (p: LoadProgress) => void;
 
 /**
- * Fetch the model (through the service worker's Cache API) while reporting
- * byte progress, then boot the LiteRT-LM engine on WebGPU.
+ * Stream the model into OPFS (see modelStore) while reporting byte progress,
+ * then boot the LiteRT-LM engine on WebGPU from the disk-backed File. Never
+ * buffer the model in page memory: iOS kills and reloads any tab that holds
+ * the 2 GB in RAM before the download even finishes.
  */
 export async function loadEngine(model: GemmaModel, onProgress: ProgressCallback) {
-	const res = await fetch(model.url);
-	if (!res.ok || !res.body) throw new Error(`model download failed: HTTP ${res.status}`);
-	const totalBytes = Number(res.headers.get('Content-Length')) || model.sizeBytes;
-
-	let receivedBytes = 0;
-	const counted = res.body.pipeThrough(
-		new TransformStream<Uint8Array, Uint8Array>({
-			transform(chunk, controller) {
-				receivedBytes += chunk.byteLength;
-				onProgress({
-					fraction: Math.min(receivedBytes / totalBytes, 1),
-					receivedBytes,
-					totalBytes,
-					stage: 'downloading'
-				});
-				controller.enqueue(chunk);
-			}
-		})
-	);
-
-	// Buffer into a Blob first. Feeding the ReadableStream straight to
-	// Engine.create looks nicer on paper but hangs init for 10+ minutes —
-	// LiteRT wants random access to the model bytes.
-	const blob = await new Response(counted).blob();
-	onProgress({ fraction: -1, receivedBytes, totalBytes, stage: 'initializing' });
+	const file = await getModelFile(model, onProgress);
+	onProgress({ fraction: -1, receivedBytes: file.size, totalBytes: file.size, stage: 'initializing' });
 
 	const engine = await Engine.create({
-		model: blob,
+		model: file,
 		// Gemma 4 E2B/E4B are trained for a 32k context — use all of it so long
 		// excerpt sets and long answers never hit the window.
 		mainExecutorSettings: { maxNumTokens: 32768 }
 	});
-	onProgress({ fraction: 1, receivedBytes, totalBytes, stage: 'ready' });
+	onProgress({ fraction: 1, receivedBytes: file.size, totalBytes: file.size, stage: 'ready' });
 	return engine;
 }
 
