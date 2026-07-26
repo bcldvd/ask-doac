@@ -1,0 +1,73 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource/instrument-sans/400.css';
+@import '@fontsource/instrument-sans/500.css';
+@import '@fontsource/instrument-sans/600.css';
+@import '@fontsource/spline-sans-mono/400.css';
+@import '@fontsource/spline-sans-mono/500.css';
+
+:root {
+	/* studio at night */
+	--ink: #100d0c;
+	--panel: #1b1614;
+	--panel-2: #241d1a;
+	--line: #322924;
+	--paper: #ede5da;
+	--muted: #93857a;
+	--faint: #5f554c;
+	--ember: #e5442a;
+	--ember-soft: rgba(229, 68, 42, 0.14);
+
+	--font-display: 'Fraunces Variable', georgia, serif;
+	--font-body: 'Instrument Sans', system-ui, sans-serif;
+	--font-mono: 'Spline Sans Mono', ui-monospace, monospace;
+
+	--w-column: 44rem;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+html {
+	color-scheme: dark;
+}
+
+body {
+	background:
+		radial-gradient(90rem 60rem at 50% -20rem, #241a15 0%, transparent 60%),
+		var(--ink);
+	color: var(--paper);
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.6;
+	min-height: 100dvh;
+	-webkit-font-smoothing: antialiased;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+:focus-visible {
+	outline: 2px solid var(--ember);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+::selection {
+	background: var(--ember-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
