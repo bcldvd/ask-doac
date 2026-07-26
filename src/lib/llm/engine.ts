@@ -1,6 +1,13 @@
-import { Backend, Engine, type Conversation } from '@litert-lm/core';
+import {
+	Backend,
+	Engine,
+	getOrLoadGlobalLiteRtLm,
+	setupDefaultWebGpuDevice,
+	type Conversation
+} from '@litert-lm/core';
 import type { GemmaModel } from './models';
 import { getModelFile } from './modelStore';
+import { crumb } from '$lib/state/bootlog';
 import { SYSTEM_PROMPT } from './prompt';
 
 export interface LoadProgress {
@@ -20,12 +27,18 @@ export type ProgressCallback = (p: LoadProgress) => void;
  * the 2 GB in RAM before the download even finishes.
  */
 export async function loadEngine(model: GemmaModel, onProgress: ProgressCallback) {
+	crumb('model-file');
 	const file = await getModelFile(model, onProgress);
 	onProgress({ fraction: -1, receivedBytes: file.size, totalBytes: file.size, stage: 'initializing' });
 
-	// Label failures: this stage covers the WASM fetch (jsdelivr CDN), WebGPU
-	// device setup and streaming the weights onto the GPU — the boot error
-	// card shows this message.
+	// Engine.create would do all three of these steps internally — running
+	// them one by one leaves a breadcrumb per step, so when iOS kills the
+	// page mid-boot the next load can say exactly which step died.
+	crumb('wasm-runtime');
+	await getOrLoadGlobalLiteRtLm();
+	crumb('webgpu-device');
+	await setupDefaultWebGpuDevice();
+	crumb('engine-weights');
 	const engine = await Engine.create({
 		model: file,
 		backend: model.backend === 'GPU' ? Backend.GPU : Backend.GPU_ARTISAN,

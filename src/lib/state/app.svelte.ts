@@ -10,6 +10,7 @@ import { cachedModelUrls } from '$lib/llm/modelStore';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
+import { startBootLog, crumb, type CrashReport } from './bootlog';
 import { DownloadEta, type EtaEstimate } from './eta';
 import type { Engine } from '@litert-lm/core';
 
@@ -57,6 +58,8 @@ class App {
 	cachedModels = $state<string[]>([]);
 	/** time-remaining estimate while downloading (null while warming up or stalled) */
 	eta = $state<EtaEstimate | null>(null);
+	/** where the previous boot got killed by the OS, if it was (see bootlog) */
+	lastCrash = $state<CrashReport | null>(null);
 	/** true when the current model will load from disk, not the network */
 	modelCached = $derived(this.cachedModels.includes(this.model.url));
 
@@ -70,6 +73,8 @@ class App {
 		this.booted = true;
 		this.mock = new URLSearchParams(location.search).has('mock');
 		if (this.mock) return this.bootMock();
+		this.lastCrash = startBootLog();
+		crumb('boot');
 		try {
 			// The engine runs on WebGPU, full stop — fail fast with a clear
 			// message rather than pulling 2 GB and dying in Engine.create.
@@ -136,6 +141,7 @@ class App {
 			this.index = await indexPromise;
 			// A download may have just completed — refresh the "cached" tags.
 			this.cachedModels = await cachedModelUrls();
+			crumb('ready');
 			this.stage = 'ready';
 			// Booted fine — future deploys may auto-reload this tab again.
 			sessionStorage.removeItem('ask-doac:sw-reloaded');
@@ -143,6 +149,7 @@ class App {
 			// Keep the full stack reachable via a remote Web Inspector — the UI
 			// only shows the message.
 			console.error('boot failed:', e);
+			crumb(`error: ${e instanceof Error ? e.message : e}`);
 			this.stage = 'error';
 			this.error = e instanceof Error ? e.message : String(e);
 		}

@@ -2,6 +2,7 @@
 	import { onMount, tick } from 'svelte';
 	import { replaceState } from '$app/navigation';
 	import { app } from '$lib/state/app.svelte';
+	import { stageLabel } from '$lib/state/bootlog';
 	import { renderAnswer } from '$lib/llm/render';
 	import { questionFromSearch, searchWithQuestion, sharePayload } from '$lib/share';
 	import SourceItem from '$lib/components/SourceItem.svelte';
@@ -99,6 +100,15 @@
 				Ask a question and get an answer built only from what Steven Bartlett and his guests
 				actually said — cited to the minute. Nothing you type leaves this page.
 			</p>
+
+			{#if app.lastCrash}
+				<aside class="crash-note" role="status">
+					The last attempt was cut short by the system while
+					<strong>{stageLabel(app.lastCrash.stage)}</strong>
+					(~{Math.max(1, Math.round(app.lastCrash.afterMs / 1000))}s in) — on phones that
+					usually means it ran out of memory at that step. Retrying now.
+				</aside>
+			{/if}
 
 			{#if downloadingFresh}
 				<DownloadCard />
@@ -261,6 +271,25 @@
 		font-size: 1.05rem;
 		font-weight: 300;
 		text-wrap: balance;
+	}
+
+	.crash-note {
+		text-align: left;
+		background: var(--black);
+		border: 1px solid color-mix(in srgb, var(--red) 55%, var(--line));
+		border-radius: 20px;
+		padding: 0.9rem 1.3rem;
+		margin: 0 auto 1.2rem;
+		max-width: 34rem;
+		color: var(--muted);
+		font-size: 0.85rem;
+		font-weight: 300;
+		line-height: 1.5;
+	}
+
+	.crash-note strong {
+		color: var(--red);
+		font-weight: 500;
 	}
 
 	.error-card {
