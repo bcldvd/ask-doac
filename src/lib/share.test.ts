@@ -64,14 +64,14 @@ describe('plainAnswer', () => {
 describe('sharePayload', () => {
 	const origin = 'https://ask-doac.example';
 
-	it('links back to the site with the question preloaded', () => {
+	it('has no separate url field — share targets would drop the text for it', () => {
 		const p = sharePayload('how do I fix my sleep?', 'Go to bed earlier [1].', origin);
-		expect(p.url).toBe('https://ask-doac.example/?q=how+do+I+fix+my+sleep%3F');
+		expect(p).not.toHaveProperty('url');
 	});
 
-	it('never carries the current page params (like mock) into the link', () => {
+	it('ends the text with the bare site URL so every share advertises', () => {
 		const p = sharePayload('hello', 'Answer.', origin);
-		expect(p.url).not.toContain('mock');
+		expect(p.text.trimEnd()).toMatch(/Ask your own: https:\/\/ask-doac\.example\/$/);
 	});
 
 	it('leads with the question and a citation-free answer', () => {
@@ -85,7 +85,6 @@ describe('sharePayload', () => {
 	it('promotes the site in the closing line', () => {
 		const p = sharePayload('hello', 'Answer.', origin);
 		expect(p.text).toMatch(/Diary of a CEO/);
-		expect(p.text.trimEnd()).toMatch(/Ask your own:$/);
 	});
 
 	it('has a title for share targets that use one', () => {

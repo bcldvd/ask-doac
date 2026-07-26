@@ -49,7 +49,7 @@
 				// user dismissed the share sheet
 			}
 		} else {
-			await navigator.clipboard.writeText(`${payload.text}\n${payload.url}`);
+			await navigator.clipboard.writeText(payload.text);
 			copiedIndex = i;
 			setTimeout(() => {
 				if (copiedIndex === i) copiedIndex = -1;

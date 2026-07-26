@@ -30,18 +30,18 @@ export function plainAnswer(text: string): string {
 /**
  * Web Share API payload for an answered question. The answer travels in
  * full — every generation is unique, so the shared text is the only copy
- * the recipient will ever see. The url reloads the same question on our
- * site (dev params like ?mock never leak into it), and the text closes on
- * an invitation so every share promotes the app.
+ * the recipient will ever see. The site URL lives INSIDE the text: when a
+ * separate `url` field is present, many share targets (WhatsApp, iMessage,
+ * Mail) keep only the URL and drop the text entirely. Closing on the bare
+ * origin means every share advertises the app.
  */
 export function sharePayload(
 	question: string,
 	answer: string,
 	origin: string
-): { title: string; text: string; url: string } {
+): { title: string; text: string } {
 	return {
 		title: `Ask the Diary — ${question}`,
-		text: `Q: ${question}\n\n${plainAnswer(answer)}\n\nAnswered from real Diary of a CEO episodes, entirely in the browser. Ask your own:`,
-		url: `${origin}/${searchWithQuestion('', question)}`
+		text: `Q: ${question}\n\n${plainAnswer(answer)}\n\nAnswered from real Diary of a CEO episodes, entirely in the browser. Ask your own: ${origin}/`
 	};
 }
