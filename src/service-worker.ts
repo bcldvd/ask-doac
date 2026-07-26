@@ -13,15 +13,20 @@ const sw = self as unknown as ServiceWorkerGlobalScope;
 
 const APP_CACHE = `ask-doac-app-${version}`;
 const MODEL_CACHE = 'ask-doac-models-v1';
-// App shell: the SPA fallback page plus all build + static assets.
-const SHELL = '/index.html';
+// App shell: the SPA fallback page (served at '/') plus build + static assets.
+const SHELL = '/';
 const APP_ASSETS = [SHELL, ...build, ...files];
 
 sw.addEventListener('install', (event) => {
 	event.waitUntil(
 		caches
 			.open(APP_CACHE)
-			.then((cache) => cache.addAll(APP_ASSETS))
+			.then(async (cache) => {
+				// Shell + build must cache; static data files are best-effort so a
+				// single bad URL can't leave the worker permanently redundant.
+				await cache.addAll([SHELL, ...build]);
+				await Promise.allSettled(files.map((f) => cache.add(f)));
+			})
 			.then(() => sw.skipWaiting())
 	);
 });
