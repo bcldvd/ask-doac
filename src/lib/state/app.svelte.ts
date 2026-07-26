@@ -2,10 +2,12 @@
 // grounded question/answer turns. `?mock=1` swaps in a canned engine so the
 // UI can be developed and screenshotted without a 2 GB download.
 import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/engine';
+import { toEnglishQuery } from '$lib/llm/translate';
 import { buildGroundedPrompt } from '$lib/llm/prompt';
 import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
+import { searchingStatus, readingStatus } from './status';
 import type { Engine } from '@litert-lm/core';
 
 export type Stage = 'boot' | 'downloading' | 'initializing' | 'ready' | 'error';
@@ -15,6 +17,8 @@ export interface Message {
 	text: string;
 	sources?: RetrievedChunk[];
 	pending?: boolean;
+	/** plain-language line describing what the app is doing right now */
+	status?: string;
 }
 
 const MOCK_ANSWER = `Steven's guests keep coming back to the same idea: consistency compounds. Alex Hormozi puts it bluntly — the biggest lever is volume, most people "simply do not do enough" [1]. James Clear frames the same thing through identity: every action is "a vote for the type of person you wish to become" [2].`;
@@ -144,18 +148,26 @@ class App {
 		this.messages.push(reply);
 		try {
 			if (this.mock) {
-				await new Promise((r) => setTimeout(r, 600));
+				reply.status = searchingStatus(228);
+				await new Promise((r) => setTimeout(r, 700));
 				reply.sources = MOCK_SOURCES;
+				reply.status = readingStatus(MOCK_SOURCES);
+				await new Promise((r) => setTimeout(r, 1200));
 				for (const word of MOCK_ANSWER.split(/(?<= )/)) {
 					reply.text += word;
 					await new Promise((r) => setTimeout(r, 24));
 				}
 			} else {
+				reply.status = searchingStatus(this.index!.episodes.length);
+				// The embedder is English-only, so non-English questions retrieve
+				// noise unless translated first (Gemma passes English through).
+				const searchQuery = await toEnglishQuery(this.engine!, q);
 				// Up to 8 excerpts; nearby hits in one episode merge into longer,
 				// deeper excerpts (see clusterHits). Worst case ~14k prompt tokens —
 				// inside the 32k window without diluting a 2B model's attention.
-				const sources = await retrieve(this.index!, await embedQuery(q), 8);
+				const sources = await retrieve(this.index!, await embedQuery(searchQuery), 8);
 				reply.sources = sources;
+				reply.status = readingStatus(sources);
 				const turn = buildGroundedPrompt(q, sources);
 				// Fresh conversation per question: every turn carries ~2k tokens of
 				// excerpts, so a shared history would blow the context window fast.
@@ -168,6 +180,7 @@ class App {
 			reply.text ||= `Something went wrong while answering: ${e instanceof Error ? e.message : e}`;
 		} finally {
 			reply.pending = false;
+			reply.status = undefined;
 			this.generating = false;
 		}
 	}

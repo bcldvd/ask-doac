@@ -40,6 +40,21 @@ describe('buildGroundedPrompt', () => {
 		expect(SYSTEM_PROMPT).not.toMatch(/don't cover the question, say so/i);
 	});
 
+	test('system prompt tells the model to answer in the language of the question', () => {
+		// The excerpts are always English, so without this a small model
+		// answers French questions in English.
+		expect(SYSTEM_PROMPT).toMatch(/same language as the question/i);
+	});
+
+	test('user turn repeats the language instruction near the question', () => {
+		// Small models weight the tail of the prompt most; the system prompt
+		// alone is too far away once excerpts pile up.
+		const prompt = buildGroundedPrompt('Comment devenir riche ?', [source()]);
+		const reminderAt = prompt.search(/same language as the question/i);
+		expect(reminderAt).toBeGreaterThan(-1);
+		expect(reminderAt).toBeGreaterThan(prompt.indexOf('volume'));
+	});
+
 	test('states when there are no relevant excerpts', () => {
 		const prompt = buildGroundedPrompt('Anything?', []);
 		expect(prompt).toMatch(/no relevant excerpts/i);

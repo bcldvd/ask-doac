@@ -91,17 +91,22 @@
 				{:else}
 					<article class="turn-assistant">
 						{#if msg.pending && !msg.text}
-							<p class="thinking"><span></span><span></span><span></span></p>
+							<p class="thinking">
+								{#if msg.status}<span class="status-text">{msg.status}</span>{/if}
+								<span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+							</p>
 						{:else}
 							<div class="answer">
 								<!-- eslint-disable-next-line svelte/no-at-html-tags — renderAnswer escapes -->
 								{@html renderAnswer(msg.text)}
 							</div>
 						{/if}
-						{#if msg.sources?.length && !msg.pending}
+						{#if msg.sources?.length}
 							<footer class="sources">
 								{#each msg.sources as s, n (s.episodeTitle + s.timestamp)}
-									<SourceItem source={s} {n} />
+									<div class="source-reveal" style:animation-delay="{n * 70}ms">
+										<SourceItem source={s} {n} />
+									</div>
 								{/each}
 							</footer>
 						{/if}
@@ -299,7 +304,21 @@
 		content: attr(data-n);
 	}
 
-	.thinking span {
+	.thinking {
+		display: flex;
+		align-items: baseline;
+		gap: 0.7rem;
+	}
+
+	.status-text {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: var(--track-caps);
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.dots span {
 		display: inline-block;
 		width: 6px;
 		height: 6px;
@@ -309,11 +328,11 @@
 		animation: pulse 1.2s ease-in-out infinite;
 	}
 
-	.thinking span:nth-child(2) {
+	.dots span:nth-child(2) {
 		animation-delay: 0.2s;
 	}
 
-	.thinking span:nth-child(3) {
+	.dots span:nth-child(3) {
 		animation-delay: 0.4s;
 	}
 
@@ -334,6 +353,23 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
+	}
+
+	.source-reveal {
+		animation: reveal 320ms ease backwards;
+	}
+
+	@keyframes reveal {
+		from {
+			opacity: 0;
+			transform: translateY(6px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.source-reveal {
+			animation: none;
+		}
 	}
 
 	/* ---- composer ---- */
