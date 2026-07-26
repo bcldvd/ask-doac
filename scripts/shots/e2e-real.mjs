@@ -35,6 +35,7 @@ page.on('pageerror', (e) => console.log('PAGE_EXCEPTION:', String(e).slice(0, 30
 async function waitForOnAir(label, timeoutMs) {
 	const deadline = Date.now() + timeoutMs;
 	let last = '';
+	let darkSince = 0;
 	while (Date.now() < deadline) {
 		const status = (await page.textContent('.status').catch(() => null))?.trim() ?? '(no .status)';
 		if (status !== last) {
@@ -42,7 +43,15 @@ async function waitForOnAir(label, timeoutMs) {
 			last = status;
 		}
 		if (status.startsWith('ON AIR')) return;
-		if (status.includes('went dark')) break;
+		if (status.includes('went dark')) {
+			// A revisit's first load runs the PREVIOUS build (old SW shell); if
+			// that build errors, the update-reload fixes it seconds later — only
+			// treat darkness as fatal once it has persisted.
+			darkSince ||= Date.now();
+			if (Date.now() - darkSince > 25000) break;
+		} else {
+			darkSince = 0;
+		}
 		await page.waitForTimeout(5000);
 	}
 	await page.screenshot({ path: `${out}/error-${label}.png` });

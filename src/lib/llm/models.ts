@@ -19,6 +19,10 @@ export interface GemmaModel {
 	 * viable for small files. Default is the streaming 'GPU_ARTISAN'.
 	 */
 	backend?: 'GPU' | 'GPU_ARTISAN';
+	/** which runtime carries the model — defaults to LiteRT-LM */
+	engine?: 'litert' | 'webllm';
+	/** WebLLM prebuilt model_id (engine === 'webllm' only) */
+	webllmId?: string;
 }
 
 export const GEMMA_MODELS: GemmaModel[] = [
@@ -41,9 +45,29 @@ export const GEMMA_MODELS: GemmaModel[] = [
 		excerpts: 8
 	},
 	{
-		// The only small model with an ungated .litertlm build — the compact
-		// Gemma repos (1B, 270m) sit behind a license wall (HTTP 401 for
-		// anonymous downloads), which a static site can't get users through.
+		// The phone model, on WebLLM. LiteRT can't run anything phone-sized
+		// here (its non-streaming loader buffers the whole file in WASM
+		// memory, the small Gemma .litertlm builds are license-gated, Qwen3's
+		// KV cache is enormous). Gemma 3 1B's MLC build was tried and is
+		// unusable for long grounded prompts: its 512-token sliding-window
+		// attention either generates noise (window disabled) or overflows the
+		// paged KV cache (window kept). Llama 3.2 1B has plain full attention
+		// and a real 4096 window — ~880 MB all-in, inside a phone's budget.
+		id: 'llama-3.2-1b-webllm',
+		label: 'Llama 3.2 1B',
+		blurb: 'Phone-sized — the pick for mobile (0.7 GB)',
+		url: 'https://huggingface.co/mlc-ai/Llama-3.2-1B-Instruct-q4f16_1-MLC',
+		sizeBytes: 640_000_000,
+		maxNumTokens: 4096,
+		excerpts: 2,
+		retrieval: { gap: 2, maxSpan: 8, margin: 1 },
+		engine: 'webllm',
+		webllmId: 'Llama-3.2-1B-Instruct-q4f16_1-MLC'
+	},
+	{
+		// Kept for experiments — the only small model with an ungated
+		// .litertlm build, but LiteRT's in-memory loader makes it die on
+		// phones and its KV cache is heavy for its size.
 		id: 'qwen3-0.6B',
 		label: 'Qwen 3 0.6B',
 		blurb: 'Phone-sized — fits mobile browsers (0.5 GB)',
@@ -70,14 +94,14 @@ export const DEFAULT_MODEL_ID = 'gemma-4-E2B';
  * RAM the device has, so the 2 GB models can never finish loading there —
  * mobile defaults to the small build.
  */
-export const MOBILE_MODEL_ID = 'qwen3-0.6B';
+export const MOBILE_MODEL_ID = 'llama-3.2-1b-webllm';
 const PREF_KEY = 'ask-doac:model';
 
 export function getModel(id: string | null | undefined): GemmaModel {
 	return GEMMA_MODELS.find((m) => m.id === id) ?? GEMMA_MODELS[0];
 }
 
-function isMobileDevice(): boolean {
+export function isMobileDevice(): boolean {
 	if (typeof navigator === 'undefined') return false;
 	// iPadOS reports itself as Macintosh — multitouch is the tell
 	return (

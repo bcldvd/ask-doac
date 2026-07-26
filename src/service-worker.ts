@@ -35,7 +35,10 @@ sw.addEventListener('activate', (event) => {
 	event.waitUntil(
 		caches.keys().then(async (keys) => {
 			for (const key of keys) {
-				if (key !== APP_CACHE && key !== LEGACY_MODEL_CACHE) await caches.delete(key);
+				// webllm/* caches hold the mobile model's shards — never touch them
+				if (key !== APP_CACHE && key !== LEGACY_MODEL_CACHE && !key.startsWith('webllm/')) {
+					await caches.delete(key);
+				}
 			}
 			await sw.clients.claim();
 		})

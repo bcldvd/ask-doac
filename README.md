@@ -25,10 +25,9 @@ question ──▶ MiniLM embedding (transformers.js, in-browser)
 
 - **Model** — real [Gemma 4](https://deepmind.google/models/gemma/gemma-4/) `E2B-it` (2.0 GB web
   build) via Google's [LiteRT-LM JS API](https://ai.google.dev/edge/litert-lm/js), running on
-  WebGPU. Preferences let you switch to `E4B` (3.0 GB). Phones default to Qwen 3 0.6B (0.5 GB):
-  mobile browsers kill any page around 1.5–3 GB of memory, so the 2 GB models can never finish
-  loading there — and the small Gemma builds are license-gated on Hugging Face, which a static
-  site can't get users through.
+  WebGPU. Preferences let you switch to `E4B` (3.0 GB). Phones default to Llama 3.2 1B (0.7 GB)
+  on [WebLLM](https://webllm.mlc.ai): mobile browsers kill any page around 1.5–3 GB of memory,
+  so the 2 GB models can never finish loading there.
 - **First load** — the model downloads once with a live progress bar ("Warming up the studio"),
   streamed chunk-by-chunk into **OPFS** (origin-private file system) so the 2 GB never sits in
   page memory — iOS kills tabs that try. Later visits boot straight from disk (a service worker

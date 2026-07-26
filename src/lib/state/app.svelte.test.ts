@@ -5,8 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 // control the order in which they become available.
 const engineMocks = vi.hoisted(() => ({
 	loadEngine: vi.fn(),
-	createGroundedConversation: vi.fn(),
-	streamAnswer: vi.fn()
+	isModelCached: vi.fn(async () => false)
 }));
 const ragMocks = vi.hoisted(() => ({
 	loadIndex: vi.fn(),

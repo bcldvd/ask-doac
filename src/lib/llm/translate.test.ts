@@ -1,20 +1,18 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { cleanTranslation, isEnglish, toEnglishQuery, TRANSLATE_SYSTEM } from './translate';
-import type { Engine } from '@litert-lm/core';
-
-vi.mock('./engine', () => ({
-	streamAnswer: async function* () {
-		// how a thinking model (Qwen 3) answers the translate prompt
-		yield '<think>';
-		yield '</think>';
-		yield '\nHow do I fix my sleep?';
-	}
-}));
+import type { Studio } from './engine';
 
 describe('toEnglishQuery', () => {
 	test('the think block never becomes the search query', async () => {
-		const engine = { createConversation: async () => ({}) } as unknown as Engine;
-		expect(await toEnglishQuery(engine, 'Comment mieux dormir ?')).toBe('How do I fix my sleep?');
+		// how a thinking model (Qwen 3) answers the translate prompt
+		const studio: Studio = {
+			respond: async function* () {
+				yield '<think>';
+				yield '</think>';
+				yield '\nHow do I fix my sleep?';
+			}
+		};
+		expect(await toEnglishQuery(studio, 'Comment mieux dormir ?')).toBe('How do I fix my sleep?');
 	});
 });
 

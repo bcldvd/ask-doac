@@ -40,8 +40,9 @@ export function crumb(stage: string, t = Date.now()): void {
 
 /**
  * Rotate the trail at boot start and report whether the previous attempt was
- * killed mid-stage. Reaching 'ready' or a caught 'error…' is a clean ending;
- * anything else means the OS killed the page during that stage.
+ * killed mid-stage. Reaching 'ready', a caught 'error…' or a deliberate
+ * 'reload' (deploy pickup) is a clean ending; anything else means the OS
+ * killed the page during that stage.
  */
 export function startBootLog(): CrashReport | null {
 	try {
@@ -49,7 +50,14 @@ export function startBootLog(): CrashReport | null {
 		localStorage.setItem(PREVIOUS, JSON.stringify(prev));
 		localStorage.setItem(CURRENT, '[]');
 		const last = prev.at(-1);
-		if (!last || last.stage === 'ready' || last.stage.startsWith('error')) return null;
+		if (
+			!last ||
+			last.stage === 'ready' ||
+			last.stage === 'reload' ||
+			last.stage.startsWith('error')
+		) {
+			return null;
+		}
 		console.warn('previous boot was killed during:', last.stage, prev);
 		return { stage: last.stage, afterMs: last.t - prev[0].t };
 	} catch {
@@ -62,7 +70,8 @@ const STAGE_LABELS: Record<string, string> = {
 	'model-file': 'downloading the model file',
 	'wasm-runtime': 'fetching the AI runtime',
 	'webgpu-device': 'starting WebGPU',
-	'engine-weights': 'loading the model onto the GPU'
+	'engine-weights': 'loading the model onto the GPU',
+	'webllm-engine': 'loading the model (download + GPU)'
 };
 
 export function stageLabel(stage: string): string {

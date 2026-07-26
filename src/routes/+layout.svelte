@@ -18,6 +18,8 @@
 		switch (app.stage) {
 			case 'boot':
 				return 'Opening the studio…';
+			case 'held':
+				return 'Standing by';
 			case 'downloading':
 				return `Warming up the studio — ${gb(app.receivedBytes)} / ${gb(app.totalBytes)} GB${eta}`;
 			case 'initializing':

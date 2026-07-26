@@ -1,20 +1,24 @@
 // Central app state (Svelte 5 runes). Boots the model + RAG index and runs
 // grounded question/answer turns. `?mock=1` swaps in a canned engine so the
 // UI can be developed and screenshotted without a 2 GB download.
-import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/engine';
+import { loadEngine, isModelCached, type Studio } from '$lib/llm/engine';
 import { stripThinking } from '$lib/llm/thinking';
 import { isEnglish, toEnglishQuery } from '$lib/llm/translate';
-import { buildGroundedPrompt } from '$lib/llm/prompt';
-import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/models';
+import { buildGroundedPrompt, SYSTEM_PROMPT } from '$lib/llm/prompt';
+import {
+	getPreferredModel,
+	setPreferredModel,
+	isMobileDevice,
+	type GemmaModel
+} from '$lib/llm/models';
 import { cachedModelUrls } from '$lib/llm/modelStore';
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
 import { startBootLog, crumb, type CrashReport } from './bootlog';
 import { DownloadEta, type EtaEstimate } from './eta';
-import type { Engine } from '@litert-lm/core';
 
-export type Stage = 'boot' | 'downloading' | 'initializing' | 'ready' | 'error';
+export type Stage = 'boot' | 'held' | 'downloading' | 'initializing' | 'ready' | 'error';
 
 export interface Message {
 	role: 'user' | 'assistant';
@@ -65,7 +69,7 @@ class App {
 
 	mock = false;
 	private index: RagIndex | null = null;
-	private engine: Engine | null = null;
+	private engine: Studio | null = null;
 	private booted = false;
 
 	async boot() {
@@ -73,7 +77,57 @@ class App {
 		this.booted = true;
 		this.mock = new URLSearchParams(location.search).has('mock');
 		if (this.mock) return this.bootMock();
+		// Register before the circuit breaker: a page held after a crash must
+		// still pick up new deploys — the fix for its crash may be in one.
+		this.registerServiceWorker();
 		this.lastCrash = startBootLog();
+		if (this.lastCrash && isMobileDevice()) {
+			// Circuit breaker, phones only: the OS killed the previous attempt,
+			// and retrying automatically produces an endless reload loop that
+			// ends on the browser's "a problem repeatedly occurred" page. Hold
+			// until a tap. Desktop never crash-loops like this, and a spurious
+			// hold there (e.g. an interrupted boot that lost its final
+			// breadcrumb) would stall the page for no reason.
+			this.stage = 'held';
+			return;
+		}
+		await this.start();
+	}
+
+	private registerServiceWorker() {
+		if (!('serviceWorker' in navigator)) return;
+		// If a NEW worker replaces the one controlling us, the page is
+		// running stale cached code — reload to pick up the deploy. Two
+		// guards make a reload loop impossible: only reload when a previous
+		// controller existed, and at most once per tab until we reach ready
+		// (a killed browser can leave a waiting worker that re-activates on
+		// the next launch, which would otherwise chain reloads mid-download).
+		const RELOADED_FLAG = 'ask-doac:sw-reloaded';
+		if (navigator.serviceWorker.controller && !sessionStorage.getItem(RELOADED_FLAG)) {
+			navigator.serviceWorker.addEventListener(
+				'controllerchange',
+				() => {
+					sessionStorage.setItem(RELOADED_FLAG, '1');
+					// mark the trail as deliberately ended — this reload must not
+					// read as an OS kill and trip the crash circuit breaker
+					crumb('reload');
+					location.reload();
+				},
+				{ once: true }
+			);
+		}
+		// Fire-and-forget: the worker only caches the app shell. Model files
+		// go straight from the page into OPFS or WebLLM's own cache.
+		navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
+	}
+
+	/** Resume a boot held after a crash (the "try again" button). */
+	retryBoot() {
+		if (this.stage !== 'held') return;
+		this.start();
+	}
+
+	private async start() {
 		crumb('boot');
 		try {
 			// The engine runs on WebGPU, full stop — fail fast with a clear
@@ -85,34 +139,12 @@ class App {
 						'elsewhere use a current Safari, Chrome or Edge.'
 				);
 			}
-			// Ask for durable storage so the 2 GB model in OPFS isn't evicted.
+			// Ask for durable storage so the model cache isn't evicted.
 			navigator.storage?.persist?.().catch(() => {});
-			if ('serviceWorker' in navigator) {
-				// If a NEW worker replaces the one controlling us, the page is
-				// running stale cached code — reload to pick up the deploy. Two
-				// guards make a reload loop impossible: only reload when a previous
-				// controller existed, and at most once per tab until we reach ready
-				// (a killed browser can leave a waiting worker that re-activates on
-				// the next launch, which would otherwise chain reloads mid-download).
-				const RELOADED_FLAG = 'ask-doac:sw-reloaded';
-				if (navigator.serviceWorker.controller && !sessionStorage.getItem(RELOADED_FLAG)) {
-					navigator.serviceWorker.addEventListener(
-						'controllerchange',
-						() => {
-							sessionStorage.setItem(RELOADED_FLAG, '1');
-							location.reload();
-						},
-						{ once: true }
-					);
-				}
-				// Fire-and-forget: the worker only caches the app shell now. Model
-				// files go straight from the page into OPFS (see modelStore).
-				navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
-			}
 			// The first-visit explainer card keys off `modelCached` — resolve it
-			// from OPFS before entering the downloading stage so a repeat visit
-			// never flashes "first visit: downloading…".
-			this.cachedModels = await cachedModelUrls();
+			// before entering the downloading stage so a repeat visit never
+			// flashes "first visit: downloading…".
+			await this.refreshCachedModels();
 			const indexPromise = loadIndex();
 			this.stage = 'downloading';
 			const etaTracker = new DownloadEta();
@@ -140,7 +172,7 @@ class App {
 			this.engine = engine;
 			this.index = await indexPromise;
 			// A download may have just completed — refresh the "cached" tags.
-			this.cachedModels = await cachedModelUrls();
+			await this.refreshCachedModels();
 			crumb('ready');
 			this.stage = 'ready';
 			// Booted fine — future deploys may auto-reload this tab again.
@@ -153,6 +185,14 @@ class App {
 			this.stage = 'error';
 			this.error = e instanceof Error ? e.message : String(e);
 		}
+	}
+
+	private async refreshCachedModels() {
+		const urls = await cachedModelUrls().catch((): string[] => []);
+		if (this.model.engine === 'webllm' && (await isModelCached(this.model).catch(() => false))) {
+			urls.push(this.model.url);
+		}
+		this.cachedModels = urls;
 	}
 
 	private async bootMock() {
@@ -214,10 +254,9 @@ class App {
 				const turn =
 					buildGroundedPrompt(q, sources, isEnglish(q, searchQuery)) +
 					(this.model.promptSuffix ?? '');
-				// Fresh conversation per question: every turn carries ~2k tokens of
-				// excerpts, so a shared history would blow the context window fast.
-				const conversation = await createGroundedConversation(this.engine!);
-				for await (const piece of stripThinking(streamAnswer(conversation, turn))) {
+				// Fresh context per question (see Studio.respond): every turn carries
+				// its own excerpts, so history would blow the context window fast.
+				for await (const piece of stripThinking(this.engine!.respond(SYSTEM_PROMPT, turn))) {
 					reply.text += piece;
 				}
 			}

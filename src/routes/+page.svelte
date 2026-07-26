@@ -106,7 +106,10 @@
 					The last attempt was cut short by the system while
 					<strong>{stageLabel(app.lastCrash.stage)}</strong>
 					(~{Math.max(1, Math.round(app.lastCrash.afterMs / 1000))}s in) — on phones that
-					usually means it ran out of memory at that step. Retrying now.
+					usually means it ran out of memory at that step.
+					{#if app.stage === 'held'}
+						<button class="crash-retry" onclick={() => app.retryBoot()}>Try loading again</button>
+					{/if}
 				</aside>
 			{/if}
 
@@ -290,6 +293,19 @@
 	.crash-note strong {
 		color: var(--red);
 		font-weight: 500;
+	}
+
+	.crash-retry {
+		display: block;
+		margin-top: 0.7rem;
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 0.85rem;
+		letter-spacing: 0.03em;
+		background: var(--volt);
+		color: var(--black);
+		padding: 0.45rem 0.9rem 0.4rem;
+		border-radius: 999px;
 	}
 
 	.error-card {

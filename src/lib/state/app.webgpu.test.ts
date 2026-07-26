@@ -6,8 +6,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 const engineMocks = vi.hoisted(() => ({
 	loadEngine: vi.fn(),
-	createGroundedConversation: vi.fn(),
-	streamAnswer: vi.fn()
+	isModelCached: vi.fn(async () => false)
 }));
 
 vi.mock('$lib/llm/engine', () => engineMocks);

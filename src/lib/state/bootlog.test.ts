@@ -34,6 +34,13 @@ describe('boot breadcrumbs', () => {
 		expect(startBootLog()).toBeNull();
 	});
 
+	it('reports nothing when the page reloaded itself on purpose (deploy pickup)', () => {
+		crumb('boot', 1000);
+		crumb('engine-weights', 2000);
+		crumb('reload', 3000);
+		expect(startBootLog()).toBeNull();
+	});
+
 	it('rotation clears the trail so one crash is only reported once', () => {
 		crumb('boot', 1000);
 		crumb('webgpu-device', 2000);
