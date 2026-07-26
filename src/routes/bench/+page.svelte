@@ -7,7 +7,7 @@
 	//   mode=load → only measure engine load (used for the warm-load pass)
 	import { onMount } from 'svelte';
 	import { GEMMA_MODELS } from '$lib/llm/models';
-	import { loadEngine, createGroundedConversation, streamAnswer } from '$lib/llm/engine';
+	import { loadEngine } from '$lib/llm/engine';
 	import { buildGroundedPrompt, SYSTEM_PROMPT, type RetrievedSource } from '$lib/llm/prompt';
 
 	interface QuestionResult {
@@ -76,13 +76,12 @@
 
 		for (const item of dataset.items) {
 			setStatus(`generating:${item.id}`);
-			// fresh conversation per question — no history contamination
-			const conversation = await createGroundedConversation(engine);
 			const { prompt, excerptsUsed } = fitPrompt(item.question, item.sources, 32768 - MAX_TOKENS - 500);
 			const tq = performance.now();
 			let ttft = 0;
 			let text = '';
-			for await (const chunk of streamAnswer(conversation, prompt)) {
+			// respond() opens a fresh conversation per call — no history contamination
+			for await (const chunk of engine.respond(SYSTEM_PROMPT, prompt)) {
 				if (!ttft && chunk.trim()) ttft = performance.now() - tq;
 				text += chunk;
 			}

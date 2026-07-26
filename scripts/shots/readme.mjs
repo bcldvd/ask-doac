@@ -27,7 +27,18 @@ const page = await browser.newPage();
 // Pin the model the README advertises — the shared e2e profile may have a
 // small experiment model left pinned in localStorage.
 await page.addInitScript(
-	(id) => localStorage.setItem('ask-doac:model', id),
+	(id) => {
+		localStorage.setItem('ask-doac:model', id);
+		// Drop the boot breadcrumb trail. This profile is shared with the e2e
+		// scripts, so any run killed or interrupted earlier leaves a trail that
+		// never reached 'ready' — and the next boot then greets us with the red
+		// "last attempt was cut short" banner across the hero shot. That warning
+		// is about a previous session in a reused CI profile, not the state of
+		// the app being photographed, so the README shot starts from a clean
+		// slate. (Real first-run behaviour is what e2e-real.mjs covers.)
+		localStorage.removeItem('ask-doac:boot:current');
+		localStorage.removeItem('ask-doac:boot:previous');
+	},
 	process.env.ASK_DOAC_MODEL ?? 'gemma-4-E2B'
 );
 page.on('pageerror', (e) => console.log('PAGE_EXCEPTION:', String(e).slice(0, 300)));
