@@ -64,6 +64,10 @@ await page.click('.composer-send');
 await page.waitForSelector('.sources', { timeout: 10 * 60 * 1000 });
 const answer = await page.textContent('.answer');
 console.log('ANSWER:', answer?.slice(0, 600));
+const links = await page.$$eval('.sources a', (as) =>
+	as.map((a) => `${a.textContent?.trim()} ${a.href}`)
+);
+for (const l of links) console.log('SOURCE:', l);
 await page.screenshot({ path: `${out}/answered.png`, fullPage: true });
 await writeFile(`${out}/answer.txt`, answer ?? '');
 

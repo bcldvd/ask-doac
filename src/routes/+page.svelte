@@ -2,6 +2,7 @@
 	import { onMount, tick } from 'svelte';
 	import { app } from '$lib/state/app.svelte';
 	import { renderAnswer } from '$lib/llm/render';
+	import SourceItem from '$lib/components/SourceItem.svelte';
 
 	let draft = $state('');
 	let feed: HTMLElement | undefined = $state();
@@ -87,11 +88,7 @@
 						{#if msg.sources?.length && !msg.pending}
 							<footer class="sources">
 								{#each msg.sources as s, n (s.episodeTitle + s.timestamp)}
-									<a class="source" href={s.episodeUrl} target="_blank" rel="noreferrer">
-										<span class="source-n">[{n + 1}]</span>
-										<span class="source-title">{s.episodeTitle.replace(/^Transcript of /, '')}</span>
-										<span class="source-t">{s.timestamp}</span>
-									</a>
+									<SourceItem source={s} {n} />
 								{/each}
 							</footer>
 						{/if}
@@ -309,46 +306,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
-	}
-
-	.source {
-		display: flex;
-		align-items: baseline;
-		gap: 0.6rem;
-		text-decoration: none;
-		color: var(--muted);
-		font-size: 0.85rem;
-		padding: 0.35rem 0.5rem;
-		margin-left: -0.5rem;
-		border-radius: 8px;
-		transition:
-			background 160ms ease,
-			color 160ms ease;
-	}
-
-	.source:hover {
-		background: var(--panel);
-		color: var(--paper);
-	}
-
-	.source-n {
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		color: var(--ember);
-		flex-shrink: 0;
-	}
-
-	.source-title {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.source-t {
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		color: var(--faint);
-		flex-shrink: 0;
 	}
 
 	/* ---- composer ---- */

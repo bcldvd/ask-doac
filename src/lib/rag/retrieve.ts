@@ -1,4 +1,5 @@
 import { normalize, topK, type Scored } from './vector';
+import { youtubeUrl } from './youtube';
 import type { RetrievedSource } from '$lib/llm/prompt';
 
 export interface RagIndex {
@@ -8,25 +9,33 @@ export interface RagIndex {
 	chunks: [number, number, number][];
 	embeddings: Int8Array;
 	scales: Float32Array;
+	/** episodeId → YouTube video id (built by scripts/rag/youtube-map.mjs) */
+	youtube: Record<string, string>;
 }
 
 export async function loadIndex(fetchFn = fetch): Promise<RagIndex> {
-	const [meta, emb, sc] = await Promise.all([
+	const [meta, emb, sc, youtube] = await Promise.all([
 		fetchFn('/rag/index.json').then((r) => r.json()),
 		fetchFn('/rag/embeddings.bin').then((r) => r.arrayBuffer()),
-		fetchFn('/rag/scales.bin').then((r) => r.arrayBuffer())
+		fetchFn('/rag/scales.bin').then((r) => r.arrayBuffer()),
+		fetchFn('/rag/youtube.json')
+			.then((r) => (r.ok ? r.json() : {}))
+			.catch(() => ({}))
 	]);
 	return {
 		dims: meta.dims,
 		episodes: meta.episodes,
 		chunks: meta.chunks,
 		embeddings: new Int8Array(emb),
-		scales: new Float32Array(sc)
+		scales: new Float32Array(sc),
+		youtube
 	};
 }
 
 export interface RetrievedChunk extends RetrievedSource {
 	episodeUrl: string;
+	/** deep link to the episode's YouTube video at this excerpt's timestamp */
+	videoUrl?: string;
 	score: number;
 }
 
@@ -112,10 +121,13 @@ export async function retrieve(
 			const from = Math.max(0, paraStart - margin);
 			const to = Math.min(transcript.paragraphs.length - 1, paraEnd + margin);
 			const paras = transcript.paragraphs.slice(from, to + 1);
+			const timestamp = paras[0]?.t ?? '';
+			const videoId = index.youtube[ep.id];
 			return {
 				episodeTitle: ep.title,
 				episodeUrl: ep.url,
-				timestamp: paras[0]?.t ?? '',
+				videoUrl: videoId ? youtubeUrl(videoId, timestamp) : undefined,
+				timestamp,
 				text: paras.map((p) => p.text).join('\n'),
 				score
 			};
