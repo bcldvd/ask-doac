@@ -5,6 +5,7 @@
 	import { renderAnswer } from '$lib/llm/render';
 	import { questionFromSearch, searchWithQuestion, sharePayload } from '$lib/share';
 	import SourceItem from '$lib/components/SourceItem.svelte';
+	import DownloadCard from '$lib/components/DownloadCard.svelte';
 
 	// A shared link (?q=…) queues its question: it prefills the composer so
 	// it's visible during model warm-up, then auto-asks once ready.
@@ -75,6 +76,11 @@
 	});
 
 	const ready = $derived(app.stage === 'ready');
+	// The first-ever load pulls 2 GB — explain it. Cached loads read from disk
+	// in seconds, so the "first visit" card would be wrong (and just flash).
+	const downloadingFresh = $derived(
+		(app.stage === 'downloading' || app.stage === 'initializing') && !app.modelCached
+	);
 	const placeholder = $derived(
 		app.stage === 'error'
 			? 'Reload to try again'
@@ -93,6 +99,10 @@
 				Ask a question and get an answer built only from what Steven Bartlett and his guests
 				actually said — cited to the minute. Nothing you type leaves this page.
 			</p>
+
+			{#if downloadingFresh}
+				<DownloadCard />
+			{/if}
 
 			<div class="cards">
 				{#each CARDS as card (card)}

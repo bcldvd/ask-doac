@@ -44,3 +44,14 @@ describe('app.boot', () => {
 		expect(app.stage).toBe('ready');
 	});
 });
+
+describe('app.modelCached', () => {
+	it('is true only when the service worker reports the current model url as cached', () => {
+		expect(app.modelCached).toBe(false);
+		app.cachedModels = ['https://example.com/other-model.litertlm'];
+		expect(app.modelCached).toBe(false);
+		app.cachedModels = [app.model.url];
+		expect(app.modelCached).toBe(true);
+		app.cachedModels = [];
+	});
+});

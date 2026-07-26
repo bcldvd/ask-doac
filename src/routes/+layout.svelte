@@ -7,13 +7,19 @@
 	let { children } = $props();
 
 	const gb = (bytes: number) => (bytes / 1e9).toFixed(1);
+	// compact ETA for the header readout ("~2 min" / "~40s")
+	const eta = $derived.by(() => {
+		if (!app.eta) return '';
+		const s = app.eta.seconds;
+		return s >= 55 ? ` · ~${Math.max(1, Math.round(s / 60))} min` : ` · ~${Math.max(5, Math.round(s / 5) * 5)}s`;
+	});
 
 	const status = $derived.by(() => {
 		switch (app.stage) {
 			case 'boot':
 				return 'Opening the studio…';
 			case 'downloading':
-				return `Warming up the studio — ${gb(app.receivedBytes)} / ${gb(app.totalBytes)} GB`;
+				return `Warming up the studio — ${gb(app.receivedBytes)} / ${gb(app.totalBytes)} GB${eta}`;
 			case 'initializing':
 				return 'Setting the stage…';
 			case 'ready':

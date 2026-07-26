@@ -8,6 +8,7 @@ import { getPreferredModel, setPreferredModel, type GemmaModel } from '$lib/llm/
 import { loadIndex, retrieve, type RagIndex, type RetrievedChunk } from '$lib/rag/retrieve';
 import { embedQuery } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
+import { DownloadEta, type EtaEstimate } from './eta';
 import type { Engine } from '@litert-lm/core';
 
 export type Stage = 'boot' | 'downloading' | 'initializing' | 'ready' | 'error';
@@ -52,6 +53,10 @@ class App {
 	prefsOpen = $state(false);
 	/** model urls already in the service worker cache */
 	cachedModels = $state<string[]>([]);
+	/** time-remaining estimate while downloading (null while warming up or stalled) */
+	eta = $state<EtaEstimate | null>(null);
+	/** true when the current model will load from disk, not the network */
+	modelCached = $derived(this.cachedModels.includes(this.model.url));
 
 	mock = false;
 	private index: RagIndex | null = null;
@@ -85,8 +90,13 @@ class App {
 					);
 				}
 				navigator.serviceWorker.register('/service-worker.js', { type: 'module' });
+				let cacheStatusKnown!: () => void;
+				const cacheStatus = new Promise<void>((r) => (cacheStatusKnown = r));
 				navigator.serviceWorker.addEventListener('message', (e) => {
-					if (e.data?.type === 'model-cache-status') this.cachedModels = e.data.cached;
+					if (e.data?.type === 'model-cache-status') {
+						this.cachedModels = e.data.cached;
+						cacheStatusKnown();
+					}
 				});
 				// The model download must go through the worker to be cached, and on
 				// the very first visit the page starts uncontrolled — wait (briefly)
@@ -105,10 +115,18 @@ class App {
 						);
 					});
 				}
-				navigator.serviceWorker.controller?.postMessage({ type: 'model-cache-status' });
+				if (navigator.serviceWorker.controller) {
+					navigator.serviceWorker.controller.postMessage({ type: 'model-cache-status' });
+					// The first-visit explainer card keys off `modelCached`, so wait
+					// (briefly) for the worker's answer — otherwise a repeat visit
+					// flashes "first visit: downloading…" while reading from disk.
+					await Promise.race([cacheStatus, new Promise((r) => setTimeout(r, 500))]);
+				}
 			}
 			const indexPromise = loadIndex();
 			this.stage = 'downloading';
+			const etaTracker = new DownloadEta();
+			let etaSampledAt = 0;
 			const engine = await loadEngine(this.model, (p) => {
 				// Engine-ready isn't app-ready: the RAG index may still be loading,
 				// and `ready` is the signal auto-ask (?q=) fires on. The real flip
@@ -117,6 +135,17 @@ class App {
 				this.fraction = p.fraction;
 				this.receivedBytes = p.receivedBytes;
 				this.totalBytes = p.totalBytes;
+				if (p.stage === 'downloading') {
+					// Progress fires per network chunk — sample every ~250ms so the
+					// ETA text doesn't churn on every frame.
+					const now = performance.now();
+					if (now - etaSampledAt >= 250) {
+						etaSampledAt = now;
+						this.eta = etaTracker.sample(now, p.receivedBytes, p.totalBytes);
+					}
+				} else {
+					this.eta = null;
+				}
 			});
 			this.engine = engine;
 			this.index = await indexPromise;
@@ -132,11 +161,16 @@ class App {
 	private async bootMock() {
 		this.stage = 'downloading';
 		this.totalBytes = this.model.sizeBytes;
+		const etaTracker = new DownloadEta();
 		for (let i = 0; i <= 40; i++) {
 			await new Promise((r) => setTimeout(r, 50));
 			this.fraction = i / 40;
 			this.receivedBytes = (this.model.sizeBytes * i) / 40;
+			// Each 50ms tick plays as a second of real download, so the mock shows
+			// a believable speed and a counting-down ETA.
+			this.eta = etaTracker.sample(i * 1000, this.receivedBytes, this.totalBytes);
 		}
+		this.eta = null;
 		this.stage = 'initializing';
 		await new Promise((r) => setTimeout(r, 800));
 		this.stage = 'ready';
