@@ -8,8 +8,9 @@ and 2px progress bar.
 
 ## Constraints
 
-- Copy readable by a broad audience; the one technical fact we *do* want to land is
-  "a real AI model is downloading to your device, once, and then works offline".
+- Copy readable by a broad audience — no model names; the one technical fact we *do*
+  want to land is "a real AI model is downloading to your device, once, and then
+  works offline".
 - Follow existing patterns: state in `app.svelte.ts` (Svelte 5 runes), pure helpers
   unit-tested under node vitest, mock mode (`?mock=1`) simulating the full flow.
 - Repeat visits read the model from the service-worker cache in seconds — the
@@ -20,7 +21,7 @@ and 2px progress bar.
 **First visit (model not in SW cache), hero, between sub-text and suggestion cards:**
 
 > **⬇ FIRST VISIT — DOWNLOADING THE AI**
-> Gemma, a real AI model, is downloading to your device — 2.0 GB, once.
+> A real AI model is downloading to your device — 2.0 GB, once.
 > After this, answers are generated right here in your browser, even offline.
 >
 > ▓▓▓▓▓▓░░░░░░░ `0.9 / 2.0 GB`

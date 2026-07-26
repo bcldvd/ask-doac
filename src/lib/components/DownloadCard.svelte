@@ -34,9 +34,8 @@
 		First visit — downloading the AI
 	</p>
 	<p class="dl-body">
-		Gemma, a real AI model, is downloading to your device — {gb(app.totalBytes ||
-			app.model.sizeBytes)} GB, once. After this, answers are generated right here in your browser,
-		even offline.
+		A real AI model is downloading to your device — {gb(app.totalBytes || app.model.sizeBytes)} GB,
+		once. After this, answers are generated right here in your browser, even offline.
 	</p>
 	<div
 		class="dl-bar"
