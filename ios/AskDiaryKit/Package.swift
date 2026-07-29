@@ -11,7 +11,8 @@ let package = Package(
         .target(name: "AskDiaryKit"),
         .testTarget(
             name: "AskDiaryKitTests",
-            dependencies: ["AskDiaryKit"]
+            dependencies: ["AskDiaryKit"],
+            resources: [.copy("Fixtures")]
         )
     ]
 )
