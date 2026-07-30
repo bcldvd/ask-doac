@@ -46,6 +46,17 @@ Foundation Models specifics: 4,096-token context — excerpt budget must be trim
 `SystemLanguageModel.default.availability` drives the unsupported/model-downloading states.
 Guardrails may refuse some health-adjacent questions — surface gracefully, offer rephrase.
 
+## Onboarding (à la Slate — user-provided reference)
+
+Modeled on Slate - Private Journal's onboarding (screenshot provided 2026-07-30): pure dark
+screens, thin progress bar, a bold plain-spoken headline ("We cannot read your journal.
+Not won't, can't."), an icon-row card explaining the pipeline in one line each, muted proof
+copy, single white pill Continue. Ours: "We cannot see your questions. Not won't, can't." —
+rows for question embedding (on this phone), search (index ships inside the app), answer
+(Apple's on-device model, never phones home), optional iCloud sync of history. Proof point
+carries over verbatim-in-spirit: airplane mode changes nothing, there is nothing to
+disconnect from. Final page checks Apple Intelligence availability.
+
 ## Autonomous iteration loop
 
 - Engine: `swift test` in `ios/AskDiaryKit` (works today, CLT only).
