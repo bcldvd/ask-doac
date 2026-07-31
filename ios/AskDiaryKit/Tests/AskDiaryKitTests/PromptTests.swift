@@ -12,8 +12,10 @@ import Testing
         let p = Prompt.grounded(question: "How does caffeine work?", sources: sources)
         #expect(p.contains("[1] Sleep Expert (01:02:03)\nCaffeine blocks adenosine."))
         #expect(p.contains("[2] Money Talk (05:42)\nPay yourself first."))
-        #expect(p.hasSuffix("Question: How does caffeine work?"))
+        #expect(p.contains("Question: How does caffeine work?"))
         #expect(p.contains("Answer in English."))
+        // the per-sentence citation reminder must be the very last line
+        #expect(p.hasSuffix("like [2]."))
     }
 
     @Test func emptySourcesGetPlaceholder() {

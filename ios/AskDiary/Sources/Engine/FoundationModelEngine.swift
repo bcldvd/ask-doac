@@ -38,21 +38,18 @@ struct FoundationModelEngine: AnswerEngine {
                         throwing: EngineError.unavailable(unavailableReason ?? "Model unavailable"))
                     return
                 }
-                // fresh session per question: history lives in SwiftData, and the
-                // 4k context is better spent on excerpts than on chat memory
-                let session = LanguageModelSession(instructions: Prompt.system)
                 let prompt = Prompt.grounded(question: question, sources: sources)
                 do {
-                    let stream = session.streamResponse(to: prompt)
-                    for try await partial in stream {
-                        continuation.yield(partial.content)
-                    }
+                    try await generate(prompt: prompt, into: continuation)
                     continuation.finish()
-                } catch let error as LanguageModelSession.GenerationError {
-                    if case .guardrailViolation = error {
+                } catch let error where isGuardrail(error) {
+                    // guardrails are stochastic and the transcripts discuss
+                    // health frankly — one silent retry rescues most of them
+                    do {
+                        try await generate(prompt: prompt, into: continuation)
+                        continuation.finish()
+                    } catch {
                         continuation.finish(throwing: EngineError.guardrail)
-                    } else {
-                        continuation.finish(throwing: error)
                     }
                 } catch {
                     continuation.finish(throwing: error)
@@ -60,5 +57,33 @@ struct FoundationModelEngine: AnswerEngine {
             }
             continuation.onTermination = { _ in task.cancel() }
         }
+    }
+
+    /// One generation attempt on a fresh session (history lives in SwiftData;
+    /// the 4k context is better spent on excerpts than chat memory).
+    private func generate(
+        prompt: String, into continuation: AsyncThrowingStream<String, Error>.Continuation
+    ) async throws {
+        let session = LanguageModelSession(instructions: Prompt.system)
+        // moderate temperature (0.3 made the 3B model loop on one sentence);
+        // the token cap bounds runaway repetition
+        // plain text streaming on purpose: guided generation (with or without
+        // schema-in-prompt) consistently tripped the safety guardrails on this
+        // health-frank transcript content, while plain text sails through.
+        // citations come from the prompt rules; sources always render as cards.
+        let stream = session.streamResponse(
+            to: prompt,
+            options: GenerationOptions(temperature: 0.7, maximumResponseTokens: 400))
+        for try await partial in stream {
+            continuation.yield(partial.content)
+        }
+    }
+
+    private func isGuardrail(_ error: Error) -> Bool {
+        if let e = error as? LanguageModelSession.GenerationError {
+            if case .guardrailViolation = e { return true }
+            if case .refusal = e { return true }
+        }
+        return false
     }
 }

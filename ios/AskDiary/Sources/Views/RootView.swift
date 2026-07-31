@@ -34,20 +34,28 @@ struct StudioView: View {
         NavigationStack {
             ZStack {
                 StudioBackground()
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 24) {
-                        if let session = app.current {
-                            AnswerView(session: session)
-                        } else if history.isEmpty {
-                            EmptyStudioView(suggestion: askSuggestion)
-                        } else {
-                            HistoryList(messages: history)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 24) {
+                            if let session = app.current {
+                                AnswerView(session: session)
+                            } else if history.isEmpty {
+                                EmptyStudioView(suggestion: askSuggestion)
+                            } else {
+                                HistoryList(messages: history)
+                            }
+                            Color.clear.frame(height: 1).id("bottom")
                         }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
+                    .scrollDismissesKeyboard(.interactively)
+                    // follow the stream so new text never hides under the ask bar
+                    .onChange(of: app.current?.answerText) {
+                        guard app.isStreaming else { return }
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
                 }
-                .scrollDismissesKeyboard(.interactively)
             }
             .navigationTitle("Ask the Diary")
             .navigationBarTitleDisplayMode(.inline)

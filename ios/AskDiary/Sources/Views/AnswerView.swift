@@ -34,6 +34,15 @@ struct AnswerView: View {
                 } description: {
                     Text(session.error ?? "Something went wrong.")
                 }
+                // the excerpts are still the receipts — show them even when
+                // generation is declined
+                if !session.citations.isEmpty {
+                    Text("Closest moments from the diary")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .kerning(1.2)
+                        .foregroundStyle(Color("Brass"))
+                    SourcesRow(citations: session.citations) { openCitation = $0 }
+                }
             }
         }
         .sheet(item: $openCitation) { citation in
