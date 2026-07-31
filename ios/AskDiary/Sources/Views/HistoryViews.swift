@@ -1,0 +1,163 @@
+import SwiftData
+import SwiftUI
+
+/// Most recent answer summaries on the studio home, as web-style cards.
+/// Long-press a card for actions (the user asked for hold-to-dismiss).
+struct HistoryList: View {
+    let messages: [Message]
+    @Environment(\.modelContext) private var context
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            CapsLabel(text: "Earlier sessions")
+                .padding(.top, 12)
+            ForEach(messages.prefix(10)) { message in
+                NavigationLink {
+                    MessageDetail(message: message)
+                } label: {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(message.question)
+                            .font(DS.body(16, .medium))
+                            .foregroundStyle(.white)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                        Text(message.createdAt, style: .date)
+                            .font(DS.mono(10))
+                            .foregroundStyle(DS.faint)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 14)
+                    .background(.black, in: .rect(cornerRadius: 20))
+                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(DS.line, lineWidth: 1))
+                    .contentShape(.contextMenuPreview, .rect(cornerRadius: 20))
+                }
+                .buttonStyle(.plain)
+                .contextMenu {
+                    Button(role: .destructive) {
+                        withAnimation(.snappy) { context.delete(message) }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct HistoryScreen: View {
+    @Query(sort: \Message.createdAt, order: .reverse) private var messages: [Message]
+    @Environment(\.modelContext) private var context
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            List {
+                ForEach(messages) { message in
+                    NavigationLink {
+                        MessageDetail(message: message)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(message.question)
+                                .font(DS.body(16, .medium))
+                                .foregroundStyle(.white)
+                                .lineLimit(2)
+                            Text(message.createdAt, format: .dateTime.day().month().hour().minute())
+                                .font(DS.mono(10))
+                                .foregroundStyle(DS.faint)
+                        }
+                    }
+                    .listRowBackground(Color.black)
+                    .listRowSeparatorTint(DS.line)
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            withAnimation(.snappy) { context.delete(message) }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+                }
+                .onDelete { offsets in
+                    for i in offsets { context.delete(messages[i]) }
+                }
+            }
+            .scrollContentBackground(.hidden)
+        }
+        .navigationTitle("History")
+        .toolbarBackground(.black, for: .navigationBar)
+        .overlay {
+            if messages.isEmpty {
+                ContentUnavailableView(
+                    "No sessions yet", systemImage: "clock",
+                    description: Text("Answers you get are saved here and sync with iCloud."))
+            }
+        }
+    }
+}
+
+/// A saved Q&A rendered like a live one: mono label, Anton question,
+/// answer on the volt border. The "…" menu deletes the conversation.
+struct MessageDetail: View {
+    let message: Message
+    @State private var openCitation: StoredCitation?
+    @State private var confirmDelete = false
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        CapsLabel(text: "You asked")
+                        Text(message.question)
+                            .font(DS.display(28, relativeTo: .title))
+                            .textCase(.uppercase)
+                            .foregroundStyle(.white)
+                            .lineSpacing(2)
+                    }
+                    VStack(alignment: .leading, spacing: 16) {
+                        CitedText(text: message.answer, citations: message.citations) {
+                            openCitation = $0
+                        }
+                        if !message.citations.isEmpty {
+                            SourcesList(citations: message.citations) { openCitation = $0 }
+                        }
+                    }
+                    .padding(.leading, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .overlay(alignment: .leading) { DS.volt.frame(width: 2) }
+                }
+                .padding(20)
+            }
+        }
+        .toolbarBackground(.black, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button(role: .destructive) {
+                        confirmDelete = true
+                    } label: {
+                        Label("Delete conversation", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(DS.muted)
+                }
+                .accessibilityLabel("Conversation actions")
+            }
+        }
+        .confirmationDialog("Delete this conversation?", isPresented: $confirmDelete, titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                context.delete(message)
+                dismiss()
+            }
+        }
+        .sheet(item: $openCitation) { citation in
+            SourceDetail(citation: citation)
+                .presentationDetents([.medium, .large])
+                .presentationBackground(.black)
+        }
+    }
+}
