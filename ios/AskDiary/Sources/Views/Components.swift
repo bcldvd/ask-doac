@@ -1,47 +1,49 @@
 import SwiftUI
 
-/// The signature element: a glass capsule that reads ON AIR and breathes red
-/// while the model is generating — the studio light above the door.
-struct OnAirBadge: View {
-    let on: Bool
-    let busy: Bool
-    /// Engine can never come up on this device (no Apple Intelligence).
-    var unavailable: Bool = false
-    @State private var breathe = false
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    private var label: String {
-        unavailable ? "OFF AIR" : (on ? "ON AIR" : "WARMING UP")
-    }
-
+/// The web header's wordmark: black condensed caps in a white box.
+struct LogoBox: View {
     var body: some View {
-        HStack(spacing: 6) {
-            Circle()
-                .fill(on ? Color("SignalRed") : Color("Brass").opacity(0.4))
-                .frame(width: 7, height: 7)
-                .shadow(color: glowColor, radius: busy && breathe ? 7 : 2)
-            Text(label)
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .kerning(1.2)
-                .foregroundStyle(on ? Color("Paper") : Color("Brass"))
-        }
-        .padding(.horizontal, 4)
-        .fixedSize()  // the toolbar supplies its own glass capsule; don't let it squeeze the label
-        .onChange(of: busy) { _, isBusy in
-            guard !reduceMotion else { return }
-            withAnimation(isBusy ? .easeInOut(duration: 0.9).repeatForever(autoreverses: true) : .default) {
-                breathe = isBusy
-            }
-        }
-        .accessibilityLabel(unavailable ? "Unavailable" : (on ? (busy ? "Answering" : "Ready") : "Loading"))
-    }
-
-    private var glowColor: Color {
-        on ? Color("SignalRed").opacity(busy ? 0.9 : 0.5) : .clear
+        Text("ASK DOAC")
+            .font(DS.display(15, relativeTo: .headline))
+            .foregroundStyle(.black)
+            .padding(.horizontal, 7)
+            .padding(.top, 4)
+            .padding(.bottom, 3)
+            .background(.white)
+            .fixedSize()
+            .accessibilityLabel("Ask DOAC")
     }
 }
 
-/// Bottom ask field: a glass bar with a mic-adjacent send button.
+/// The web header's loadline: a 2 px volt sweep under the toolbar, shown only
+/// while the index/model warm up. Replaces the old ON AIR badge — once the
+/// studio is ready there is nothing to show.
+struct LoadLine: View {
+    @State private var sweep = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                DS.line
+                DS.volt
+                    .frame(width: geo.size.width * 0.4)
+                    .offset(x: sweep ? geo.size.width : -geo.size.width * 0.4)
+            }
+        }
+        .frame(height: 2)
+        .clipped()
+        .onAppear {
+            guard !reduceMotion else { return }
+            withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: false)) {
+                sweep = true
+            }
+        }
+        .accessibilityLabel("Loading")
+    }
+}
+
+/// Bottom composer: pill input on a hairline, volt disc with a black arrow.
 struct AskBar: View {
     @Binding var text: String
     var focused: FocusState<Bool>.Binding
@@ -50,27 +52,46 @@ struct AskBar: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            TextField("Ask the diary…", text: $text, axis: .vertical)
+            TextField("Ask the diary anything…", text: $text, axis: .vertical)
                 .focused(focused)
                 .lineLimit(1...4)
-                .font(.body)
+                .font(DS.body(16))
+                .foregroundStyle(.white)
+                .tint(DS.volt)
                 .submitLabel(.send)
                 .onSubmit(submit)
                 .disabled(busy)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 13)
+                .background(.black, in: .rect(cornerRadius: 26))
+                .overlay(RoundedRectangle(cornerRadius: 26).stroke(DS.line, lineWidth: 1))
+
             Button(action: submit) {
-                Image(systemName: busy ? "waveform" : "arrow.up")
-                    .fontWeight(.semibold)
-                    .symbolEffect(.variableColor.iterative, isActive: busy)
+                ZStack {
+                    Circle().fill(sendDisabled ? DS.panel : DS.volt)
+                    if busy {
+                        ProgressView().tint(DS.faint).scaleEffect(0.8)
+                    } else {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 17, weight: .bold))
+                            .foregroundStyle(sendDisabled ? DS.faint : .black)
+                    }
+                }
+                .frame(width: 46, height: 46)
             }
-            .buttonStyle(.glassProminent)
-            .tint(Color("SignalRed"))
-            .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty && !busy)
+            .disabled(sendDisabled)
             .accessibilityLabel(busy ? "Answering" : "Send question")
         }
         .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .glassEffect(.regular, in: .rect(cornerRadius: 26))
-        .padding(.horizontal, 12)
-        .padding(.bottom, 4)
+        .padding(.top, 8)
+        .padding(.bottom, 6)
+        .background(
+            LinearGradient(colors: [.black.opacity(0), .black], startPoint: .top, endPoint: .bottom)
+                .padding(.top, -24)
+                .ignoresSafeArea(edges: .bottom))
+    }
+
+    private var sendDisabled: Bool {
+        busy || text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }

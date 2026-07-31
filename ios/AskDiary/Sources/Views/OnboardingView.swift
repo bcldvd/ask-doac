@@ -22,19 +22,37 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ProgressBar(progress: Double(page + 1) / 3)
-                .padding(.top, 24)
-                .padding(.bottom, 40)
-
-            Group {
-                switch page {
-                case 0: whatItIs
-                case 1: privacy
-                default: ready
+            HStack(spacing: 12) {
+                if page > 0 {
+                    Button {
+                        withAnimation(.snappy) { page -= 1 }
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(.white.opacity(0.7))
+                    }
+                    .accessibilityLabel("Back")
+                    .transition(.opacity)
                 }
+                ProgressBar(progress: Double(page + 1) / 3)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .opacity))
+            .padding(.top, 24)
+            .padding(.bottom, 40)
+
+            // scrolls when large text sizes outgrow the screen — never crop copy
+            ScrollView {
+                Group {
+                    switch page {
+                    case 0: whatItIs
+                    case 1: privacy
+                    default: ready
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .opacity))
+            }
+            .scrollBounceBehavior(.basedOnSize)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Button {
                 if page < 2 {
@@ -43,15 +61,14 @@ struct OnboardingView: View {
                     done()
                 }
             } label: {
-                Text(page < 2 ? "Continue" : "Start asking")
-                    .font(.body.weight(.semibold))
+                Text(page < 2 ? "CONTINUE" : "START ASKING")
+                    .font(DS.display(16, relativeTo: .headline))
+                    .foregroundStyle(.black)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
+                    .padding(.vertical, 14)
+                    .background(DS.volt, in: .capsule)
             }
-            .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.capsule)
-            .tint(.white)
-            .foregroundStyle(.black)
+            .buttonStyle(.plain)
             .padding(.bottom, 12)
         }
         .padding(.horizontal, 24)
@@ -62,8 +79,8 @@ struct OnboardingView: View {
 
     private var whatItIs: some View {
         VStack(alignment: .leading, spacing: 28) {
-            Text("400 hours of Diary of a CEO.\nAnswered in seconds.")
-                .font(.system(size: 32, weight: .semibold))
+            Text("400 HOURS OF DIARY OF A CEO.\nANSWERED IN SECONDS.")
+                .font(DS.display(34, relativeTo: .largeTitle))
                 .foregroundStyle(.white)
             InfoCard(rows: [
                 .init(icon: "text.quote", title: "Ask anything",
@@ -74,8 +91,8 @@ struct OnboardingView: View {
                       detail: "Every claim links to the exact moment it was said, on YouTube."),
             ])
             Text("Answers come only from what guests and Steven actually said — with the receipts attached.")
-                .font(.callout)
-                .foregroundStyle(.white.opacity(0.55))
+                .font(DS.body(15, .light))
+                .foregroundStyle(DS.muted)
         }
     }
 
@@ -83,8 +100,8 @@ struct OnboardingView: View {
 
     private var privacy: some View {
         VStack(alignment: .leading, spacing: 28) {
-            Text("We cannot see your questions.\nNot won't, can't.")
-                .font(.system(size: 32, weight: .semibold))
+            Text("WE CANNOT SEE YOUR QUESTIONS.\nNOT WON'T, CAN'T.")
+                .font(DS.display(34, relativeTo: .largeTitle))
                 .foregroundStyle(.white)
             InfoCard(rows: [
                 .init(icon: "magnifyingglass", title: "Your question",
@@ -97,8 +114,8 @@ struct OnboardingView: View {
                       detail: "History syncs encrypted to your private iCloud. It never touches our servers — we don't have any."),
             ], dividerBefore: 3)
             Text("Don't take our word for it. Turn on airplane mode and ask something. Everything still works. There is nothing to disconnect from.")
-                .font(.callout)
-                .foregroundStyle(.white.opacity(0.55))
+                .font(DS.body(15, .light))
+                .foregroundStyle(DS.muted)
         }
     }
 
@@ -106,8 +123,8 @@ struct OnboardingView: View {
 
     private var ready: some View {
         VStack(alignment: .leading, spacing: 28) {
-            Text("One engine.\nAlready on your iPhone.")
-                .font(.system(size: 32, weight: .semibold))
+            Text("ONE ENGINE.\nALREADY ON YOUR IPHONE.")
+                .font(DS.display(34, relativeTo: .largeTitle))
                 .foregroundStyle(.white)
             InfoCard(rows: [
                 .init(icon: "apple.intelligence", title: "Apple Intelligence",
@@ -125,28 +142,26 @@ struct OnboardingView: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: app.engine.isAvailable ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
                 .font(.system(size: 19))
-                .foregroundStyle(app.engine.isAvailable ? .green : .orange)
+                .foregroundStyle(app.engine.isAvailable ? DS.volt : DS.red)
             VStack(alignment: .leading, spacing: 3) {
                 Text(app.engine.isAvailable
                     ? "Checked: Apple Intelligence is on"
                     : "Apple Intelligence isn't ready")
-                    .font(.body.weight(.semibold))
+                    .font(DS.body(16, .semibold))
                     .foregroundStyle(.white)
                 Text(app.engine.isAvailable
                     ? "This iPhone can answer right now."
                     : (app.engine.unavailableReason ?? "Check Settings, then come back."))
-                    .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.6))
+                    .font(DS.body(14, .light))
+                    .foregroundStyle(DS.muted)
             }
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            (app.engine.isAvailable ? Color.green : Color.orange).opacity(0.09),
-            in: .rect(cornerRadius: 16))
+        .background(.black, in: .rect(cornerRadius: 20))
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke((app.engine.isAvailable ? Color.green : Color.orange).opacity(0.25), lineWidth: 1))
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(app.engine.isAvailable ? DS.volt : DS.red, lineWidth: 1))
     }
 }
 
@@ -156,8 +171,8 @@ private struct ProgressBar: View {
     var body: some View {
         GeometryReader { geo in
             ZStack(alignment: .leading) {
-                Capsule().fill(.white.opacity(0.15))
-                Capsule().fill(.white)
+                Capsule().fill(Color("Line"))
+                Capsule().fill(Color("Volt"))
                     .frame(width: geo.size.width * progress)
             }
         }
@@ -181,7 +196,7 @@ struct InfoCard: View {
         VStack(alignment: .leading, spacing: 22) {
             ForEach(Array(rows.enumerated()), id: \.element.id) { i, row in
                 if i == dividerBefore {
-                    Divider().overlay(.white.opacity(0.15))
+                    Divider().overlay(Color("Line"))
                 }
                 HStack(alignment: .top, spacing: 16) {
                     Image(systemName: row.icon)
@@ -190,19 +205,20 @@ struct InfoCard: View {
                         .frame(width: 28)
                     VStack(alignment: .leading, spacing: 3) {
                         Text(row.title)
-                            .font(.body.weight(.semibold))
+                            .font(DS.body(16, .semibold))
                             .foregroundStyle(.white)
                         Text(row.detail)
-                            .font(.subheadline)
-                            .foregroundStyle(.white.opacity(0.6))
+                            .font(DS.body(14, .light))
+                            .foregroundStyle(Color("Muted"))
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.white.opacity(0.06), in: .rect(cornerRadius: 20))
+        .background(.black, in: .rect(cornerRadius: 20))
         .overlay(
-            RoundedRectangle(cornerRadius: 20).stroke(.white.opacity(0.1), lineWidth: 1))
+            RoundedRectangle(cornerRadius: 20).stroke(Color("Line"), lineWidth: 1))
     }
 }

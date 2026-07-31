@@ -29,7 +29,7 @@ struct RootView: View {
     }
 }
 
-/// The main room: history + ask bar + streaming answer.
+/// The main room: hero or history + composer + streaming answer.
 struct StudioView: View {
     @Environment(AppModel.self) private var app
     @Environment(\.modelContext) private var context
@@ -40,7 +40,7 @@ struct StudioView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                StudioBackground()
+                Color.black.ignoresSafeArea()
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
@@ -51,7 +51,7 @@ struct StudioView: View {
                             if let session = app.current {
                                 AnswerView(session: session)
                             } else if history.isEmpty && app.engine.isAvailable {
-                                EmptyStudioView(suggestion: askSuggestion)
+                                HeroView { submit($0) }
                             } else if !history.isEmpty {
                                 HistoryList(messages: history)
                             }
@@ -61,7 +61,7 @@ struct StudioView: View {
                         .padding(.top, 8)
                     }
                     .scrollDismissesKeyboard(.interactively)
-                    // follow the stream so new text never hides under the ask bar
+                    // follow the stream so new text never hides under the composer
                     .onChange(of: app.current?.answerText) {
                         guard app.isStreaming else { return }
                         proxy.scrollTo("bottom", anchor: .bottom)
@@ -74,22 +74,31 @@ struct StudioView: View {
                         }
                     }
                 }
+                // warm-up readout: a loadline under the toolbar, then nothing
+                if !app.onAir && app.engine.isAvailable {
+                    VStack(spacing: 0) {
+                        LoadLine()
+                        Spacer()
+                    }
+                }
             }
-            .navigationTitle("Ask the Diary")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    OnAirBadge(on: app.onAir, busy: app.isStreaming, unavailable: !app.engine.isAvailable)
+                    LogoBox()
                 }
+                .sharedBackgroundVisibility(.hidden)
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
                         HistoryScreen()
                     } label: {
                         Image(systemName: "clock")
+                            .foregroundStyle(DS.muted)
                     }
                     .accessibilityLabel("History")
                 }
             }
+            .toolbarBackground(.black, for: .navigationBar)
             .safeAreaInset(edge: .bottom) {
                 AskBar(text: $question, focused: $askFocused, busy: app.isStreaming) {
                     submit()
@@ -107,16 +116,8 @@ struct StudioView: View {
         }
     }
 
-    private var askSuggestion: String {
-        [
-            "What did the sleep expert say about caffeine?",
-            "How do I get better at hard conversations?",
-            "Is it too late to start training in my 60s?",
-        ].randomElement()!
-    }
-
-    private func submit() {
-        let q = question.trimmingCharacters(in: .whitespacesAndNewlines)
+    private func submit(_ preset: String? = nil) {
+        let q = (preset ?? question).trimmingCharacters(in: .whitespacesAndNewlines)
         guard !q.isEmpty, !app.isStreaming else { return }
         question = ""
         askFocused = false
@@ -132,16 +133,69 @@ struct StudioView: View {
     }
 }
 
-/// Warm near-black wash with a faint tungsten glow at the top — the room.
-struct StudioBackground: View {
+/// The web hero: mono eyebrow, Anton headline with the volt highlight mark,
+/// muted sub, question cards.
+struct HeroView: View {
+    let ask: (String) -> Void
+    @Environment(AppModel.self) private var app
+
+    private let cards = [
+        "What actually makes people rich?",
+        "How do I fix my sleep?",
+        "What morning habits do guests swear by?",
+        "How do I start a business with no money?",
+    ]
+
     var body: some View {
-        ZStack {
-            Color(red: 0.051, green: 0.043, blue: 0.035)
-            RadialGradient(
-                colors: [Color(red: 0.16, green: 0.09, blue: 0.05).opacity(0.8), .clear],
-                center: .top, startRadius: 0, endRadius: 420)
+        VStack(alignment: .leading, spacing: 0) {
+            CapsLabel(text: "228 episodes · every word indexed", color: DS.muted)
+                .padding(.top, 36)
+                .padding(.bottom, 20)
+
+            Text("THE DIARY")
+                .font(DS.display(54, relativeTo: .largeTitle))
+                .foregroundStyle(.white)
+            Text("ANSWERS BACK")
+                .font(DS.display(54, relativeTo: .largeTitle))
+                .foregroundStyle(.black)
+                .padding(.horizontal, 8)
+                .padding(.bottom, 2)
+                .background(DS.volt)
+                .padding(.top, 6)
+
+            Text("Ask a question and get an answer built only from what Steven Bartlett and his guests actually said — cited to the minute. Nothing you type leaves this iPhone.")
+                .font(DS.body(16, .light))
+                .foregroundStyle(DS.muted)
+                .lineSpacing(4)
+                .padding(.top, 20)
+                .padding(.bottom, 32)
+
+            VStack(spacing: 10) {
+                ForEach(cards, id: \.self) { card in
+                    Button {
+                        ask(card)
+                    } label: {
+                        HStack(alignment: .firstTextBaseline, spacing: 7) {
+                            Text("Q.")
+                                .font(DS.display(15, relativeTo: .callout))
+                                .foregroundStyle(DS.volt)
+                            Text(card)
+                                .font(DS.body(16, .medium))
+                                .foregroundStyle(.white)
+                                .multilineTextAlignment(.leading)
+                            Spacer(minLength: 0)
+                        }
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 15)
+                        .background(.black, in: .rect(cornerRadius: 20))
+                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(DS.line, lineWidth: 1))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!app.onAir)
+                    .opacity(app.onAir ? 1 : 0.55)
+                }
+            }
         }
-        .ignoresSafeArea()
     }
 }
 
@@ -151,37 +205,21 @@ struct UnsupportedCard: View {
     let reason: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Label("The mic is off", systemImage: "mic.slash")
-                .font(.headline)
-                .foregroundStyle(Color("Paper"))
+        VStack(alignment: .leading, spacing: 8) {
+            Text("THE MIC IS OFF")
+                .font(DS.display(16, relativeTo: .headline))
+                .foregroundStyle(DS.red)
             Text(reason ?? "Apple Intelligence isn't available on this iPhone.")
-                .font(.subheadline)
-                .foregroundStyle(Color("Paper").opacity(0.7))
+                .font(DS.body(15, .light))
+                .foregroundStyle(DS.muted)
             Text("Ask the Diary needs it to answer. If your iPhone supports it, turn it on in Settings → Apple Intelligence & Siri, then come back.")
-                .font(.subheadline)
-                .foregroundStyle(Color("Paper").opacity(0.7))
+                .font(DS.body(15, .light))
+                .foregroundStyle(DS.muted)
         }
-        .padding(16)
+        .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .glassEffect(.regular, in: .rect(cornerRadius: 16))
+        .background(.black, in: .rect(cornerRadius: 20))
+        .overlay(RoundedRectangle(cornerRadius: 20).stroke(DS.red, lineWidth: 1))
         .padding(.top, 24)
-    }
-}
-
-struct EmptyStudioView: View {
-    let suggestion: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("228 episodes.\nEvery answer cited to the minute.")
-                .font(.system(.title, design: .serif, weight: .semibold))
-                .foregroundStyle(Color("Paper"))
-                .padding(.top, 48)
-            Text("Try “\(suggestion)”")
-                .font(.callout)
-                .foregroundStyle(Color("Brass"))
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

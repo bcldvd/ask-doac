@@ -57,8 +57,13 @@ final class AppModel {
     func ask(_ question: String) async -> AnswerSession {
         let session = AnswerSession(question: question)
         current = session
+        let clock = ContinuousClock()
+        let start = clock.now
+        var retrievalDone = start
+        var firstToken: ContinuousClock.Instant?
         do {
             let chunks = try await rag.retrieve(question: question)
+            retrievalDone = clock.now
             session.citations = chunks.enumerated().map { i, c in
                 StoredCitation(
                     id: i + 1, episodeTitle: cleanTitle(c.episodeTitle), episodeURL: c.episodeURL,
@@ -66,6 +71,7 @@ final class AppModel {
             }
             session.phase = .generating
             for try await snapshot in engine.stream(question: question, sources: chunks.map(\.source)) {
+                if firstToken == nil { firstToken = clock.now }
                 session.answerText = snapshot
             }
             session.phase = .done
@@ -73,22 +79,35 @@ final class AppModel {
             session.error = error.localizedDescription
             session.phase = .failed
         }
-        logForQA(session)
+        func secs(_ to: ContinuousClock.Instant) -> Double {
+            let d = start.duration(to: to).components
+            return Double(d.seconds) + Double(d.attoseconds) / 1e18
+        }
+        let timing = String(
+            format: "retrieval %.2fs, first token %.2fs, total %.2fs",
+            secs(retrievalDone), firstToken.map(secs) ?? -1, secs(clock.now))
+        logForQA(session, timing: timing)
         return session
     }
 
     /// Under -AutoAsk, dump the outcome so the scripted QA loop can read it
-    /// back with `log show` (public: simulator-only QA, never user data).
-    private func logForQA(_ session: AnswerSession) {
+    /// back (public: scripted QA only, never user data). print() mirrors the
+    /// os_log lines because `devicectl --console` only captures stdout.
+    private func logForQA(_ session: AnswerSession, timing: String) {
         guard ProcessInfo.processInfo.arguments.contains("-AutoAsk") else { return }
+        func emit(_ line: String) {
+            Self.log.info("\(line, privacy: .public)")
+            print(line)
+        }
         switch session.phase {
         case .done:
-            Self.log.info("QA answer | \(session.question, privacy: .public) | \(session.answerText, privacy: .public)")
+            emit("QA timing | \(timing)")
+            emit("QA answer | \(session.question) | \(session.answerText)")
             for c in session.citations {
-                Self.log.info("QA source [\(c.id)] \(c.timestamp, privacy: .public) | \(c.episodeTitle, privacy: .public)")
+                emit("QA source [\(c.id)] \(c.timestamp) | \(c.episodeTitle)")
             }
         case .failed:
-            Self.log.error("QA failed | \(session.question, privacy: .public) | \(session.error ?? "?", privacy: .public)")
+            emit("QA failed | \(session.question) | \(session.error ?? "?")")
         default: break
         }
     }
