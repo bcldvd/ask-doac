@@ -44,6 +44,7 @@ struct StudioView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
+                            Color.clear.frame(height: 1).id("top")
                             if let session = app.current {
                                 AnswerView(session: session)
                             } else if history.isEmpty {
@@ -61,6 +62,13 @@ struct StudioView: View {
                     .onChange(of: app.current?.answerText) {
                         guard app.isStreaming else { return }
                         proxy.scrollTo("bottom", anchor: .bottom)
+                    }
+                    // screenshot tooling: park on the question once the answer lands
+                    .onChange(of: app.current?.phase) {
+                        if app.current?.phase == .done,
+                            ProcessInfo.processInfo.arguments.contains("-ScrollTopWhenDone") {
+                            withAnimation { proxy.scrollTo("top", anchor: .top) }
+                        }
                     }
                 }
             }
