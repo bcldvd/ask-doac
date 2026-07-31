@@ -5,8 +5,17 @@ import Foundation
 /// (launch argument -MockLLM). Retrieval still runs for real — only the
 /// generation is canned, so citation chips resolve against real excerpts.
 struct MockAnswerEngine: AnswerEngine {
-    var isAvailable: Bool { true }
-    var unavailableReason: String? { nil }
+    // -MockUnavailable simulates a phone without Apple Intelligence,
+    // so the unsupported state can be screenshot-tested in the simulator
+    var isAvailable: Bool {
+        !ProcessInfo.processInfo.arguments.contains("-MockUnavailable")
+    }
+
+    var unavailableReason: String? {
+        isAvailable
+            ? nil
+            : "This iPhone doesn't support Apple Intelligence, which Ask the Diary uses to answer on-device."
+    }
 
     func prewarm() {}
 

@@ -45,11 +45,14 @@ struct StudioView: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
                             Color.clear.frame(height: 1).id("top")
+                            if !app.engine.isAvailable {
+                                UnsupportedCard(reason: app.engine.unavailableReason)
+                            }
                             if let session = app.current {
                                 AnswerView(session: session)
-                            } else if history.isEmpty {
+                            } else if history.isEmpty && app.engine.isAvailable {
                                 EmptyStudioView(suggestion: askSuggestion)
-                            } else {
+                            } else if !history.isEmpty {
                                 HistoryList(messages: history)
                             }
                             Color.clear.frame(height: 1).id("bottom")
@@ -76,7 +79,7 @@ struct StudioView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    OnAirBadge(on: app.onAir, busy: app.isStreaming)
+                    OnAirBadge(on: app.onAir, busy: app.isStreaming, unavailable: !app.engine.isAvailable)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
@@ -139,6 +142,30 @@ struct StudioBackground: View {
                 center: .top, startRadius: 0, endRadius: 420)
         }
         .ignoresSafeArea()
+    }
+}
+
+/// The studio when the phone can't run Apple Intelligence: plain words,
+/// no dead ends — search still works, so history and sources remain useful.
+struct UnsupportedCard: View {
+    let reason: String?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("The mic is off", systemImage: "mic.slash")
+                .font(.headline)
+                .foregroundStyle(Color("Paper"))
+            Text(reason ?? "Apple Intelligence isn't available on this iPhone.")
+                .font(.subheadline)
+                .foregroundStyle(Color("Paper").opacity(0.7))
+            Text("Ask the Diary needs it to answer. If your iPhone supports it, turn it on in Settings → Apple Intelligence & Siri, then come back.")
+                .font(.subheadline)
+                .foregroundStyle(Color("Paper").opacity(0.7))
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassEffect(.regular, in: .rect(cornerRadius: 16))
+        .padding(.top, 24)
     }
 }
 

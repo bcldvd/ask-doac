@@ -5,8 +5,14 @@ import SwiftUI
 struct OnAirBadge: View {
     let on: Bool
     let busy: Bool
+    /// Engine can never come up on this device (no Apple Intelligence).
+    var unavailable: Bool = false
     @State private var breathe = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var label: String {
+        unavailable ? "OFF AIR" : (on ? "ON AIR" : "WARMING UP")
+    }
 
     var body: some View {
         HStack(spacing: 6) {
@@ -14,7 +20,7 @@ struct OnAirBadge: View {
                 .fill(on ? Color("SignalRed") : Color("Brass").opacity(0.4))
                 .frame(width: 7, height: 7)
                 .shadow(color: glowColor, radius: busy && breathe ? 7 : 2)
-            Text(on ? "ON AIR" : "WARMING UP")
+            Text(label)
                 .font(.system(size: 11, weight: .bold, design: .rounded))
                 .kerning(1.2)
                 .foregroundStyle(on ? Color("Paper") : Color("Brass"))
@@ -27,7 +33,7 @@ struct OnAirBadge: View {
                 breathe = isBusy
             }
         }
-        .accessibilityLabel(on ? (busy ? "Answering" : "Ready") : "Loading")
+        .accessibilityLabel(unavailable ? "Unavailable" : (on ? (busy ? "Answering" : "Ready") : "Loading"))
     }
 
     private var glowColor: Color {
