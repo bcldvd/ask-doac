@@ -54,4 +54,25 @@ final class AskFlowTests: XCTestCase {
         XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'hire well'"))
             .firstMatch.waitForExistence(timeout: 10))
     }
+
+    func testDeleteConversationFromDetailMenu() {
+        let field = app.textFields["Ask the diary anything…"]
+        XCTAssertTrue(field.waitForExistence(timeout: 10))
+        field.tap()
+        field.typeText("should I delete this later?")
+        app.buttons["Send question"].tap()
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'broken system'"))
+            .firstMatch.waitForExistence(timeout: 30))
+
+        // open the saved conversation, delete it via the "…" menu
+        app.buttons["History"].tap()
+        let entry = app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'delete this later'")).firstMatch
+        XCTAssertTrue(entry.waitForExistence(timeout: 10))
+        entry.tap()
+        app.buttons["Conversation actions"].tap()
+        app.buttons["Delete conversation"].tap()
+        app.buttons["Delete"].tap()  // confirmation dialog
+        // back on the history list, the entry is gone
+        XCTAssertFalse(entry.waitForExistence(timeout: 3))
+    }
 }

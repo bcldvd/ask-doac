@@ -2,8 +2,10 @@ import SwiftData
 import SwiftUI
 
 /// Most recent answer summaries on the studio home, as web-style cards.
+/// Long-press a card for actions (the user asked for hold-to-dismiss).
 struct HistoryList: View {
     let messages: [Message]
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -28,8 +30,16 @@ struct HistoryList: View {
                     .padding(.vertical, 14)
                     .background(.black, in: .rect(cornerRadius: 20))
                     .overlay(RoundedRectangle(cornerRadius: 20).stroke(DS.line, lineWidth: 1))
+                    .contentShape(.contextMenuPreview, .rect(cornerRadius: 20))
                 }
                 .buttonStyle(.plain)
+                .contextMenu {
+                    Button(role: .destructive) {
+                        withAnimation(.snappy) { context.delete(message) }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
             }
         }
     }
@@ -59,6 +69,13 @@ struct HistoryScreen: View {
                     }
                     .listRowBackground(Color.black)
                     .listRowSeparatorTint(DS.line)
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            withAnimation(.snappy) { context.delete(message) }
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
                 }
                 .onDelete { offsets in
                     for i in offsets { context.delete(messages[i]) }
@@ -79,10 +96,13 @@ struct HistoryScreen: View {
 }
 
 /// A saved Q&A rendered like a live one: mono label, Anton question,
-/// answer on the volt border.
+/// answer on the volt border. The "…" menu deletes the conversation.
 struct MessageDetail: View {
     let message: Message
     @State private var openCitation: StoredCitation?
+    @State private var confirmDelete = false
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -113,6 +133,27 @@ struct MessageDetail: View {
             }
         }
         .toolbarBackground(.black, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button(role: .destructive) {
+                        confirmDelete = true
+                    } label: {
+                        Label("Delete conversation", systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .foregroundStyle(DS.muted)
+                }
+                .accessibilityLabel("Conversation actions")
+            }
+        }
+        .confirmationDialog("Delete this conversation?", isPresented: $confirmDelete, titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                context.delete(message)
+                dismiss()
+            }
+        }
         .sheet(item: $openCitation) { citation in
             SourceDetail(citation: citation)
                 .presentationDetents([.medium, .large])
