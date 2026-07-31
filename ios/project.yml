@@ -59,6 +59,10 @@ targets:
     sources: [AskDiaryUITests]
     dependencies:
       - target: AskDiary
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "6.0"
 
 schemes:
   AskDiary:

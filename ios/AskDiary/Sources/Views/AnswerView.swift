@@ -38,7 +38,7 @@ struct AnswerView: View {
                 // generation is declined
                 if !session.citations.isEmpty {
                     Text("Closest moments from the diary")
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .font(.system(.caption, design: .rounded).weight(.bold))
                         .kerning(1.2)
                         .foregroundStyle(Color("Brass"))
                     SourcesRow(citations: session.citations) { openCitation = $0 }
@@ -82,7 +82,7 @@ struct CitedText: View {
             let n = Int(rest[range].dropFirst().dropLast()) ?? 0
             var chip = AttributedString("\(n)")
             chip.link = URL(string: "citation://\(n)")
-            chip.font = .system(size: 12, weight: .bold, design: .monospaced)
+            chip.font = .system(.footnote, design: .monospaced).weight(.bold)
             chip.foregroundColor = Color("SignalRed")
             chip.backgroundColor = Color("SignalRed").opacity(0.14)
             out += AttributedString(" ") + chip
@@ -107,7 +107,7 @@ struct SourcesRow: View {
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
                             Text("[\(citation.id)] \(citation.timestamp)")
-                                .font(.system(size: 12, weight: .semibold, design: .monospaced))
+                                .font(.system(.caption, design: .monospaced).weight(.semibold))
                                 .foregroundStyle(Color("SignalRed"))
                             Text(citation.episodeTitle)
                                 .font(.footnote.weight(.medium))

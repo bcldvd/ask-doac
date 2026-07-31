@@ -8,7 +8,7 @@ struct HistoryList: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Earlier sessions")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .font(.system(.caption, design: .rounded).weight(.bold))
                 .kerning(1.2)
                 .foregroundStyle(Color("Brass"))
             ForEach(messages.prefix(10)) { message in

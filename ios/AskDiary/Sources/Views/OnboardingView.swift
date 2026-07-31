@@ -4,8 +4,21 @@ import SwiftUI
 /// pure dark pages, a thin progress bar, one bold plain-spoken headline,
 /// an icon-row card, muted proof copy, a single white pill button.
 struct OnboardingView: View {
+    @Environment(AppModel.self) private var app
     let done: () -> Void
-    @State private var page = 0
+    @State private var page: Int
+
+    init(done: @escaping () -> Void) {
+        self.done = done
+        // scripted QA/screenshots: -OnboardingPage 0|1|2 jumps straight to a page
+        let args = ProcessInfo.processInfo.arguments
+        if let i = args.firstIndex(of: "-OnboardingPage"), args.indices.contains(i + 1),
+            let n = Int(args[i + 1]), (0...2).contains(n) {
+            _page = State(initialValue: n)
+        } else {
+            _page = State(initialValue: 0)
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -81,7 +94,7 @@ struct OnboardingView: View {
                 .init(icon: "brain", title: "The answer",
                       detail: "Apple's on-device model. It never phones home."),
                 .init(icon: "icloud", title: "iCloud sync, optional",
-                      detail: "Your history syncs encrypted to your private iCloud, in your account. Questions never touch our servers — we don't have any."),
+                      detail: "History syncs encrypted to your private iCloud. It never touches our servers — we don't have any."),
             ], dividerBefore: 3)
             Text("Don't take our word for it. Turn on airplane mode and ask something. Everything still works. There is nothing to disconnect from.")
                 .font(.callout)
@@ -98,12 +111,42 @@ struct OnboardingView: View {
                 .foregroundStyle(.white)
             InfoCard(rows: [
                 .init(icon: "apple.intelligence", title: "Apple Intelligence",
-                      detail: "Ask the Diary answers with the on-device model — no account, no wait, no download."),
+                      detail: "Most AI apps send your questions to a server — OpenAI's, Google's. This one answers with the model already on your iPhone. Nothing leaves it."),
                 .init(icon: "bolt", title: "Ready now",
-                      detail: "First answer in seconds. Works offline, on a plane, anywhere."),
+                      detail: "No account, no download. First answer in seconds — offline, on a plane, anywhere."),
             ])
+            availabilityCheck
             Spacer().frame(height: 0)
         }
+    }
+
+    /// The promised check: is Apple Intelligence actually ready on this phone?
+    private var availabilityCheck: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: app.engine.isAvailable ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                .font(.system(size: 19))
+                .foregroundStyle(app.engine.isAvailable ? .green : .orange)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(app.engine.isAvailable
+                    ? "Checked: Apple Intelligence is on"
+                    : "Apple Intelligence isn't ready")
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.white)
+                Text(app.engine.isAvailable
+                    ? "This iPhone can answer right now."
+                    : (app.engine.unavailableReason ?? "Check Settings, then come back."))
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.6))
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            (app.engine.isAvailable ? Color.green : Color.orange).opacity(0.09),
+            in: .rect(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke((app.engine.isAvailable ? Color.green : Color.orange).opacity(0.25), lineWidth: 1))
     }
 }
 

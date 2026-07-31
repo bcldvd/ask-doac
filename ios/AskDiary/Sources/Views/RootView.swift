@@ -9,6 +9,13 @@ struct RootView: View {
         ProcessInfo.processInfo.arguments.contains("-SkipOnboarding")
     }
 
+    init() {
+        // scripted QA: -ResetOnboarding forces the first-run flow
+        if ProcessInfo.processInfo.arguments.contains("-ResetOnboarding") {
+            UserDefaults.standard.set(false, forKey: "onboarded")
+        }
+    }
+
     var body: some View {
         Group {
             if onboarded || skipOnboarding {
@@ -69,6 +76,7 @@ struct StudioView: View {
                     } label: {
                         Image(systemName: "clock")
                     }
+                    .accessibilityLabel("History")
                 }
             }
             .safeAreaInset(edge: .bottom) {
