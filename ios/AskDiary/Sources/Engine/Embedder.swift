@@ -4,7 +4,8 @@ import Foundation
 
 /// Query embedding: WordPiece tokenize, pad to the model's fixed 128-token
 /// shape, run the bundled Core ML MiniLM. Same 384-dim space as the index.
-struct Embedder: Sendable {
+/// @unchecked: MLModel isn't Sendable-annotated but prediction is thread-safe.
+struct Embedder: @unchecked Sendable {
     static let maxSeq = 128
     private let model: MLModel
     private let tokenizer: WordPieceTokenizer

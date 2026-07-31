@@ -4,6 +4,7 @@ import Observation
 import os
 
 /// One in-flight or finished answer, streamed into the UI.
+@MainActor
 @Observable
 final class AnswerSession: Identifiable {
     let id = UUID()
@@ -20,6 +21,7 @@ final class AnswerSession: Identifiable {
     }
 }
 
+@MainActor
 @Observable
 final class AppModel {
     static let log = Logger(subsystem: "com.davidbocle.askdiary", category: "app")

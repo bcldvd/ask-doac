@@ -12,6 +12,18 @@ public struct RetrievedChunk: Sendable {
     public var source: RetrievedSource {
         RetrievedSource(episodeTitle: episodeTitle, timestamp: timestamp, text: text)
     }
+
+    /// Shorten the excerpt to at most `maxChars`, preferring a paragraph
+    /// boundary, with an ellipsis marking the cut. Keeps prompt budgets in
+    /// check without dropping whole sources.
+    public func capped(at maxChars: Int) -> RetrievedChunk {
+        guard text.count > maxChars else { return self }
+        let head = String(text.prefix(maxChars))
+        let cut = head.lastIndex(of: "\n").map { String(head[..<$0]) } ?? head
+        return RetrievedChunk(
+            episodeTitle: episodeTitle, episodeURL: episodeURL, videoURL: videoURL,
+            timestamp: timestamp, text: cut + "\n…", score: score)
+    }
 }
 
 public struct RetrieveOptions: Sendable {

@@ -19,9 +19,8 @@ struct OnAirBadge: View {
                 .kerning(1.2)
                 .foregroundStyle(on ? Color("Paper") : Color("Brass"))
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 5)
-        .glassEffect(.regular, in: .capsule)
+        .padding(.horizontal, 4)
+        .fixedSize()  // the toolbar supplies its own glass capsule; don't let it squeeze the label
         .onChange(of: busy) { _, isBusy in
             guard !reduceMotion else { return }
             withAnimation(isBusy ? .easeInOut(duration: 0.9).repeatForever(autoreverses: true) : .default) {

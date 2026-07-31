@@ -68,6 +68,15 @@ struct StudioView: View {
                     submit()
                 }
             }
+            .task {
+                // scripted QA/screenshots: -AutoAsk "question"
+                let args = ProcessInfo.processInfo.arguments
+                if let i = args.firstIndex(of: "-AutoAsk"), app.current == nil {
+                    question = args.indices.contains(i + 1) && !args[i + 1].hasPrefix("-")
+                        ? args[i + 1] : "what did the sleep expert say about caffeine?"
+                    submit()
+                }
+            }
         }
     }
 

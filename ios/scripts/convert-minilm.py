@@ -80,7 +80,10 @@ def main():
         ],
         outputs=[ct.TensorType(name="embedding")],
         convert_to="mlprogram",
-        compute_precision=ct.precision.FLOAT16,
+        # FLOAT16 produced all-zero outputs on the iOS simulator (fine on
+        # macOS/device); fp32 is ~90 MB and the model runs once per question,
+        # so correctness everywhere beats the size win.
+        compute_precision=ct.precision.FLOAT32,
         minimum_deployment_target=ct.target.iOS17,
     )
     mlmodel.short_description = "all-MiniLM-L6-v2 sentence embedder (mean-pooled, L2-normalized)"
