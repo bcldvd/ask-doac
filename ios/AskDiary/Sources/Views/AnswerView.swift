@@ -1,3 +1,4 @@
+import AskDiaryKit
 import SwiftUI
 
 /// A streaming (or finished) answer: the question set like a diary entry,
@@ -76,19 +77,20 @@ struct CitedText: View {
 
     private var attributed: AttributedString {
         var out = AttributedString()
-        var rest = Substring(text)
-        while let range = rest.range(of: #"\[(\d+)\]"#, options: .regularExpression) {
-            out += AttributedString(rest[..<range.lowerBound])
-            let n = Int(rest[range].dropFirst().dropLast()) ?? 0
-            var chip = AttributedString("\(n)")
-            chip.link = URL(string: "citation://\(n)")
-            chip.font = .system(.footnote, design: .monospaced).weight(.bold)
-            chip.foregroundColor = Color("SignalRed")
-            chip.backgroundColor = Color("SignalRed").opacity(0.14)
-            out += AttributedString(" ") + chip
-            rest = rest[range.upperBound...]
+        let valid = Set(citations.map(\.id))
+        for segment in CitationMarkup.segments(of: text, validIDs: valid) {
+            switch segment {
+            case .prose(let p):
+                out += AttributedString(p)
+            case .citation(let n):
+                var chip = AttributedString("\(n)")
+                chip.link = URL(string: "citation://\(n)")
+                chip.font = .system(.footnote, design: .monospaced).weight(.bold)
+                chip.foregroundColor = Color("SignalRed")
+                chip.backgroundColor = Color("SignalRed").opacity(0.14)
+                out += AttributedString(" ") + chip
+            }
         }
-        out += AttributedString(rest)
         return out
     }
 }

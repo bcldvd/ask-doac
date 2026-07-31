@@ -73,7 +73,24 @@ final class AppModel {
             session.error = error.localizedDescription
             session.phase = .failed
         }
+        logForQA(session)
         return session
+    }
+
+    /// Under -AutoAsk, dump the outcome so the scripted QA loop can read it
+    /// back with `log show` (public: simulator-only QA, never user data).
+    private func logForQA(_ session: AnswerSession) {
+        guard ProcessInfo.processInfo.arguments.contains("-AutoAsk") else { return }
+        switch session.phase {
+        case .done:
+            Self.log.info("QA answer | \(session.question, privacy: .public) | \(session.answerText, privacy: .public)")
+            for c in session.citations {
+                Self.log.info("QA source [\(c.id)] \(c.timestamp, privacy: .public) | \(c.episodeTitle, privacy: .public)")
+            }
+        case .failed:
+            Self.log.error("QA failed | \(session.question, privacy: .public) | \(session.error ?? "?", privacy: .public)")
+        default: break
+        }
     }
 
     /// Episode titles in the index read "Transcript of X" — strip the scaffolding.

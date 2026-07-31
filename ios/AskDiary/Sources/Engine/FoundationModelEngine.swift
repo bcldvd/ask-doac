@@ -40,13 +40,22 @@ struct FoundationModelEngine: AnswerEngine {
                 }
                 let prompt = Prompt.grounded(question: question, sources: sources)
                 do {
-                    try await generate(prompt: prompt, into: continuation)
+                    var answer = try await generate(prompt: prompt, into: continuation)
+                    // the 3B model occasionally collapses into a repetition
+                    // loop (~1/12 at temp 0.7) — one fresh-session retry
+                    if AnswerHygiene.looksDegenerate(answer) {
+                        answer = try await generate(prompt: prompt, into: continuation)
+                    }
+                    let trimmed = AnswerHygiene.trimmedTail(answer)
+                    if trimmed != answer { continuation.yield(trimmed) }
                     continuation.finish()
                 } catch let error where isGuardrail(error) {
                     // guardrails are stochastic and the transcripts discuss
                     // health frankly — one silent retry rescues most of them
                     do {
-                        try await generate(prompt: prompt, into: continuation)
+                        let answer = try await generate(prompt: prompt, into: continuation)
+                        let trimmed = AnswerHygiene.trimmedTail(answer)
+                        if trimmed != answer { continuation.yield(trimmed) }
                         continuation.finish()
                     } catch {
                         continuation.finish(throwing: EngineError.guardrail)
@@ -61,9 +70,11 @@ struct FoundationModelEngine: AnswerEngine {
 
     /// One generation attempt on a fresh session (history lives in SwiftData;
     /// the 4k context is better spent on excerpts than chat memory).
+    /// Returns the final answer so callers can run post-generation hygiene.
+    @discardableResult
     private func generate(
         prompt: String, into continuation: AsyncThrowingStream<String, Error>.Continuation
-    ) async throws {
+    ) async throws -> String {
         let session = LanguageModelSession(instructions: Prompt.system)
         // moderate temperature (0.3 made the 3B model loop on one sentence);
         // the token cap bounds runaway repetition
@@ -74,9 +85,12 @@ struct FoundationModelEngine: AnswerEngine {
         let stream = session.streamResponse(
             to: prompt,
             options: GenerationOptions(temperature: 0.7, maximumResponseTokens: 400))
+        var latest = ""
         for try await partial in stream {
-            continuation.yield(partial.content)
+            latest = partial.content
+            continuation.yield(latest)
         }
+        return latest
     }
 
     private func isGuardrail(_ error: Error) -> Bool {

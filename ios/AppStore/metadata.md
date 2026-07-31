@@ -10,15 +10,16 @@
 Ask anything. Get an answer built only from what guests actually said on The
 Diary of a CEO — with every claim cited to the exact minute it was spoken.
 
-Ask the Diary is an unofficial companion for listeners. 228 episode
-transcripts ship inside the app, and Apple Intelligence answers on your
-iPhone. Nothing to sign up for, nothing to download, nothing sent anywhere.
+Most AI apps send your questions to a server — OpenAI's, Google's. Ask the
+Diary answers with Apple Intelligence, the model already on your iPhone.
+Your questions never leave it. 228 episode transcripts ship inside the app,
+so there is nothing to sign up for and nowhere for your data to go.
 
+• Private by construction: your questions never leave your iPhone
 • 228 episodes, searchable in seconds
 • Every sentence cited — tap a citation to watch that exact moment on YouTube
 • Works offline. Airplane mode changes nothing
-• Private by construction: your questions never leave your iPhone
-• History syncs through your own iCloud
+• History syncs through your own iCloud — never through us
 
 Ask the Diary requires Apple Intelligence (iPhone 15 Pro or later).
 
