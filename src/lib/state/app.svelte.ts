@@ -17,6 +17,16 @@ import { embedQuery, getEmbedder } from '$lib/rag/embed';
 import { searchingStatus, readingStatus } from './status';
 import { startBootLog, crumb, type CrashReport } from './bootlog';
 import { DownloadEta, type EtaEstimate } from './eta';
+import {
+	clearOnboardingSkipped,
+	clearStoredProfile,
+	getOnboardingSkippedAt,
+	loadStoredProfile,
+	markOnboardingSkipped,
+	shouldPromptOnboarding,
+	storeProfile,
+	type UserProfile
+} from './profile';
 
 export type Stage = 'boot' | 'held' | 'downloading' | 'initializing' | 'ready' | 'error';
 
@@ -66,6 +76,9 @@ class App {
 	lastCrash = $state<CrashReport | null>(null);
 	/** true when the current model will load from disk, not the network */
 	modelCached = $derived(this.cachedModels.includes(this.model.url));
+	userProfile = $state<UserProfile | null>(null);
+	onboardingOpen = $state(false);
+	onboardingSkippedAt = $state<number | null>(null);
 
 	mock = false;
 	private index: RagIndex | null = null;
@@ -75,6 +88,7 @@ class App {
 	async boot() {
 		if (this.booted) return;
 		this.booted = true;
+		this.hydratePersonalization();
 		this.mock = new URLSearchParams(location.search).has('mock');
 		if (this.mock) return this.bootMock();
 		// Register before the circuit breaker: a page held after a crash must
@@ -223,6 +237,39 @@ class App {
 		this.stage = 'ready';
 	}
 
+	private hydratePersonalization() {
+		this.userProfile = loadStoredProfile();
+		this.onboardingSkippedAt = getOnboardingSkippedAt();
+		this.onboardingOpen = shouldPromptOnboarding(this.userProfile, this.onboardingSkippedAt);
+	}
+
+	openOnboarding() {
+		this.prefsOpen = false;
+		this.onboardingOpen = true;
+	}
+
+	skipOnboarding() {
+		const at = Date.now();
+		this.onboardingSkippedAt = at;
+		markOnboardingSkipped(at);
+		this.onboardingOpen = false;
+	}
+
+	saveUserProfile(profile: UserProfile) {
+		this.userProfile = profile;
+		storeProfile(profile);
+		this.onboardingSkippedAt = null;
+		clearOnboardingSkipped();
+		this.onboardingOpen = false;
+	}
+
+	clearUserProfile() {
+		this.userProfile = null;
+		clearStoredProfile();
+		this.onboardingSkippedAt = null;
+		clearOnboardingSkipped();
+	}
+
 	async ask(question: string) {
 		const q = question.trim();
 		if (!q || this.generating || this.stage !== 'ready') return;
@@ -261,7 +308,7 @@ class App {
 					queryVector,
 					this.model.excerpts,
 					fetch,
-					this.model.retrieval
+					{ ...this.model.retrieval, profile: this.userProfile }
 				);
 				reply.sources = sources;
 				reply.status = readingStatus(sources);
@@ -270,7 +317,7 @@ class App {
 				// English, and the prompt pins the answer language explicitly —
 				// letting the model infer it occasionally lands on the wrong one.
 				const turn =
-					buildGroundedPrompt(q, sources, isEnglish(q, searchQuery)) +
+					buildGroundedPrompt(q, sources, isEnglish(q, searchQuery), this.userProfile) +
 					(this.model.promptSuffix ?? '');
 				// Fresh context per question (see Studio.respond): every turn carries
 				// its own excerpts, so history would blow the context window fast.

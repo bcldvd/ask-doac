@@ -2,6 +2,7 @@
 	import { app } from '$lib/state/app.svelte';
 	import { GEMMA_MODELS } from '$lib/llm/models';
 	import { versionLabel } from '$lib/version';
+	import { profileSummary } from '$lib/state/profile';
 
 	function isCached(url: string) {
 		return app.cachedModels.includes(url);
@@ -60,6 +61,21 @@
 			Switching models reloads the page and downloads the new model once. Models stay cached in
 			your browser, so the next visit starts instantly — even offline.
 		</p>
+
+		<p class="section-label">Personalization</p>
+		<div class="personalization">
+			<p class="profile-summary">{profileSummary(app.userProfile)}</p>
+			<div class="profile-actions">
+				<button class="profile-btn" type="button" onclick={() => app.openOnboarding()}>
+					{app.userProfile ? 'Edit questionnaire' : 'Set up profile'}
+				</button>
+				{#if app.userProfile}
+					<button class="profile-btn ghost" type="button" onclick={() => app.clearUserProfile()}>
+						Reset
+					</button>
+				{/if}
+			</div>
+		</div>
 
 		<p class="build">Build {versionLabel(__BUILD_DATE__, __COMMIT_HASH__)}</p>
 	</div>
@@ -185,6 +201,41 @@
 		color: var(--faint);
 		font-size: 0.8rem;
 		line-height: 1.5;
+	}
+
+	.personalization {
+		background: var(--panel-2);
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		padding: 0.85rem 0.95rem;
+	}
+
+	.profile-summary {
+		color: var(--muted);
+		font-size: 0.84rem;
+	}
+
+	.profile-actions {
+		display: flex;
+		gap: 0.5rem;
+		margin-top: 0.7rem;
+	}
+
+	.profile-btn {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-size: 0.74rem;
+		letter-spacing: 0.03em;
+		padding: 0.42rem 0.8rem;
+		border-radius: 999px;
+		background: var(--volt);
+		color: var(--black);
+	}
+
+	.profile-btn.ghost {
+		background: transparent;
+		color: var(--muted);
+		border: 1px solid var(--line);
 	}
 
 	.build {

@@ -4,6 +4,14 @@ export interface RetrievedSource {
 	text: string;
 }
 
+export interface PromptProfile {
+	focusArea: string;
+	experienceLevel: string;
+	answerStyle: string;
+	timeBudget: string;
+	constraints: string;
+}
+
 export const SYSTEM_PROMPT = `You are the Diary of a CEO oracle — a warm, sharp assistant who answers questions using only what guests and Steven Bartlett actually said on the Diary of a CEO podcast.
 
 You will receive numbered transcript excerpts. Ground every claim in them and cite the excerpt number like [1] or [2] after the sentence it supports. Quote short memorable phrases where it helps.
@@ -21,7 +29,8 @@ The user message ends with an instruction naming the language to answer in — f
 export function buildGroundedPrompt(
 	question: string,
 	sources: RetrievedSource[],
-	english = true
+	english = true,
+	profile?: PromptProfile | null
 ): string {
 	const excerpts =
 		sources.length === 0
@@ -30,5 +39,8 @@ export function buildGroundedPrompt(
 					.map((s, i) => `[${i + 1}] ${s.episodeTitle} (${s.timestamp})\n${s.text}`)
 					.join('\n\n');
 	const language = english ? 'Answer in English.' : 'Answer in the same language as the question.';
-	return `Transcript excerpts:\n\n${excerpts}\n\n${language}\n\nQuestion: ${question}`;
+	const preferenceBlock = profile
+		? `\n\nUser profile:\n- Focus area: ${profile.focusArea}\n- Current level: ${profile.experienceLevel}\n- Preferred style: ${profile.answerStyle}\n- Time budget: ${profile.timeBudget}${profile.constraints ? `\n- Constraints: ${profile.constraints}` : ''}\n\nTailor the answer to this profile while staying fully grounded in the excerpts and preserving [n] citations.`
+		: '';
+	return `Transcript excerpts:\n\n${excerpts}${preferenceBlock}\n\n${language}\n\nQuestion: ${question}`;
 }

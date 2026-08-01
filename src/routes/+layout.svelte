@@ -3,6 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { app } from '$lib/state/app.svelte';
 	import Preferences from '$lib/components/Preferences.svelte';
+	import Onboarding from '$lib/components/Onboarding.svelte';
 
 	let { children } = $props();
 
@@ -86,6 +87,10 @@
 
 {#if app.prefsOpen}
 	<Preferences />
+{/if}
+
+{#if app.onboardingOpen}
+	<Onboarding />
 {/if}
 
 <style>
