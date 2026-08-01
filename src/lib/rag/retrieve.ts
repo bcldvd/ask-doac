@@ -1,6 +1,7 @@
 import { normalize, topK, type Scored } from './vector';
 import { youtubeUrl } from './youtube';
 import type { RetrievedSource } from '$lib/llm/prompt';
+import type { UserProfile } from '$lib/state/profile';
 
 export interface RagIndex {
 	dims: number;
@@ -46,6 +47,66 @@ export interface RetrievedChunk extends RetrievedSource {
 	/** deep link to the episode's YouTube video at this excerpt's timestamp */
 	videoUrl?: string;
 	score: number;
+}
+
+export interface RetrieveOptions {
+	gap?: number;
+	maxSpan?: number;
+	margin?: number;
+	profile?: UserProfile | null;
+}
+
+const FOCUS_TERMS: Record<UserProfile['focusArea'], string[]> = {
+	sleep: ['sleep', 'insomnia', 'circadian', 'caffeine', 'melatonin', 'rest'],
+	fitness: ['fitness', 'training', 'exercise', 'cardio', 'strength', 'muscle', 'workout'],
+	business: ['business', 'startup', 'sales', 'market', 'entrepreneur', 'revenue'],
+	mindset: ['mindset', 'confidence', 'anxiety', 'fear', 'resilience', 'belief'],
+	relationships: ['relationship', 'love', 'marriage', 'dating', 'family', 'friendship'],
+	productivity: ['productivity', 'focus', 'discipline', 'deep work', 'habits', 'routine'],
+	nutrition: ['nutrition', 'diet', 'protein', 'calorie', 'sugar', 'food'],
+	longevity: ['longevity', 'aging', 'healthspan', 'biomarker', 'anti-aging', 'lifespan']
+};
+
+const LEVEL_TERMS: Record<UserProfile['experienceLevel'], string[]> = {
+	beginner: ['beginner', 'start', 'simple', 'basics', 'first step'],
+	intermediate: ['practice', 'progress', 'consistency', 'routine'],
+	advanced: ['advanced', 'optimization', 'protocol', 'high performance']
+};
+
+function countMatches(text: string, terms: string[]): number {
+	const hay = text.toLowerCase();
+	let hits = 0;
+	for (const term of terms) {
+		if (hay.includes(term)) hits++;
+	}
+	return hits;
+}
+
+function profileStyleBoost(profile: UserProfile | null | undefined): number {
+	if (!profile) return 0;
+	if (profile.answerStyle === 'tactical') return 0.03;
+	if (profile.answerStyle === 'deep') return 0.02;
+	return 0;
+}
+
+function profileTitleBoost(profile: UserProfile | null | undefined, title: string): number {
+	if (!profile) return 0;
+	const titleMatches = countMatches(title, FOCUS_TERMS[profile.focusArea]);
+	return Math.min(0.22, titleMatches * 0.09);
+}
+
+function profileTextBoost(profile: UserProfile | null | undefined, text: string): number {
+	if (!profile) return 0;
+	const textMatches = countMatches(text, FOCUS_TERMS[profile.focusArea]);
+	const levelHits = countMatches(text, LEVEL_TERMS[profile.experienceLevel]);
+	const focusBoost = Math.min(0.13, textMatches * 0.015);
+	const levelBoost = Math.min(0.08, levelHits * 0.02);
+	return focusBoost + levelBoost;
+}
+
+export function profileScoreBoost(profile: UserProfile | null | undefined, title: string, text: string) {
+	if (!profile) return 0;
+	return profileTitleBoost(profile, title) + profileTextBoost(profile, text) + profileStyleBoost(profile);
 }
 
 const transcriptCache = new Map<string, Promise<{ paragraphs: { t: string; text: string }[] }>>();
@@ -119,11 +180,21 @@ export async function retrieve(
 	queryEmbedding: Float32Array,
 	k = 6,
 	fetchFn = fetch,
-	{ gap = 4, maxSpan = 24, margin = 2 } = {}
+	{ gap = 4, maxSpan = 24, margin = 2, profile = null }: RetrieveOptions = {}
 ): Promise<RetrievedChunk[]> {
 	const raw = topK(normalize(queryEmbedding), index.embeddings, index.scales, index.dims, k * 5);
-	const clusters = clusterHits(raw, index.chunks, { k, gap, maxSpan });
-	return Promise.all(
+	const reranked = raw
+		.map((hit) => {
+			const [epIdx] = index.chunks[hit.index];
+			const title = index.episodes[epIdx]?.title ?? '';
+			return {
+				...hit,
+				score: hit.score + profileScoreBoost(profile, title, '') * 0.5
+			};
+		})
+		.sort((a, b) => b.score - a.score);
+	const clusters = clusterHits(reranked, index.chunks, { k, gap, maxSpan });
+	const chunks = await Promise.all(
 		clusters.map(async ({ epIdx, paraStart, paraEnd, score }) => {
 			const ep = index.episodes[epIdx];
 			const transcript = await getTranscript(ep.id, fetchFn);
@@ -132,14 +203,16 @@ export async function retrieve(
 			const paras = transcript.paragraphs.slice(from, to + 1);
 			const timestamp = paras[0]?.t ?? '';
 			const videoId = index.youtube[ep.id];
+			const text = paras.map((p) => p.text).join('\n');
 			return {
 				episodeTitle: ep.title,
 				episodeUrl: ep.url,
 				videoUrl: videoId ? youtubeUrl(videoId, timestamp) : undefined,
 				timestamp,
-				text: paras.map((p) => p.text).join('\n'),
-				score
+				text,
+				score: score + profileScoreBoost(profile, '', text) * 0.5
 			};
 		})
 	);
+	return chunks.sort((a, b) => b.score - a.score);
 }

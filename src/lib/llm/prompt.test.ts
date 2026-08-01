@@ -9,6 +9,14 @@ const source = (over: Partial<Parameters<typeof buildGroundedPrompt>[1][number]>
 });
 
 describe('buildGroundedPrompt', () => {
+	const profile = {
+		focusArea: 'sleep',
+		experienceLevel: 'beginner',
+		answerStyle: 'tactical',
+		timeBudget: '20 min / day',
+		constraints: 'Low energy after work'
+	};
+
 	test('numbers each source and includes episode title, timestamp and text', () => {
 		const prompt = buildGroundedPrompt('How do I get rich?', [
 			source(),
@@ -73,5 +81,22 @@ describe('buildGroundedPrompt', () => {
 	test('states when there are no relevant excerpts', () => {
 		const prompt = buildGroundedPrompt('Anything?', []);
 		expect(prompt).toMatch(/no relevant excerpts/i);
+	});
+
+	test('adds a profile block when personalization is available', () => {
+		const prompt = buildGroundedPrompt('How do I sleep better?', [source()], true, profile);
+		expect(prompt).toContain('User profile:');
+		expect(prompt).toContain('Focus area: sleep');
+		expect(prompt).toContain('Current level: beginner');
+		expect(prompt).toContain('Preferred style: tactical');
+		expect(prompt).toContain('Time budget: 20 min / day');
+		expect(prompt).toContain('Constraints: Low energy after work');
+	});
+
+	test('keeps excerpt numbering intact with personalization', () => {
+		const prompt = buildGroundedPrompt('How do I sleep better?', [source(), source({ text: 'Two.' })], true, profile);
+		expect(prompt).toContain('[1]');
+		expect(prompt).toContain('[2]');
+		expect(prompt).toContain('preserving [n] citations');
 	});
 });
